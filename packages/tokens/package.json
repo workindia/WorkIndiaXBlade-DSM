@@ -1,0 +1,29 @@
+{
+  "name": "@workindia/tokens",
+  "version": "0.1.0",
+  "description": "Restricted design tokens for WorkIndia Design System",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "design-tokens",
+    "workindia",
+    "design-system"
+  ],
+  "author": "WorkIndia",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}

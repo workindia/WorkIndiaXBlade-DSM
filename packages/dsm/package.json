@@ -1,0 +1,44 @@
+{
+  "name": "@workindia/dsm",
+  "version": "0.1.0",
+  "description": "WorkIndia Design System wrapper around @razorpay/blade with restricted tokens",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "fonts.css",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "design-system",
+    "workindia",
+    "blade",
+    "react",
+    "components"
+  ],
+  "author": "WorkIndia",
+  "license": "MIT",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@razorpay/blade": "^12.65.1",
+    "@workindia/tokens": "^0.1.0"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.24",
+    "@types/react-dom": "^18.2.24",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^5"
+  }
+}
