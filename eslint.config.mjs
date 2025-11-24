@@ -39,6 +39,7 @@ const eslintConfig = [
       {
         files: ['**/__tests__/**/*', '**/*.test.ts', '**/*.test.tsx'],
         rules: {
+          // Test files can be less strict about types
           '@typescript-eslint/no-unsafe-member-access': 'off',
           '@typescript-eslint/no-unsafe-assignment': 'off',
           '@typescript-eslint/no-unsafe-argument': 'off',
@@ -48,17 +49,11 @@ const eslintConfig = [
       {
         files: ['packages/app/**/*.ts', 'packages/app/**/*.tsx'],
         rules: {
+          // Demo app can be less strict - it's not part of the published packages
           '@typescript-eslint/no-unsafe-member-access': 'off',
           '@typescript-eslint/no-unsafe-assignment': 'off',
           '@typescript-eslint/no-unsafe-argument': 'off',
           '@typescript-eslint/no-unsafe-return': 'off',
-        },
-      },
-      {
-        files: ['packages/dsm/src/theme.ts'],
-        rules: {
-          '@typescript-eslint/no-unsafe-member-access': 'off',
-          '@typescript-eslint/no-unsafe-assignment': 'off',
         },
       },
     ],
