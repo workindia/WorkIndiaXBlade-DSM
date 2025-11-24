@@ -37,6 +37,8 @@ import {
 /**
  * Calculate the relative luminance of a color
  * Returns a value between 0 (dark) and 1 (light)
+ * @param color - Color string (hex or rgba)
+ * @returns Luminance value between 0 and 1
  */
 const getLuminance = (color: string): number => {
   // Handle rgba colors
@@ -59,6 +61,8 @@ const getLuminance = (color: string): number => {
 
 /**
  * Get contrasting text color (black or white) based on background color
+ * @param backgroundColor - Background color string
+ * @returns Contrasting color string ('#000000' or '#FFFFFF')
  */
 const getContrastColor = (backgroundColor: string): string => {
   const luminance = getLuminance(backgroundColor);

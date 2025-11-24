@@ -32,8 +32,28 @@ const eslintConfig = [
           'plugin:typescript-enum/recommended',
         ],
         parserOptions: {
-          project: './tsconfig.json',
+          project: ['./tsconfig.json', './tsconfig.eslint.json', './packages/*/tsconfig.json', './packages/*/tsconfig.test.json'],
           tsconfigRootDir: __dirname,
+        },
+      },
+      {
+        files: ['**/__tests__/**/*', '**/*.test.ts', '**/*.test.tsx'],
+        rules: {
+          // Test files can be less strict about types
+          '@typescript-eslint/no-unsafe-member-access': 'off',
+          '@typescript-eslint/no-unsafe-assignment': 'off',
+          '@typescript-eslint/no-unsafe-argument': 'off',
+          '@typescript-eslint/no-unsafe-return': 'off',
+        },
+      },
+      {
+        files: ['packages/app/**/*.ts', 'packages/app/**/*.tsx'],
+        rules: {
+          // Demo app can be less strict - it's not part of the published packages
+          '@typescript-eslint/no-unsafe-member-access': 'off',
+          '@typescript-eslint/no-unsafe-assignment': 'off',
+          '@typescript-eslint/no-unsafe-argument': 'off',
+          '@typescript-eslint/no-unsafe-return': 'off',
         },
       },
     ],

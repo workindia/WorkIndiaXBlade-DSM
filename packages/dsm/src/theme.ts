@@ -8,6 +8,7 @@ import { bladeTheme } from '@razorpay/blade/tokens';
 import {
   WorkIndiaColors,
   type WorkIndiaChromaticColorScale,
+  type WorkIndiaColorTokens,
 } from '@workindia/tokens';
 import { deepMerge } from './utils/deep-merge';
 
@@ -22,8 +23,8 @@ const createWorkIndiaTheme = (): ThemeTokens => {
 
   // Extract alpha color values to avoid type inference issues in nested object
   // Accessing through the scale object ensures proper type inference
-  const primaryScale: WorkIndiaChromaticColorScale =
-    WorkIndiaColors.chromatic.brand;
+  const colors: WorkIndiaColorTokens = WorkIndiaColors;
+  const primaryScale: WorkIndiaChromaticColorScale = colors.chromatic.brand;
   const primaryFaded = primaryScale.a50;
   const primaryFadedHighlighted = primaryScale.a100;
 
@@ -40,20 +41,20 @@ const createWorkIndiaTheme = (): ThemeTokens => {
           background: {
             ...baseTheme.colors.onLight.surface.background,
             primary: {
-              subtle: WorkIndiaColors.chromatic.brand[50],
-              intense: WorkIndiaColors.chromatic.brand[500],
+              subtle: colors.chromatic.brand[50],
+              intense: colors.chromatic.brand[500],
             },
           },
           text: {
             ...baseTheme.colors.onLight.surface.text,
             gray: {
-              normal: WorkIndiaColors.neutral.light[900],
-              subtle: WorkIndiaColors.neutral.light[700],
+              normal: colors.neutral.light[900],
+              subtle: colors.neutral.light[700],
               muted: baseTheme.colors.onLight.surface.text.gray.muted,
               disabled: baseTheme.colors.onLight.surface.text.gray.disabled,
             },
             staticBlack: {
-              normal: WorkIndiaColors.neutral.blackNWhite.black,
+              normal: colors.neutral.blackNWhite.black,
               subtle: baseTheme.colors.onLight.surface.text.staticBlack.subtle,
               muted: baseTheme.colors.onLight.surface.text.staticBlack.muted,
               disabled:
@@ -66,8 +67,8 @@ const createWorkIndiaTheme = (): ThemeTokens => {
           background: {
             ...baseTheme.colors.onLight.interactive.background,
             primary: {
-              default: WorkIndiaColors.chromatic.brand[500],
-              highlighted: WorkIndiaColors.chromatic.brand[700],
+              default: colors.chromatic.brand[500],
+              highlighted: colors.chromatic.brand[700],
               disabled:
                 baseTheme.colors.onLight.interactive.background.primary
                   .disabled,
@@ -78,8 +79,8 @@ const createWorkIndiaTheme = (): ThemeTokens => {
           border: {
             ...baseTheme.colors.onLight.interactive.border,
             primary: {
-              default: WorkIndiaColors.chromatic.brand[500],
-              highlighted: WorkIndiaColors.chromatic.brand[700],
+              default: colors.chromatic.brand[500],
+              highlighted: colors.chromatic.brand[700],
               disabled:
                 baseTheme.colors.onLight.interactive.border.primary.disabled,
               faded: primaryFadedHighlighted,
@@ -88,8 +89,8 @@ const createWorkIndiaTheme = (): ThemeTokens => {
           text: {
             ...baseTheme.colors.onLight.interactive.text,
             primary: {
-              normal: WorkIndiaColors.chromatic.brand[500],
-              subtle: WorkIndiaColors.chromatic.brand[700],
+              normal: colors.chromatic.brand[500],
+              subtle: colors.chromatic.brand[700],
               muted: baseTheme.colors.onLight.interactive.text.primary.muted,
               disabled:
                 baseTheme.colors.onLight.interactive.text.primary.disabled,
@@ -98,8 +99,8 @@ const createWorkIndiaTheme = (): ThemeTokens => {
           icon: {
             ...baseTheme.colors.onLight.interactive.icon,
             primary: {
-              normal: WorkIndiaColors.chromatic.brand[500],
-              subtle: WorkIndiaColors.chromatic.brand[700],
+              normal: colors.chromatic.brand[500],
+              subtle: colors.chromatic.brand[700],
               muted: baseTheme.colors.onLight.interactive.icon.primary.muted,
               disabled:
                 baseTheme.colors.onLight.interactive.icon.primary.disabled,
@@ -112,45 +113,45 @@ const createWorkIndiaTheme = (): ThemeTokens => {
           background: {
             ...baseTheme.colors.onLight.feedback.background,
             positive: {
-              subtle: WorkIndiaColors.chromatic.emerald[50],
-              intense: WorkIndiaColors.chromatic.emerald[500],
+              subtle: colors.chromatic.emerald[50],
+              intense: colors.chromatic.emerald[500],
             },
             negative: {
-              subtle: WorkIndiaColors.chromatic.crimson[50],
-              intense: WorkIndiaColors.chromatic.crimson[500],
+              subtle: colors.chromatic.crimson[50],
+              intense: colors.chromatic.crimson[500],
             },
           },
           border: {
             ...baseTheme.colors.onLight.feedback.border,
             positive: {
-              subtle: WorkIndiaColors.chromatic.emerald[200],
-              intense: WorkIndiaColors.chromatic.emerald[500],
+              subtle: colors.chromatic.emerald[200],
+              intense: colors.chromatic.emerald[500],
             },
             negative: {
-              subtle: WorkIndiaColors.chromatic.crimson[200],
-              intense: WorkIndiaColors.chromatic.crimson[500],
+              subtle: colors.chromatic.crimson[200],
+              intense: colors.chromatic.crimson[500],
             },
           },
           text: {
             ...baseTheme.colors.onLight.feedback.text,
             positive: {
-              subtle: WorkIndiaColors.chromatic.emerald[700],
-              intense: WorkIndiaColors.chromatic.emerald[900],
+              subtle: colors.chromatic.emerald[700],
+              intense: colors.chromatic.emerald[900],
             },
             negative: {
-              subtle: WorkIndiaColors.chromatic.crimson[700],
-              intense: WorkIndiaColors.chromatic.crimson[900],
+              subtle: colors.chromatic.crimson[700],
+              intense: colors.chromatic.crimson[900],
             },
           },
           icon: {
             ...baseTheme.colors.onLight.feedback.icon,
             positive: {
-              subtle: WorkIndiaColors.chromatic.emerald[500],
-              intense: WorkIndiaColors.chromatic.emerald[700],
+              subtle: colors.chromatic.emerald[500],
+              intense: colors.chromatic.emerald[700],
             },
             negative: {
-              subtle: WorkIndiaColors.chromatic.crimson[500],
-              intense: WorkIndiaColors.chromatic.crimson[700],
+              subtle: colors.chromatic.crimson[500],
+              intense: colors.chromatic.crimson[700],
             },
           },
         },
@@ -164,20 +165,20 @@ const createWorkIndiaTheme = (): ThemeTokens => {
           background: {
             ...baseTheme.colors.onDark.surface.background,
             primary: {
-              subtle: WorkIndiaColors.chromatic.brand[50],
-              intense: WorkIndiaColors.chromatic.brand[500],
+              subtle: colors.chromatic.brand[50],
+              intense: colors.chromatic.brand[500],
             },
           },
           text: {
             ...baseTheme.colors.onDark.surface.text,
             gray: {
-              normal: WorkIndiaColors.neutral.light[900],
-              subtle: WorkIndiaColors.neutral.light[700],
+              normal: colors.neutral.light[900],
+              subtle: colors.neutral.light[700],
               muted: baseTheme.colors.onDark.surface.text.gray.muted,
               disabled: baseTheme.colors.onDark.surface.text.gray.disabled,
             },
             staticBlack: {
-              normal: WorkIndiaColors.neutral.blackNWhite.black,
+              normal: colors.neutral.blackNWhite.black,
               subtle: baseTheme.colors.onDark.surface.text.staticBlack.subtle,
               muted: baseTheme.colors.onDark.surface.text.staticBlack.muted,
               disabled:
@@ -190,8 +191,8 @@ const createWorkIndiaTheme = (): ThemeTokens => {
           background: {
             ...baseTheme.colors.onDark.interactive.background,
             primary: {
-              default: WorkIndiaColors.chromatic.brand[500],
-              highlighted: WorkIndiaColors.chromatic.brand[700],
+              default: colors.chromatic.brand[500],
+              highlighted: colors.chromatic.brand[700],
               disabled:
                 baseTheme.colors.onDark.interactive.background.primary.disabled,
               faded: primaryFaded,
@@ -201,8 +202,8 @@ const createWorkIndiaTheme = (): ThemeTokens => {
           border: {
             ...baseTheme.colors.onDark.interactive.border,
             primary: {
-              default: WorkIndiaColors.chromatic.brand[500],
-              highlighted: WorkIndiaColors.chromatic.brand[700],
+              default: colors.chromatic.brand[500],
+              highlighted: colors.chromatic.brand[700],
               disabled:
                 baseTheme.colors.onDark.interactive.border.primary.disabled,
               faded: primaryFadedHighlighted,
@@ -211,8 +212,8 @@ const createWorkIndiaTheme = (): ThemeTokens => {
           text: {
             ...baseTheme.colors.onDark.interactive.text,
             primary: {
-              normal: WorkIndiaColors.chromatic.brand[500],
-              subtle: WorkIndiaColors.chromatic.brand[700],
+              normal: colors.chromatic.brand[500],
+              subtle: colors.chromatic.brand[700],
               muted: baseTheme.colors.onDark.interactive.text.primary.muted,
               disabled:
                 baseTheme.colors.onDark.interactive.text.primary.disabled,
@@ -221,8 +222,8 @@ const createWorkIndiaTheme = (): ThemeTokens => {
           icon: {
             ...baseTheme.colors.onDark.interactive.icon,
             primary: {
-              normal: WorkIndiaColors.chromatic.brand[500],
-              subtle: WorkIndiaColors.chromatic.brand[700],
+              normal: colors.chromatic.brand[500],
+              subtle: colors.chromatic.brand[700],
               muted: baseTheme.colors.onDark.interactive.icon.primary.muted,
               disabled:
                 baseTheme.colors.onDark.interactive.icon.primary.disabled,
@@ -234,45 +235,45 @@ const createWorkIndiaTheme = (): ThemeTokens => {
           background: {
             ...baseTheme.colors.onDark.feedback.background,
             positive: {
-              subtle: WorkIndiaColors.chromatic.emerald[50],
-              intense: WorkIndiaColors.chromatic.emerald[500],
+              subtle: colors.chromatic.emerald[50],
+              intense: colors.chromatic.emerald[500],
             },
             negative: {
-              subtle: WorkIndiaColors.chromatic.crimson[50],
-              intense: WorkIndiaColors.chromatic.crimson[500],
+              subtle: colors.chromatic.crimson[50],
+              intense: colors.chromatic.crimson[500],
             },
           },
           border: {
             ...baseTheme.colors.onDark.feedback.border,
             positive: {
-              subtle: WorkIndiaColors.chromatic.emerald[50],
-              intense: WorkIndiaColors.chromatic.emerald[500],
+              subtle: colors.chromatic.emerald[50],
+              intense: colors.chromatic.emerald[500],
             },
             negative: {
-              subtle: WorkIndiaColors.chromatic.crimson[50],
-              intense: WorkIndiaColors.chromatic.crimson[500],
+              subtle: colors.chromatic.crimson[50],
+              intense: colors.chromatic.crimson[500],
             },
           },
           text: {
             ...baseTheme.colors.onDark.feedback.text,
             positive: {
-              subtle: WorkIndiaColors.chromatic.emerald[50],
-              intense: WorkIndiaColors.chromatic.emerald[500],
+              subtle: colors.chromatic.emerald[50],
+              intense: colors.chromatic.emerald[500],
             },
             negative: {
-              subtle: WorkIndiaColors.chromatic.crimson[50],
-              intense: WorkIndiaColors.chromatic.crimson[500],
+              subtle: colors.chromatic.crimson[50],
+              intense: colors.chromatic.crimson[500],
             },
           },
           icon: {
             ...baseTheme.colors.onDark.feedback.icon,
             positive: {
-              subtle: WorkIndiaColors.chromatic.emerald[50],
-              intense: WorkIndiaColors.chromatic.emerald[500],
+              subtle: colors.chromatic.emerald[50],
+              intense: colors.chromatic.emerald[500],
             },
             negative: {
-              subtle: WorkIndiaColors.chromatic.crimson[50],
-              intense: WorkIndiaColors.chromatic.crimson[500],
+              subtle: colors.chromatic.crimson[50],
+              intense: colors.chromatic.crimson[500],
             },
           },
         },
