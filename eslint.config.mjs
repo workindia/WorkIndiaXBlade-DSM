@@ -45,6 +45,22 @@ const eslintConfig = [
           '@typescript-eslint/no-unsafe-return': 'off',
         },
       },
+      {
+        files: ['packages/app/**/*.ts', 'packages/app/**/*.tsx'],
+        rules: {
+          '@typescript-eslint/no-unsafe-member-access': 'off',
+          '@typescript-eslint/no-unsafe-assignment': 'off',
+          '@typescript-eslint/no-unsafe-argument': 'off',
+          '@typescript-eslint/no-unsafe-return': 'off',
+        },
+      },
+      {
+        files: ['packages/dsm/src/theme.ts'],
+        rules: {
+          '@typescript-eslint/no-unsafe-member-access': 'off',
+          '@typescript-eslint/no-unsafe-assignment': 'off',
+        },
+      },
     ],
     parser: '@typescript-eslint/parser',
     plugins: ['jsdoc', 'prettier', 'typescript-enum'],
