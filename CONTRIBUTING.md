@@ -98,7 +98,23 @@ npm run build
 
 Follow the [Commit Message Guidelines](#commit-message-guidelines) when committing.
 
-### 5. Push and Create Pull Request
+### 5. Create a Changeset (if publishing)
+
+If your changes should be published to npm, create a changeset:
+
+```bash
+npm run changeset
+```
+
+This will prompt you to:
+
+- Select which packages have changed (`@workindia/tokens`, `@workindia/dsm`)
+- Choose the type of change (major, minor, or patch)
+- Write a summary of the changes
+
+**Note**: Only create changesets for packages that should be published. The `@workindia/app` package is private and should not have changesets.
+
+### 6. Push and Create Pull Request
 
 ```bash
 git push origin <branch-name>
@@ -275,6 +291,16 @@ Use the PR template (automatically populated). Include:
 - Squash and merge is preferred for most PRs
 - Maintain a clean commit history
 - PR title becomes the commit message
+
+### Versioning & Releases
+
+This project uses [Changesets](https://github.com/changesets/changesets) for version management:
+
+1. **Creating Changesets**: When your PR includes changes that should be published, create a changeset using `npm run changeset`
+2. **Version Bumping**: When changesets are merged to `main`, a version PR is automatically created
+3. **Publishing**: When the version PR is merged, packages are automatically published to npm
+
+See [.changeset/README.md](.changeset/README.md) for detailed versioning documentation.
 
 ## Coding Standards
 

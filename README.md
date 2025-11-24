@@ -92,18 +92,63 @@ Design system wrapper that:
 
 Example consumer application with ESLint rules that prevent direct Blade imports.
 
-## Publishing
+## Versioning & Publishing
 
-Packages can be published independently using Lerna:
+This repository uses [Changesets](https://github.com/changesets/changesets) for version management and automated releases.
+
+### Creating a Changeset
+
+When you make changes that should be published, create a changeset:
 
 ```bash
-# Publish all changed packages
-npm run publish:all
-
-# Publish specific package
-npm run publish:tokens
-npm run publish:dsm
+npm run changeset
 ```
+
+This will prompt you to:
+
+1. Select which packages have changed (`@workindia/tokens`, `@workindia/dsm`)
+2. Choose the type of change (major, minor, or patch)
+3. Write a summary of the changes
+
+### Version Bumping
+
+To bump versions based on changesets:
+
+```bash
+npm run version
+```
+
+This updates package versions and CHANGELOG.md files based on changesets.
+
+### Publishing
+
+To publish packages to npm:
+
+```bash
+npm run release
+```
+
+This will build, test, and publish all packages with pending changesets.
+
+### Automated Releases
+
+The GitHub Actions workflow automatically:
+
+- Creates a PR when changesets are added to main branch
+- Publishes packages to npm when the version PR is merged
+
+**Note**: Make sure to set `NPM_TOKEN` secret in GitHub repository settings for automated publishing.
+
+### Manual Publishing
+
+For manual publishing, ensure you have:
+
+1. Created changesets for changed packages
+2. Bumped versions with `npm run version`
+3. Built and tested the packages
+4. Published with `npm run release`
+
+See [.changeset/README.md](.changeset/README.md) for more details.
 
 ## Usage in Applications
 
