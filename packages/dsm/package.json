@@ -10,8 +10,8 @@
     "README.md"
   ],
   "scripts": {
-    "build": "tsc",
-    "clean": "rm -rf dist",
+    "build": "rm -f tsconfig.tsbuildinfo && tsc",
+    "clean": "rm -rf dist tsconfig.tsbuildinfo",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [
