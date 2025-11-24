@@ -36,6 +36,15 @@ const eslintConfig = [
           tsconfigRootDir: __dirname,
         },
       },
+      {
+        files: ['**/__tests__/**/*', '**/*.test.ts', '**/*.test.tsx'],
+        rules: {
+          '@typescript-eslint/no-unsafe-member-access': 'off',
+          '@typescript-eslint/no-unsafe-assignment': 'off',
+          '@typescript-eslint/no-unsafe-argument': 'off',
+          '@typescript-eslint/no-unsafe-return': 'off',
+        },
+      },
     ],
     parser: '@typescript-eslint/parser',
     plugins: ['jsdoc', 'prettier', 'typescript-enum'],

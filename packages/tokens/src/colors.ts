@@ -129,6 +129,9 @@ export interface WorkIndiaColorTokens {
 
 /**
  * Helper function to convert hex color with opacity percentage to rgba
+ * @param hex - Hex color string (e.g., '#3C50C8')
+ * @param opacityPercent - Opacity percentage (0-100)
+ * @returns RGBA color string (e.g., 'rgba(60, 80, 200, 0.09)')
  */
 function hexToRgba(hex: string, opacityPercent: number): string {
   const hexColor = hex.replace('#', '');
@@ -136,7 +139,7 @@ function hexToRgba(hex: string, opacityPercent: number): string {
   const g = parseInt(hexColor.substring(2, 4), 16);
   const b = parseInt(hexColor.substring(4, 6), 16);
   const opacity = opacityPercent / 100;
-  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+  return `rgba(${String(r)}, ${String(g)}, ${String(b)}, ${String(opacity)})`;
 }
 
 /**

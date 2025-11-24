@@ -1,5 +1,22 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
 
-npx lint-staged
+# Source nvm if available to ensure node/npm/npx are in PATH
+if [ -s "$HOME/.nvm/nvm.sh" ]; then
+  . "$HOME/.nvm/nvm.sh"
+fi
+
+# Ensure we're in the project root (husky runs from .git/hooks, so go up 3 levels)
+cd "$(dirname -- "$0")/../.." || exit
+
+# Export PATH to include node_modules/.bin
+export PATH="$PWD/node_modules/.bin:$PATH"
+
+# Run lint-staged - check if it exists first
+if command -v lint-staged >/dev/null 2>&1; then
+  lint-staged
+elif [ -f "$PWD/node_modules/.bin/lint-staged" ]; then
+  "$PWD/node_modules/.bin/lint-staged"
+else
+  npm exec -- lint-staged
+fi
 
