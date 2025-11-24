@@ -23,16 +23,13 @@ The design system enforces token lockdown through:
 ### Prerequisites
 
 - Node.js >= 18.12.1
-- npm or yarn
+- npm
 
 ### Installation
 
 ```bash
 # Install dependencies
 npm install
-
-# Bootstrap packages (link local packages)
-npm run bootstrap
 ```
 
 ### Building
