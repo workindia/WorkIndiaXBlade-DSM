@@ -20,10 +20,10 @@ import {
 } from '@workindia/tokens';
 
 // Use color scales - locked-down gradient variations
-const primaryBase = WorkIndiaColors.brand.primary[500]; // '#005A9C' - Base color
-const primaryLight = WorkIndiaColors.brand.primary[50]; // Lightest shade
-const primaryDark = WorkIndiaColors.brand.primary[900]; // Dark shade
-const primaryOverlay = WorkIndiaColors.brand.primary.a50; // 10% opacity variant
+const primaryBase = WorkIndiaColors.chromatic.brand[500]; // '#3C50C8' - Base color
+const primaryLight = WorkIndiaColors.chromatic.brand[50]; // Lightest shade
+const primaryDark = WorkIndiaColors.chromatic.brand[900]; // Dark shade
+const primaryOverlay = WorkIndiaColors.chromatic.brand.a50; // 9% opacity variant
 
 // Use restricted spacing
 const padding = WorkIndiaSpacing.medium; // 16
@@ -38,26 +38,33 @@ const fontSize = WorkIndiaTypography.fontSize.base; // 14
 
 Color tokens use **locked-down gradient scales** to ensure consistency. Each color provides a full scale of variations:
 
-#### Brand Colors
+#### Chromatic Colors
 
-- `brand.primary` - Primary brand color scale with gradient variations:
-  - `50`, `100`, `200` - Light shades (for backgrounds)
+The chromatic palette includes seven color scales, each with full gradient variations:
+
+- `chromatic.brand` - Primary brand color scale
+- `chromatic.rose` - Rose color scale
+- `chromatic.cerulean` - Cerulean color scale
+- `chromatic.emerald` - Emerald color scale (success/positive states)
+- `chromatic.crimson` - Crimson color scale (error/negative states)
+- `chromatic.amber` - Amber color scale
+- `chromatic.sky` - Sky color scale
+
+Each chromatic color scale includes:
+  - `50`, `100`, `200`, `300`, `400` - Light to medium shades (for backgrounds)
   - `500` - Base color (primary shade)
-  - `700`, `900`, `1000` - Dark shades (for emphasis)
-  - `a50`, `a100`, `a200` - Alpha variants (for overlays)
+  - `600`, `700`, `800`, `900`, `1000` - Medium-dark to darkest shades (for emphasis)
+  - `a50`, `a100`, `a150`, `a200` - Alpha variants (9%, 18%, 24%, 32% opacity for overlays)
 
-- `brand.secondary` - Secondary brand color scale (same structure as primary)
+#### Neutral Colors
 
-#### Feedback Colors
+The neutral palette includes light and dark scales for text and backgrounds:
 
-- `feedback.success` - Success color scale (same gradient structure)
-- `feedback.error` - Error color scale (same gradient structure)
-
-#### Text Colors
-
-- `text.body` - Body text color (single value)
-- `text.heading` - Heading text color (single value)
-- `text.subtle` - Subtle/secondary text color (single value)
+- `neutral.light` - Light neutral color scale (shades 0-1300 + alpha variants)
+- `neutral.dark` - Dark neutral color scale (shades 0-1300 + alpha variants)
+- `neutral.blackNWhite` - Pure black and white colors
+  - `black` - Pure black (#000000)
+  - `white` - Pure white (#FFFFFF)
 
 ### Spacing
 
@@ -91,30 +98,34 @@ All tokens are strongly typed. TypeScript will prevent you from using undefined 
 ```typescript
 import type {
   WorkIndiaColorTokens,
-  WorkIndiaColorScale,
+  WorkIndiaChromaticColorScale,
 } from '@workindia/tokens';
 
 // Access color scale
-const primaryScale: WorkIndiaColorScale = WorkIndiaColors.brand.primary;
+const primaryScale: WorkIndiaChromaticColorScale = WorkIndiaColors.chromatic.brand;
 
 // TypeScript enforces only valid shade keys
 const shade = primaryScale[500]; // ✅ Valid
 // const invalid = primaryScale[999]; // ❌ TypeScript error
 
 // This ensures only valid color tokens are used
-function useColor(color: keyof WorkIndiaColorTokens['brand']) {
+function useColor(color: keyof WorkIndiaColorTokens['chromatic']) {
   // Implementation
 }
 ```
 
 ## Color Scale Structure
 
-Each color scale provides locked-down gradient variations **manually defined by the design team**:
+Each chromatic color scale provides locked-down gradient variations **manually defined by the design team**:
 
-- **50, 100, 200**: Light shades for backgrounds and subtle elements
+- **50, 100, 200, 300, 400**: Light to medium shades for backgrounds and subtle elements
 - **500**: Base color - the primary shade
-- **700, 900, 1000**: Dark shades for emphasis and contrast
-- **a50, a100, a200**: Alpha variants with opacity for overlays and effects
+- **600, 700, 800, 900, 1000**: Medium-dark to darkest shades for emphasis and contrast
+- **a50, a100, a150, a200**: Alpha variants with opacity (9%, 18%, 24%, 32%) for overlays and effects
+
+Neutral color scales provide:
+- **0-1300**: Full range of neutral shades from lightest to darkest
+- **a25, a50, a100, a200**: Alpha variants with opacity (6%, 9%, 18%, 32%) for overlays
 
 **Important**: All color scale values are manually defined hex codes provided by the design team. They are not auto-generated. To update colors, edit `packages/tokens/src/colors.ts` with the design team's approved hex codes.
 

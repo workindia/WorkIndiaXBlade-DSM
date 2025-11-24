@@ -69,21 +69,25 @@ export const App = () => {
               color provides a full gradient scale.
             </Text>
 
-            {/* Brand Colors */}
+            {/* Chromatic Colors */}
             <Box marginBottom="spacing.5">
               <Heading size="medium" marginBottom="spacing.3">
-                Brand Colors
+                Chromatic Colors
               </Heading>
+              <Text marginBottom="spacing.4" color="surface.text.gray.subtle">
+                All chromatic colors include shades from 50-1000 and alpha
+                variants (a50, a100, a150, a200).
+              </Text>
               <Box
                 display="flex"
                 flexDirection="row"
                 gap="spacing.4"
                 flexWrap="wrap"
               >
-                {/* Primary Color Scale */}
+                {/* Brand */}
                 <Box>
                   <Text weight="semibold" marginBottom="spacing.2">
-                    Primary
+                    Brand
                   </Text>
                   <Box
                     display="flex"
@@ -94,14 +98,14 @@ export const App = () => {
                     borderWidth="thin"
                     borderColor="surface.border.gray.subtle"
                   >
-                    {Object.entries(WorkIndiaColors.brand.primary).map(
+                    {Object.entries(WorkIndiaColors.chromatic.brand).map(
                       ([shade, color]: [string, string]) => (
                         <div
                           key={shade}
                           style={{
                             backgroundColor: color,
                             padding: '8px',
-                            minWidth: '120px',
+                            minWidth: '140px',
                             display: 'flex',
                             justifyContent: 'space-between',
                             alignItems: 'center',
@@ -115,10 +119,10 @@ export const App = () => {
                   </Box>
                 </Box>
 
-                {/* Secondary Color Scale */}
+                {/* Rose */}
                 <Box>
                   <Text weight="semibold" marginBottom="spacing.2">
-                    Secondary
+                    Rose
                   </Text>
                   <Box
                     display="flex"
@@ -129,14 +133,189 @@ export const App = () => {
                     borderWidth="thin"
                     borderColor="surface.border.gray.subtle"
                   >
-                    {Object.entries(WorkIndiaColors.brand.secondary).map(
+                    {Object.entries(WorkIndiaColors.chromatic.rose).map(
                       ([shade, color]: [string, string]) => (
                         <div
                           key={shade}
                           style={{
                             backgroundColor: color,
                             padding: '8px',
-                            minWidth: '120px',
+                            minWidth: '140px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <Text size="small">{shade}</Text>
+                          <Text size="small">{color}</Text>
+                        </div>
+                      ),
+                    )}
+                  </Box>
+                </Box>
+
+                {/* Cerulean */}
+                <Box>
+                  <Text weight="semibold" marginBottom="spacing.2">
+                    Cerulean
+                  </Text>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    gap="spacing.1"
+                    borderRadius="small"
+                    overflow="hidden"
+                    borderWidth="thin"
+                    borderColor="surface.border.gray.subtle"
+                  >
+                    {Object.entries(WorkIndiaColors.chromatic.cerulean).map(
+                      ([shade, color]: [string, string]) => (
+                        <div
+                          key={shade}
+                          style={{
+                            backgroundColor: color,
+                            padding: '8px',
+                            minWidth: '140px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <Text size="small">{shade}</Text>
+                          <Text size="small">{color}</Text>
+                        </div>
+                      ),
+                    )}
+                  </Box>
+                </Box>
+
+                {/* Emerald */}
+                <Box>
+                  <Text weight="semibold" marginBottom="spacing.2">
+                    Emerald
+                  </Text>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    gap="spacing.1"
+                    borderRadius="small"
+                    overflow="hidden"
+                    borderWidth="thin"
+                    borderColor="surface.border.gray.subtle"
+                  >
+                    {Object.entries(WorkIndiaColors.chromatic.emerald).map(
+                      ([shade, color]: [string, string]) => (
+                        <div
+                          key={shade}
+                          style={{
+                            backgroundColor: color,
+                            padding: '8px',
+                            minWidth: '140px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <Text size="small">{shade}</Text>
+                          <Text size="small">{color}</Text>
+                        </div>
+                      ),
+                    )}
+                  </Box>
+                </Box>
+
+                {/* Crimson */}
+                <Box>
+                  <Text weight="semibold" marginBottom="spacing.2">
+                    Crimson
+                  </Text>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    gap="spacing.1"
+                    borderRadius="small"
+                    overflow="hidden"
+                    borderWidth="thin"
+                    borderColor="surface.border.gray.subtle"
+                  >
+                    {Object.entries(WorkIndiaColors.chromatic.crimson).map(
+                      ([shade, color]: [string, string]) => (
+                        <div
+                          key={shade}
+                          style={{
+                            backgroundColor: color,
+                            padding: '8px',
+                            minWidth: '140px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <Text size="small">{shade}</Text>
+                          <Text size="small">{color}</Text>
+                        </div>
+                      ),
+                    )}
+                  </Box>
+                </Box>
+
+                {/* Amber */}
+                <Box>
+                  <Text weight="semibold" marginBottom="spacing.2">
+                    Amber
+                  </Text>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    gap="spacing.1"
+                    borderRadius="small"
+                    overflow="hidden"
+                    borderWidth="thin"
+                    borderColor="surface.border.gray.subtle"
+                  >
+                    {Object.entries(WorkIndiaColors.chromatic.amber).map(
+                      ([shade, color]: [string, string]) => (
+                        <div
+                          key={shade}
+                          style={{
+                            backgroundColor: color,
+                            padding: '8px',
+                            minWidth: '140px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <Text size="small">{shade}</Text>
+                          <Text size="small">{color}</Text>
+                        </div>
+                      ),
+                    )}
+                  </Box>
+                </Box>
+
+                {/* Sky */}
+                <Box>
+                  <Text weight="semibold" marginBottom="spacing.2">
+                    Sky
+                  </Text>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    gap="spacing.1"
+                    borderRadius="small"
+                    overflow="hidden"
+                    borderWidth="thin"
+                    borderColor="surface.border.gray.subtle"
+                  >
+                    {Object.entries(WorkIndiaColors.chromatic.sky).map(
+                      ([shade, color]: [string, string]) => (
+                        <div
+                          key={shade}
+                          style={{
+                            backgroundColor: color,
+                            padding: '8px',
+                            minWidth: '140px',
                             display: 'flex',
                             justifyContent: 'space-between',
                             alignItems: 'center',
@@ -152,129 +331,147 @@ export const App = () => {
               </Box>
             </Box>
 
-            {/* Feedback Colors */}
-            <Box marginBottom="spacing.5">
-              <Heading size="medium" marginBottom="spacing.3">
-                Feedback Colors
-              </Heading>
-              <Box
-                display="flex"
-                flexDirection="row"
-                gap="spacing.4"
-                flexWrap="wrap"
-              >
-                {/* Success Color Scale */}
-                <Box>
-                  <Text weight="semibold" marginBottom="spacing.2">
-                    Success
-                  </Text>
-                  <Box
-                    display="flex"
-                    flexDirection="column"
-                    gap="spacing.1"
-                    borderRadius="small"
-                    overflow="hidden"
-                    borderWidth="thin"
-                    borderColor="surface.border.gray.subtle"
-                  >
-                    {Object.entries(WorkIndiaColors.feedback.success).map(
-                      ([shade, color]: [string, string]) => (
-                        <div
-                          key={shade}
-                          style={{
-                            backgroundColor: color,
-                            padding: '8px',
-                            minWidth: '120px',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                          }}
-                        >
-                          <Text size="small">{shade}</Text>
-                          <Text size="small">{color}</Text>
-                        </div>
-                      ),
-                    )}
-                  </Box>
-                </Box>
-
-                {/* Error Color Scale */}
-                <Box>
-                  <Text weight="semibold" marginBottom="spacing.2">
-                    Error
-                  </Text>
-                  <Box
-                    display="flex"
-                    flexDirection="column"
-                    gap="spacing.1"
-                    borderRadius="small"
-                    overflow="hidden"
-                    borderWidth="thin"
-                    borderColor="surface.border.gray.subtle"
-                  >
-                    {Object.entries(WorkIndiaColors.feedback.error).map(
-                      ([shade, color]: [string, string]) => (
-                        <div
-                          key={shade}
-                          style={{
-                            backgroundColor: color,
-                            padding: '8px',
-                            minWidth: '120px',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                          }}
-                        >
-                          <Text size="small">{shade}</Text>
-                          <Text size="small">{color}</Text>
-                        </div>
-                      ),
-                    )}
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-
-            {/* Text Colors */}
+            {/* Neutral Colors */}
             <Box>
               <Heading size="medium" marginBottom="spacing.3">
-                Text Colors
+                Neutral Colors
               </Heading>
+              <Text marginBottom="spacing.4" color="surface.text.gray.subtle">
+                Neutral colors include light and dark scales with shades from
+                0-1300 and alpha variants (a25, a50, a100, a200).
+              </Text>
               <Box
                 display="flex"
                 flexDirection="row"
                 gap="spacing.4"
                 flexWrap="wrap"
               >
-                {Object.entries(WorkIndiaColors.text).map(
-                  ([key, color]: [string, string]) => (
-                    <Box key={key}>
-                      <div
-                        style={{
-                          backgroundColor: color,
-                          padding: '16px',
-                          borderRadius: '4px',
-                          border: '1px solid',
-                          minWidth: '150px',
-                        }}
-                      >
-                        <Text
-                          size="small"
-                          color="surface.text.staticWhite.normal"
-                        >
-                          {key}
-                        </Text>
-                        <Text
-                          size="small"
-                          marginTop="spacing.1"
-                          color="surface.text.staticWhite.subtle"
-                        >
-                          {color}
-                        </Text>
-                      </div>
-                    </Box>
-                  ),
-                )}
+                {/* Neutral Light */}
+                <Box>
+                  <Text weight="semibold" marginBottom="spacing.2">
+                    Neutral Light
+                  </Text>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    gap="spacing.1"
+                    borderRadius="small"
+                    overflow="hidden"
+                    borderWidth="thin"
+                    borderColor="surface.border.gray.subtle"
+                    maxHeight="400px"
+                    overflowY="auto"
+                  >
+                    {Object.entries(WorkIndiaColors.neutral.light).map(
+                      ([shade, color]: [string, string]) => {
+                        const shadeNum = parseInt(shade);
+                        const isDark = !isNaN(shadeNum) && shadeNum >= 800;
+                        return (
+                          <div
+                            key={shade}
+                            style={{
+                              backgroundColor: color,
+                              padding: '8px',
+                              minWidth: '140px',
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                              color: isDark
+                                ? WorkIndiaColors.neutral.blackNWhite.white
+                                : WorkIndiaColors.neutral.blackNWhite.black,
+                            }}
+                          >
+                            <Text size="small">{shade}</Text>
+                            <Text size="small">{color}</Text>
+                          </div>
+                        );
+                      },
+                    )}
+                  </Box>
+                </Box>
+
+                {/* Neutral Dark */}
+                <Box>
+                  <Text weight="semibold" marginBottom="spacing.2">
+                    Neutral Dark
+                  </Text>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    gap="spacing.1"
+                    borderRadius="small"
+                    overflow="hidden"
+                    borderWidth="thin"
+                    borderColor="surface.border.gray.subtle"
+                    maxHeight="400px"
+                    overflowY="auto"
+                  >
+                    {Object.entries(WorkIndiaColors.neutral.dark).map(
+                      ([shade, color]: [string, string]) => {
+                        const shadeNum = parseInt(shade);
+                        const isDark = !isNaN(shadeNum) && shadeNum >= 800;
+                        return (
+                          <div
+                            key={shade}
+                            style={{
+                              backgroundColor: color,
+                              padding: '8px',
+                              minWidth: '140px',
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                              color: isDark
+                                ? WorkIndiaColors.neutral.blackNWhite.white
+                                : WorkIndiaColors.neutral.blackNWhite.black,
+                            }}
+                          >
+                            <Text size="small">{shade}</Text>
+                            <Text size="small">{color}</Text>
+                          </div>
+                        );
+                      },
+                    )}
+                  </Box>
+                </Box>
+
+                {/* Black & White */}
+                <Box>
+                  <Text weight="semibold" marginBottom="spacing.2">
+                    Black & White
+                  </Text>
+                  <Box display="flex" flexDirection="column" gap="spacing.2">
+                    <div
+                      style={{
+                        backgroundColor:
+                          WorkIndiaColors.neutral.blackNWhite.black,
+                        color: WorkIndiaColors.neutral.blackNWhite.white,
+                        padding: '16px',
+                        borderRadius: '4px',
+                        border: '1px solid',
+                        minWidth: '150px',
+                      }}
+                    >
+                      <Text size="small">
+                        black: {WorkIndiaColors.neutral.blackNWhite.black}
+                      </Text>
+                    </div>
+                    <div
+                      style={{
+                        backgroundColor:
+                          WorkIndiaColors.neutral.blackNWhite.white,
+                        color: WorkIndiaColors.neutral.blackNWhite.black,
+                        padding: '16px',
+                        borderRadius: '4px',
+                        border: '1px solid',
+                        minWidth: '150px',
+                      }}
+                    >
+                      <Text size="small">
+                        white: {WorkIndiaColors.neutral.blackNWhite.white}
+                      </Text>
+                    </div>
+                  </Box>
+                </Box>
               </Box>
             </Box>
           </CardBody>

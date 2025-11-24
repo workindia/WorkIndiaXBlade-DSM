@@ -6,7 +6,12 @@
  * Package: @workindia/tokens
  */
 
-export type { WorkIndiaColorTokens, WorkIndiaColorScale } from './colors';
+export type {
+  WorkIndiaColorTokens,
+  WorkIndiaChromaticColorScale,
+  WorkIndiaNeutralColorScale,
+  WorkIndiaBlackNWhite,
+} from './colors';
 export { WorkIndiaColors } from './colors';
 
 export type { WorkIndiaSpacingTokens } from './spacing';
