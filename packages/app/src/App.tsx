@@ -35,6 +35,40 @@ import {
 } from '@workindia/tokens';
 
 /**
+ * Calculate the relative luminance of a color
+ * Returns a value between 0 (dark) and 1 (light)
+ */
+const getLuminance = (color: string): number => {
+  // Handle rgba colors
+  if (color.startsWith('rgba')) {
+    const regex = /rgba?\((\d+),\s*(\d+),\s*(\d+)/;
+    const match = regex.exec(color);
+    if (match) {
+      const [, r, g, b] = match.map(Number);
+      return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+    }
+  }
+
+  // Handle hex colors
+  const hex = color.replace('#', '');
+  const r = parseInt(hex.substring(0, 2), 16);
+  const g = parseInt(hex.substring(2, 4), 16);
+  const b = parseInt(hex.substring(4, 6), 16);
+  return (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+};
+
+/**
+ * Get contrasting text color (black or white) based on background color
+ */
+const getContrastColor = (backgroundColor: string): string => {
+  const luminance = getLuminance(backgroundColor);
+  // Use white text for dark backgrounds (luminance < 0.5), black for light
+  return luminance < 0.5
+    ? WorkIndiaColors.neutral.blackNWhite.white
+    : WorkIndiaColors.neutral.blackNWhite.black;
+};
+
+/**
  * Example App component showcasing locked-down tokens and UI components
  * Note: We only import from @workindia/dsm, never from @razorpay/blade directly
  * @returns The App component
@@ -99,22 +133,30 @@ export const App = () => {
                     borderColor="surface.border.gray.subtle"
                   >
                     {Object.entries(WorkIndiaColors.chromatic.brand).map(
-                      ([shade, color]: [string, string]) => (
-                        <div
-                          key={shade}
-                          style={{
-                            backgroundColor: color,
-                            padding: '8px',
-                            minWidth: '140px',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                          }}
-                        >
-                          <Text size="small">{shade}</Text>
-                          <Text size="small">{color}</Text>
-                        </div>
-                      ),
+                      ([shade, color]: [string, string]) => {
+                        const textColor = getContrastColor(color);
+                        return (
+                          <div
+                            key={shade}
+                            style={{
+                              backgroundColor: color,
+                              color: textColor,
+                              padding: '8px',
+                              minWidth: '140px',
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <Text size="small" color="currentColor">
+                              {shade}
+                            </Text>
+                            <Text size="small" color="currentColor">
+                              {color}
+                            </Text>
+                          </div>
+                        );
+                      },
                     )}
                   </Box>
                 </Box>
@@ -134,22 +176,30 @@ export const App = () => {
                     borderColor="surface.border.gray.subtle"
                   >
                     {Object.entries(WorkIndiaColors.chromatic.rose).map(
-                      ([shade, color]: [string, string]) => (
-                        <div
-                          key={shade}
-                          style={{
-                            backgroundColor: color,
-                            padding: '8px',
-                            minWidth: '140px',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                          }}
-                        >
-                          <Text size="small">{shade}</Text>
-                          <Text size="small">{color}</Text>
-                        </div>
-                      ),
+                      ([shade, color]: [string, string]) => {
+                        const textColor = getContrastColor(color);
+                        return (
+                          <div
+                            key={shade}
+                            style={{
+                              backgroundColor: color,
+                              color: textColor,
+                              padding: '8px',
+                              minWidth: '140px',
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <Text size="small" color="currentColor">
+                              {shade}
+                            </Text>
+                            <Text size="small" color="currentColor">
+                              {color}
+                            </Text>
+                          </div>
+                        );
+                      },
                     )}
                   </Box>
                 </Box>
@@ -169,22 +219,30 @@ export const App = () => {
                     borderColor="surface.border.gray.subtle"
                   >
                     {Object.entries(WorkIndiaColors.chromatic.cerulean).map(
-                      ([shade, color]: [string, string]) => (
-                        <div
-                          key={shade}
-                          style={{
-                            backgroundColor: color,
-                            padding: '8px',
-                            minWidth: '140px',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                          }}
-                        >
-                          <Text size="small">{shade}</Text>
-                          <Text size="small">{color}</Text>
-                        </div>
-                      ),
+                      ([shade, color]: [string, string]) => {
+                        const textColor = getContrastColor(color);
+                        return (
+                          <div
+                            key={shade}
+                            style={{
+                              backgroundColor: color,
+                              color: textColor,
+                              padding: '8px',
+                              minWidth: '140px',
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <Text size="small" color="currentColor">
+                              {shade}
+                            </Text>
+                            <Text size="small" color="currentColor">
+                              {color}
+                            </Text>
+                          </div>
+                        );
+                      },
                     )}
                   </Box>
                 </Box>
@@ -204,22 +262,30 @@ export const App = () => {
                     borderColor="surface.border.gray.subtle"
                   >
                     {Object.entries(WorkIndiaColors.chromatic.emerald).map(
-                      ([shade, color]: [string, string]) => (
-                        <div
-                          key={shade}
-                          style={{
-                            backgroundColor: color,
-                            padding: '8px',
-                            minWidth: '140px',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                          }}
-                        >
-                          <Text size="small">{shade}</Text>
-                          <Text size="small">{color}</Text>
-                        </div>
-                      ),
+                      ([shade, color]: [string, string]) => {
+                        const textColor = getContrastColor(color);
+                        return (
+                          <div
+                            key={shade}
+                            style={{
+                              backgroundColor: color,
+                              color: textColor,
+                              padding: '8px',
+                              minWidth: '140px',
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <Text size="small" color="currentColor">
+                              {shade}
+                            </Text>
+                            <Text size="small" color="currentColor">
+                              {color}
+                            </Text>
+                          </div>
+                        );
+                      },
                     )}
                   </Box>
                 </Box>
@@ -239,22 +305,30 @@ export const App = () => {
                     borderColor="surface.border.gray.subtle"
                   >
                     {Object.entries(WorkIndiaColors.chromatic.crimson).map(
-                      ([shade, color]: [string, string]) => (
-                        <div
-                          key={shade}
-                          style={{
-                            backgroundColor: color,
-                            padding: '8px',
-                            minWidth: '140px',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                          }}
-                        >
-                          <Text size="small">{shade}</Text>
-                          <Text size="small">{color}</Text>
-                        </div>
-                      ),
+                      ([shade, color]: [string, string]) => {
+                        const textColor = getContrastColor(color);
+                        return (
+                          <div
+                            key={shade}
+                            style={{
+                              backgroundColor: color,
+                              color: textColor,
+                              padding: '8px',
+                              minWidth: '140px',
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <Text size="small" color="currentColor">
+                              {shade}
+                            </Text>
+                            <Text size="small" color="currentColor">
+                              {color}
+                            </Text>
+                          </div>
+                        );
+                      },
                     )}
                   </Box>
                 </Box>
@@ -274,22 +348,30 @@ export const App = () => {
                     borderColor="surface.border.gray.subtle"
                   >
                     {Object.entries(WorkIndiaColors.chromatic.amber).map(
-                      ([shade, color]: [string, string]) => (
-                        <div
-                          key={shade}
-                          style={{
-                            backgroundColor: color,
-                            padding: '8px',
-                            minWidth: '140px',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                          }}
-                        >
-                          <Text size="small">{shade}</Text>
-                          <Text size="small">{color}</Text>
-                        </div>
-                      ),
+                      ([shade, color]: [string, string]) => {
+                        const textColor = getContrastColor(color);
+                        return (
+                          <div
+                            key={shade}
+                            style={{
+                              backgroundColor: color,
+                              color: textColor,
+                              padding: '8px',
+                              minWidth: '140px',
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <Text size="small" color="currentColor">
+                              {shade}
+                            </Text>
+                            <Text size="small" color="currentColor">
+                              {color}
+                            </Text>
+                          </div>
+                        );
+                      },
                     )}
                   </Box>
                 </Box>
@@ -309,22 +391,30 @@ export const App = () => {
                     borderColor="surface.border.gray.subtle"
                   >
                     {Object.entries(WorkIndiaColors.chromatic.sky).map(
-                      ([shade, color]: [string, string]) => (
-                        <div
-                          key={shade}
-                          style={{
-                            backgroundColor: color,
-                            padding: '8px',
-                            minWidth: '140px',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                          }}
-                        >
-                          <Text size="small">{shade}</Text>
-                          <Text size="small">{color}</Text>
-                        </div>
-                      ),
+                      ([shade, color]: [string, string]) => {
+                        const textColor = getContrastColor(color);
+                        return (
+                          <div
+                            key={shade}
+                            style={{
+                              backgroundColor: color,
+                              color: textColor,
+                              padding: '8px',
+                              minWidth: '140px',
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <Text size="small" color="currentColor">
+                              {shade}
+                            </Text>
+                            <Text size="small" color="currentColor">
+                              {color}
+                            </Text>
+                          </div>
+                        );
+                      },
                     )}
                   </Box>
                 </Box>
@@ -364,25 +454,26 @@ export const App = () => {
                   >
                     {Object.entries(WorkIndiaColors.neutral.light).map(
                       ([shade, color]: [string, string]) => {
-                        const shadeNum = parseInt(shade);
-                        const isDark = !isNaN(shadeNum) && shadeNum >= 800;
+                        const textColor = getContrastColor(color);
                         return (
                           <div
                             key={shade}
                             style={{
                               backgroundColor: color,
+                              color: textColor,
                               padding: '8px',
                               minWidth: '140px',
                               display: 'flex',
                               justifyContent: 'space-between',
                               alignItems: 'center',
-                              color: isDark
-                                ? WorkIndiaColors.neutral.blackNWhite.white
-                                : WorkIndiaColors.neutral.blackNWhite.black,
                             }}
                           >
-                            <Text size="small">{shade}</Text>
-                            <Text size="small">{color}</Text>
+                            <Text size="small" color="currentColor">
+                              {shade}
+                            </Text>
+                            <Text size="small" color="currentColor">
+                              {color}
+                            </Text>
                           </div>
                         );
                       },
@@ -408,25 +499,26 @@ export const App = () => {
                   >
                     {Object.entries(WorkIndiaColors.neutral.dark).map(
                       ([shade, color]: [string, string]) => {
-                        const shadeNum = parseInt(shade);
-                        const isDark = !isNaN(shadeNum) && shadeNum >= 800;
+                        const textColor = getContrastColor(color);
                         return (
                           <div
                             key={shade}
                             style={{
                               backgroundColor: color,
+                              color: textColor,
                               padding: '8px',
                               minWidth: '140px',
                               display: 'flex',
                               justifyContent: 'space-between',
                               alignItems: 'center',
-                              color: isDark
-                                ? WorkIndiaColors.neutral.blackNWhite.white
-                                : WorkIndiaColors.neutral.blackNWhite.black,
                             }}
                           >
-                            <Text size="small">{shade}</Text>
-                            <Text size="small">{color}</Text>
+                            <Text size="small" color="currentColor">
+                              {shade}
+                            </Text>
+                            <Text size="small" color="currentColor">
+                              {color}
+                            </Text>
                           </div>
                         );
                       },
