@@ -26,7 +26,8 @@
     "publish:tokens": "lerna publish --scope @workindia/tokens",
     "publish:dsm": "lerna publish --scope @workindia/dsm",
     "setup:git-template": "./scripts/setup-git-template.sh",
-    "prepare": "npm run setup:git-template || true"
+    "lint-staged": "lint-staged",
+    "prepare": "husky || npm run setup:git-template || true"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -47,7 +48,7 @@
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "lerna": "^8.1.2",
-    "lint-staged": "^15.2.11",
+    "lint-staged": "^15.5.2",
     "prettier": "^3.4.2",
     "ts-jest": "^29.1.1",
     "typescript": "^5"
