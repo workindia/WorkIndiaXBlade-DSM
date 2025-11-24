@@ -19,7 +19,9 @@
     "clean": "lerna run clean && rm -rf node_modules",
     "publish:all": "lerna publish",
     "publish:tokens": "lerna publish --scope @workindia/tokens",
-    "publish:dsm": "lerna publish --scope @workindia/dsm"
+    "publish:dsm": "lerna publish --scope @workindia/dsm",
+    "setup:git-template": "./scripts/setup-git-template.sh",
+    "prepare": "npm run setup:git-template || true"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -33,9 +35,20 @@
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-typescript-enum": "^2.1.0",
     "eslint-plugin-unicorn": "^57.0.0",
+    "husky": "^9.1.7",
     "lerna": "^8.1.2",
+    "lint-staged": "^15.2.11",
     "prettier": "^3.4.2",
     "typescript": "^5"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
   },
   "engines": {
     "node": ">=18.12.1"

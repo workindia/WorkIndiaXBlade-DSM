@@ -1,0 +1,56 @@
+# <type>(<scope>): <subject>
+#
+# <body>
+#
+# <footer>
+
+# Types:
+#   feat:     A new feature
+#   fix:      A bug fix
+#   docs:     Documentation only changes
+#   style:    Changes that do not affect the meaning of the code
+#             (white-space, formatting, missing semi-colons, etc)
+#   refactor: A code change that neither fixes a bug nor adds a feature
+#   perf:     A code change that improves performance
+#   test:     Adding missing tests or correcting existing tests
+#   chore:    Changes to the build process or auxiliary tools
+#             and libraries such as documentation generation
+#   build:    Changes that affect the build system or external dependencies
+#
+# Scope:
+#   tokens:   Changes to @workindia/tokens
+#   dsm:      Changes to @workindia/dsm
+#   app:      Changes to @workindia/app
+#   root:     Changes to root-level configuration
+#   ci:       CI/CD changes
+#
+# Subject:
+#   - Use imperative mood ("add feature" not "added feature")
+#   - First letter lowercase
+#   - No period at the end
+#   - Maximum 72 characters
+#
+# Body:
+#   - Explain the "what" and "why" of the change
+#   - Wrap at 72 characters
+#   - Can include multiple paragraphs
+#
+# Footer:
+#   - Reference issues: Closes #123, Fixes #456
+#   - Breaking changes: BREAKING CHANGE: <description>
+#
+# Examples:
+#   feat(tokens): add error color token
+#
+#   Add new error color token to support error states
+#   in the design system.
+#
+#   Closes #42
+#
+#   fix(dsm): correct theme mapping for spacing tokens
+#
+#   The spacing tokens were not correctly mapped to Blade's
+#   theme structure. This fix ensures proper mapping.
+#
+#   Fixes #15
+
