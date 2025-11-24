@@ -32,7 +32,7 @@ const eslintConfig = [
           'plugin:typescript-enum/recommended',
         ],
         parserOptions: {
-          project: './tsconfig.json',
+          project: ['./tsconfig.json', './tsconfig.eslint.json', './packages/*/tsconfig.json', './packages/*/tsconfig.test.json'],
           tsconfigRootDir: __dirname,
         },
       },
