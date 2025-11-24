@@ -7,6 +7,11 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write # Required for OIDC trusted publishing
+
 jobs:
   release:
     name: Release
@@ -23,6 +28,8 @@ jobs:
         with:
           node-version: 22.x
           registry-url: 'https://registry.npmjs.org'
+          # OIDC authentication is handled automatically via trusted publishers
+          # No NPM_TOKEN secret needed when using OIDC trusted publishing
           cache: 'npm'
 
       - name: Install dependencies
@@ -41,5 +48,6 @@ jobs:
           title: 'chore: version packages'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # OIDC authentication is handled automatically via trusted publishers
+          # No NPM_TOKEN secret needed when using OIDC trusted publishing
 

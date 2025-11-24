@@ -137,7 +137,7 @@ The GitHub Actions workflow automatically:
 - Creates a PR when changesets are added to main branch
 - Publishes packages to npm when the version PR is merged
 
-**Note**: Make sure to set `NPM_TOKEN` secret in GitHub repository settings for automated publishing.
+This repository uses npm's **OIDC (OpenID Connect) Trusted Publishing** for secure, token-less publishing. This eliminates the need for long-lived npm tokens.
 
 ### Manual Publishing
 

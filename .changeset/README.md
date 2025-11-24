@@ -54,6 +54,8 @@ The GitHub Actions workflow automatically:
 - Creates a PR when changesets are added
 - Publishes packages when the PR is merged to main
 
+**Authentication**: Uses npm's OIDC Trusted Publishing (no secrets required). See the main [README.md](../README.md) for setup instructions.
+
 ## Manual Publishing
 
 You can also publish specific packages:
