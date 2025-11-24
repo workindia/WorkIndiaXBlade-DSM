@@ -48,10 +48,13 @@ jobs:
         run: npm test -- --coverage
 
       - name: Upload coverage reports
-        uses: codecov/codecov-action@v4
-        if: matrix.node-version == '20.x'
+        uses: codecov/codecov-action@v5
+        if: matrix.node-version == '22.x'
         with:
           files: ./coverage/lcov.info
           flags: unittests
           name: codecov-umbrella
           fail_ci_if_error: false
+          # Tokenless uploads are supported in v5 for public repos
+          # For private repos, set CODECOV_TOKEN secret in GitHub repository settings
+          # For public repos, ensure token authentication is disabled in Codecov org settings
