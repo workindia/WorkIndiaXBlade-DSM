@@ -1,8 +1,12 @@
 name: CI
 
 on:
+  # Only run on push to develop (not main) to avoid redundancy:
+  # - PRs already validate code before merge via pull_request trigger
+  # - Release workflow validates when publishing packages
+  # - Direct pushes to main should be prevented by branch protection
   push:
-    branches: [main, develop]
+    branches: [develop]
   pull_request:
     branches: [main, develop]
 

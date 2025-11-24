@@ -7,6 +7,11 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write # Required for OIDC trusted publishing
+
 jobs:
   release:
     name: Release
@@ -23,26 +28,26 @@ jobs:
         with:
           node-version: 22.x
           registry-url: 'https://registry.npmjs.org'
+          # OIDC authentication is handled automatically via trusted publishers
+          # No NPM_TOKEN secret needed when using OIDC trusted publishing
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Build packages
-        run: npm run build
-
-      - name: Run tests
-        run: npm test -- --coverage
-
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
+          # Only publish if there are no changesets (version PR was merged)
+          # The publish command includes build and test, so no need to duplicate
           publish: npm run release
+          # Create version PR if changesets exist (no build/test needed here)
           version: npm run version
           commit: 'chore: version packages'
           title: 'chore: version packages'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # OIDC authentication is handled automatically via trusted publishers
+          # No NPM_TOKEN secret needed when using OIDC trusted publishing
 
