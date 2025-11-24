@@ -32,6 +32,11 @@ jobs:
         run: npm run build
         # Build tokens first (no dependencies), then dsm (depends on tokens)
         # This ensures type definitions are available for ESLint type checking
+      
+      - name: Check build artifacts
+        run: |
+          test -d packages/tokens/dist || exit 1
+          test -d packages/dsm/dist || exit 1
 
       - name: Run linter
         run: npm run lint
