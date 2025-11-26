@@ -10,6 +10,7 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 permissions:
   contents: write
   pull-requests: write
+  id-token: write
 
 jobs:
   release:
@@ -27,8 +28,6 @@ jobs:
         with:
           node-version: 22.x
           registry-url: 'https://registry.npmjs.org'
-          # OIDC authentication is handled automatically via trusted publishers
-          # No NPM_TOKEN secret needed when using OIDC trusted publishing
           cache: 'npm'
 
       - name: Install dependencies
@@ -36,7 +35,7 @@ jobs:
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
-        uses: changesets/action@v1
+        uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba # v1.5.3
         with:
           # Only publish if there are no changesets (version PR was merged)
           # The publish command includes build and test, so no need to duplicate
@@ -47,4 +46,5 @@ jobs:
           title: 'chore: version packages'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          # NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_TOKEN: '' # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
