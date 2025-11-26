@@ -10,6 +10,14 @@ This package provides a locked-down design system that enforces the use of only 
 npm install @workindia/dsm @razorpay/blade
 ```
 
+**Note for React 19 users**: If you're using React 19, you may need to use the `--legacy-peer-deps` flag:
+
+```bash
+npm install @workindia/dsm @razorpay/blade --legacy-peer-deps
+```
+
+This is because npm's peer dependency resolution may be strict about React versions, even though `@workindia/dsm` supports React >=18 (including React 19).
+
 ## Usage
 
 ### Basic Setup

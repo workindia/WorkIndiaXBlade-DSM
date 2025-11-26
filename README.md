@@ -92,6 +92,12 @@ Design system wrapper that:
 
 Example consumer application with ESLint rules that prevent direct Blade imports.
 
+## Contributing
+
+This project follows **GitHub Flow** - all work branches from `main`, and PRs merge back to `main` for automated releases.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed development workflow, branching strategy, and release process.
+
 ## Versioning & Publishing
 
 This repository uses [Changesets](https://github.com/changesets/changesets) for version management and automated releases.

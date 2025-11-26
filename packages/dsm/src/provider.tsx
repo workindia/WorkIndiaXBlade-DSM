@@ -3,7 +3,7 @@
  * Wraps BladeProvider with WorkIndia restricted theme
  */
 
-import type { ReactNode } from 'react';
+import React, { type ReactNode } from 'react';
 import { BladeProvider } from '@razorpay/blade/components';
 import type { ColorSchemeNamesInput } from '@razorpay/blade/tokens';
 import { workIndiaTheme } from './theme';

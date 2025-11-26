@@ -13,6 +13,16 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
+  {
+    ignores: [
+      '**/dist/**',
+      '**/build/**',
+      '**/node_modules/**',
+      '**/*.config.js',
+      '**/*.config.mjs',
+      '**/*.config.ts',
+    ],
+  },
   ...compat.config({
     extends: [
       'eslint:recommended',

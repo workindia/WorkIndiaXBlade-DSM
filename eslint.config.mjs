@@ -15,7 +15,17 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   {
-    ignores: ['**/dist/**', '**/node_modules/**', '**/*.config.js', '**/*.config.mjs'],
+    ignores: [
+      '**/dist/**',
+      '**/build/**',
+      '**/coverage/**',
+      '**/node_modules/**',
+      '**/*.config.js',
+      '**/*.config.mjs',
+      '**/.babelrc.js',
+      '**/*.tsbuildinfo',
+      '**/lcov-report/**',
+    ],
   },
   ...compat.config({
     extends: [

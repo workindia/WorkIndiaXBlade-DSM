@@ -1,14 +1,10 @@
 name: CI
 
 on:
-  # Only run on push to develop (not main) to avoid redundancy:
-  # - PRs already validate code before merge via pull_request trigger
-  # - Release workflow validates when publishing packages
-  # - Direct pushes to main should be prevented by branch protection
-  push:
-    branches: [develop]
+  # Run CI on pull requests to main
+  # Direct pushes to main are handled by the release workflow
   pull_request:
-    branches: [main, develop]
+    branches: [main]
 
 jobs:
   test:
@@ -39,8 +35,8 @@ jobs:
       
       - name: Check build artifacts
         run: |
-          test -d packages/tokens/dist || exit 1
-          test -d packages/dsm/dist || exit 1
+          test -d packages/tokens/build || exit 1
+          test -d packages/dsm/build || exit 1
 
       - name: Run linter
         run: npm run lint
