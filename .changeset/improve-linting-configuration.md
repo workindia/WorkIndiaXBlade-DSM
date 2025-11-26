@@ -1,7 +1,7 @@
 ---
 ---
 
-# Improved Linting Configuration and Performance
+# Improved Linting Configuration and CI/CD Updates
 
 ## Infrastructure Changes
 
@@ -17,6 +17,11 @@
 - **Added**: `lint` and `lint:fix` scripts to all packages (`@workindia/tokens`, `@workindia/dsm`)
 - **Added**: `lint:root` and `lint:root:fix` for root-level file linting
 - **Benefit**: Parallel linting across all packages with real-time output via `--stream`
+
+### CI/CD Updates
+
+- **Fixed**: Updated CI workflow to check for `build/` directory instead of `dist/`
+- Aligns with rollup-based build system that outputs to `build/` directory
 
 ### Package-Level Improvements
 
