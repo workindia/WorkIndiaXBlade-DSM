@@ -57,6 +57,20 @@ npm run setup:git-template
 
 ## Development Workflow
 
+This project follows **GitHub Flow** - a simple, branch-based workflow:
+
+```
+main (protected)
+  ↑
+  └─ feature/fix branches → PR → merge → auto-release
+```
+
+### Workflow Steps:
+
+1. **Branch from main** → Work on feature → Create PR → CI validates
+2. **After approval** → Merge to main → Changesets creates Version PR
+3. **Merge Version PR** → Automatic npm publish
+
 ### 1. Create a Branch
 
 Always create a new branch from `main` for your changes:
@@ -121,6 +135,45 @@ git push origin <branch-name>
 ```
 
 Then create a Pull Request following the [Pull Request Process](#pull-request-process).
+
+### Complete GitHub Flow Workflow
+
+Here's the full cycle from feature development to npm publication:
+
+```
+main (protected branch)
+  ↑
+  └─ feature branches → PR → CI validates → merge → auto-release
+```
+
+**Step-by-Step Process:**
+
+1. **Branch from `main`**
+
+   ```bash
+   git checkout -b feat/my-feature
+   ```
+
+2. **Make changes + create changeset**
+
+   ```bash
+   npm run changeset
+   ```
+
+3. **Open PR to `main`**
+   - CI runs automatically (build, lint, test, typecheck)
+   - Code review happens
+
+4. **After merge to `main`**
+   - Changesets bot creates/updates "Version Packages" PR automatically
+   - This PR aggregates all changesets since last release
+
+5. **Merge Version PR**
+   - Package versions are bumped
+   - CHANGELOG.md files are updated
+   - Packages are automatically published to npm
+
+**Note**: The Version PR may batch multiple merged feature PRs together, allowing coordinated releases of related changes.
 
 ## Branch Naming Convention
 
@@ -294,11 +347,26 @@ Use the PR template (automatically populated). Include:
 
 ### Versioning & Releases
 
-This project uses [Changesets](https://github.com/changesets/changesets) for version management:
+This project uses [Changesets](https://github.com/changesets/changesets) for automated version management:
 
-1. **Creating Changesets**: When your PR includes changes that should be published, create a changeset using `npm run changeset`
-2. **Version Bumping**: When changesets are merged to `main`, a version PR is automatically created
-3. **Publishing**: When the version PR is merged, packages are automatically published to npm
+#### GitHub Flow + Changesets Process:
+
+1. **Create changeset** in your feature branch:
+
+   ```bash
+   npm run changeset
+   ```
+
+2. **Open PR to main** → CI validates your changes
+
+3. **After PR merges to main** → Changesets bot automatically creates a "Version PR" that:
+   - Bumps package versions
+   - Updates CHANGELOG.md files
+   - Aggregates all changesets
+
+4. **When Version PR merges to main** → Packages are automatically published to npm
+
+**Note**: The Version PR may batch multiple merged feature PRs together, allowing coordinated releases.
 
 See [.changeset/README.md](.changeset/README.md) for detailed versioning documentation.
 
