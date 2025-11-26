@@ -34,7 +34,8 @@
   "author": "WorkIndia",
   "license": "MIT",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
   },
   "dependencies": {
     "@babel/runtime": "^7.28.3"
