@@ -15,7 +15,7 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   {
-    ignores: ['**/dist/**', '**/node_modules/**', '**/*.config.js', '**/*.config.mjs'],
+    ignores: ['**/dist/**', '**/node_modules/**', '**/*.config.js', '**/*.config.mjs', '**/.babelrc.js'],
   },
   ...compat.config({
     extends: [

@@ -1,0 +1,24 @@
+module.exports = {
+  presets: [
+    ['@babel/preset-env', { modules: false }],
+    '@babel/preset-typescript',
+    ['@babel/preset-react', { runtime: 'automatic' }],
+  ],
+  plugins: [
+    [
+      '@babel/plugin-transform-runtime',
+      {
+        helpers: true,
+        regenerator: true,
+      },
+    ],
+    [
+      'babel-plugin-styled-components',
+      {
+        displayName: true,
+        pure: true,
+        ssr: true,
+      },
+    ],
+  ],
+};
