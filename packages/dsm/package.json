@@ -46,8 +46,8 @@
     "@workindia/tokens": "^0.2.0"
   },
   "peerDependencies": {
-    "react": ">=17",
-    "react-dom": ">=17"
+    "react": ">=18",
+    "react-dom": ">=18"
   },
   "devDependencies": {
     "@babel/cli": "^7.28.3",

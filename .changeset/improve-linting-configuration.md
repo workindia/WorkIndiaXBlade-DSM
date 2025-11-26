@@ -1,4 +1,6 @@
 ---
+'@workindia/tokens': minor
+'@workindia/dsm': minor
 ---
 
 # Improved Linting Configuration and CI/CD Updates
@@ -30,6 +32,13 @@
 - Fixed ESLint configuration in `@workindia/app` to properly ignore config files
 - All packages now have consistent lint script patterns
 
+### Breaking Changes
+
+- **@workindia/dsm**: Updated peerDependencies from React `>=17` to React `>=18`
+  - This removes support for React 17
+  - React 18 and React 19 are still supported
+  - Updated README with React 19 installation instructions using `--legacy-peer-deps` flag
+
 ### Documentation Updates
 
 - **Added**: `format:check` script to validate code formatting without modifying files
@@ -37,6 +46,7 @@
 - **Added**: "Branching Strategy" section to README.md with visual workflow diagram
 - **Clarified**: GitHub Flow workflow in CONTRIBUTING.md with step-by-step release process
 - **Enhanced**: Changesets + GitHub Flow integration documentation
+- **Updated**: `@workindia/dsm` README with React 19 installation instructions
 - Documents Rollup build system, Lerna orchestration, and automated release workflow
 
-These changes improve the developer experience, CI/CD performance, and contributor onboarding without affecting any package APIs or functionality.
+These changes improve the developer experience, CI/CD performance, and contributor onboarding. Note: React 17 users will need to upgrade to React 18+ to use the new version of `@workindia/dsm`.
