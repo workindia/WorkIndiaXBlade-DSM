@@ -10,7 +10,6 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 permissions:
   contents: write
   pull-requests: write
-  id-token: write # Required for OIDC trusted publishing
 
 jobs:
   release:
@@ -37,7 +36,7 @@ jobs:
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
-        uses: changesets/action@e0145edc7d9d8679003495b11f87bd8ef63c0cba # v1.5.3
+        uses: changesets/action@v1
         with:
           # Only publish if there are no changesets (version PR was merged)
           # The publish command includes build and test, so no need to duplicate
@@ -48,5 +47,4 @@ jobs:
           title: 'chore: version packages'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # OIDC authentication is handled automatically via trusted publishers
-          NPM_TOKEN: '' # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
