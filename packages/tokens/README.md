@@ -51,10 +51,11 @@ The chromatic palette includes seven color scales, each with full gradient varia
 - `chromatic.sky` - Sky color scale
 
 Each chromatic color scale includes:
-  - `50`, `100`, `200`, `300`, `400` - Light to medium shades (for backgrounds)
-  - `500` - Base color (primary shade)
-  - `600`, `700`, `800`, `900`, `1000` - Medium-dark to darkest shades (for emphasis)
-  - `a50`, `a100`, `a150`, `a200` - Alpha variants (9%, 18%, 24%, 32% opacity for overlays)
+
+- `50`, `100`, `200`, `300`, `400` - Light to medium shades (for backgrounds)
+- `500` - Base color (primary shade)
+- `600`, `700`, `800`, `900`, `1000` - Medium-dark to darkest shades (for emphasis)
+- `a50`, `a100`, `a150`, `a200` - Alpha variants (9%, 18%, 24%, 32% opacity for overlays)
 
 #### Neutral Colors
 
@@ -102,7 +103,8 @@ import type {
 } from '@workindia/tokens';
 
 // Access color scale
-const primaryScale: WorkIndiaChromaticColorScale = WorkIndiaColors.chromatic.brand;
+const primaryScale: WorkIndiaChromaticColorScale =
+  WorkIndiaColors.chromatic.brand;
 
 // TypeScript enforces only valid shade keys
 const shade = primaryScale[500]; // ✅ Valid
@@ -124,6 +126,7 @@ Each chromatic color scale provides locked-down gradient variations **manually d
 - **a50, a100, a150, a200**: Alpha variants with opacity (9%, 18%, 24%, 32%) for overlays and effects
 
 Neutral color scales provide:
+
 - **0-1300**: Full range of neutral shades from lightest to darkest
 - **a25, a50, a100, a200**: Alpha variants with opacity (6%, 9%, 18%, 32%) for overlays
 
