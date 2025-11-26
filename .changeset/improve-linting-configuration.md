@@ -28,4 +28,9 @@
 - Fixed ESLint configuration in `@workindia/app` to properly ignore config files
 - All packages now have consistent lint script patterns
 
+### Documentation Fixes
+
+- **Added**: `format:check` script to validate code formatting without modifying files
+- Aligns with CONTRIBUTING.md guidelines that referenced this command
+
 These changes improve the developer experience and CI/CD performance without affecting any package APIs or functionality.
