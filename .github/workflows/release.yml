@@ -49,5 +49,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # OIDC authentication is handled automatically via trusted publishers
-          # No NPM_TOKEN secret needed when using OIDC trusted publishing
-
+          NPM_TOKEN: '' # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
