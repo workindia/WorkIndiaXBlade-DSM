@@ -414,7 +414,9 @@ See [.changeset/README.md](.changeset/README.md) for detailed versioning documen
 npm test
 
 # Run tests for specific package
-npm test -- --scope @workindia/tokens
+npm run test:tokens
+npm run test:dsm
+npm run test:mcp
 ```
 
 ## Project Structure

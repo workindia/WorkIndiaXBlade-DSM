@@ -1,6 +1,6 @@
 # WorkIndiaXBlade DSM
 
-A Lerna monorepo implementing a locked-down design system based on @razorpay/blade with restricted color and spacing tokens.
+An Nx monorepo implementing a locked-down design system based on @razorpay/blade with restricted color and spacing tokens.
 
 ## Overview
 
