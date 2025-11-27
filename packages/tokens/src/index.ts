@@ -7,15 +7,32 @@
  */
 
 export type {
-  WorkIndiaColorTokens,
-  WorkIndiaChromaticColorScale,
-  WorkIndiaNeutralColorScale,
-  WorkIndiaBlackNWhite,
+  ColorTokens,
+  ChromaticColorScale,
+  NeutralColorScale,
+  BlackNWhite,
 } from './colors';
-export { WorkIndiaColors } from './colors';
+export { Colors } from './colors';
 
-export type { WorkIndiaSpacingTokens } from './spacing';
-export { WorkIndiaSpacing } from './spacing';
+export type { SpacingTokens } from './spacing';
+export { Spacing } from './spacing';
 
-export type { WorkIndiaTypographyTokens } from './typography';
-export { WorkIndiaTypography } from './typography';
+export type { BreakpointTokens } from './breakpoints';
+export { Breakpoints } from './breakpoints';
+
+export type { TypographyTokens } from './typography';
+export { Typography } from './typography';
+
+export type {
+  BorderTokens,
+  BorderRadiusTokens,
+  BorderWidthTokens,
+} from './border';
+export { Border } from './border';
+
+export type {
+  ElevationTokens,
+  ElevationWithColorModes,
+  ElevationLevels,
+} from './elevation';
+export { Elevation } from './elevation';

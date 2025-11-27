@@ -3,28 +3,28 @@
  */
 
 import {
-  WorkIndiaColors,
-  type WorkIndiaColorTokens,
-  type WorkIndiaChromaticColorScale,
-  type WorkIndiaNeutralColorScale,
-  type WorkIndiaBlackNWhite,
+  Colors,
+  type ColorTokens,
+  type ChromaticColorScale,
+  type NeutralColorScale,
+  type BlackNWhite,
 } from '../colors';
 
-describe('WorkIndiaColors', () => {
+describe('Colors', () => {
   describe('Color structure validation', () => {
-    it('should export WorkIndiaColors object', () => {
-      expect(WorkIndiaColors).toBeDefined();
-      expect(typeof WorkIndiaColors).toBe('object');
+    it('should export Colors object', () => {
+      expect(Colors).toBeDefined();
+      expect(typeof Colors).toBe('object');
     });
 
     it('should have chromatic colors', () => {
-      expect(WorkIndiaColors.chromatic).toBeDefined();
-      expect(typeof WorkIndiaColors.chromatic).toBe('object');
+      expect(Colors.chromatic).toBeDefined();
+      expect(typeof Colors.chromatic).toBe('object');
     });
 
     it('should have neutral colors', () => {
-      expect(WorkIndiaColors.neutral).toBeDefined();
-      expect(typeof WorkIndiaColors.neutral).toBe('object');
+      expect(Colors.neutral).toBeDefined();
+      expect(typeof Colors.neutral).toBe('object');
     });
 
     it('should have all required chromatic color scales', () => {
@@ -40,22 +40,20 @@ describe('WorkIndiaColors', () => {
 
       chromaticColors.forEach((color) => {
         expect(
-          WorkIndiaColors.chromatic[
-            color as keyof typeof WorkIndiaColors.chromatic
-          ],
+          Colors.chromatic[color as keyof typeof Colors.chromatic],
         ).toBeDefined();
       });
     });
 
     it('should have neutral light and dark scales', () => {
-      expect(WorkIndiaColors.neutral.light).toBeDefined();
-      expect(WorkIndiaColors.neutral.dark).toBeDefined();
-      expect(WorkIndiaColors.neutral.blackNWhite).toBeDefined();
+      expect(Colors.neutral.light).toBeDefined();
+      expect(Colors.neutral.dark).toBeDefined();
+      expect(Colors.neutral.blackNWhite).toBeDefined();
     });
   });
 
   describe('Chromatic color scale validation', () => {
-    const chromaticScales: (keyof typeof WorkIndiaColors.chromatic)[] = [
+    const chromaticScales: (keyof typeof Colors.chromatic)[] = [
       'brand',
       'rose',
       'cerulean',
@@ -67,31 +65,27 @@ describe('WorkIndiaColors', () => {
 
     chromaticScales.forEach((scaleName) => {
       describe(`${scaleName} scale`, () => {
-        const scale = WorkIndiaColors.chromatic[scaleName];
+        const scale = Colors.chromatic[scaleName];
 
         it('should have all required numeric shades (50-1000)', () => {
           const requiredShades = [
             50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000,
           ];
           requiredShades.forEach((shade) => {
-            expect(
-              scale[shade as keyof WorkIndiaChromaticColorScale],
-            ).toBeDefined();
-            expect(
-              typeof scale[shade as keyof WorkIndiaChromaticColorScale],
-            ).toBe('string');
+            expect(scale[shade as keyof ChromaticColorScale]).toBeDefined();
+            expect(typeof scale[shade as keyof ChromaticColorScale]).toBe(
+              'string',
+            );
           });
         });
 
         it('should have all required alpha variants', () => {
           const alphaVariants = ['a50', 'a100', 'a150', 'a200', 'a400'];
           alphaVariants.forEach((alpha) => {
-            expect(
-              scale[alpha as keyof WorkIndiaChromaticColorScale],
-            ).toBeDefined();
-            expect(
-              typeof scale[alpha as keyof WorkIndiaChromaticColorScale],
-            ).toBe('string');
+            expect(scale[alpha as keyof ChromaticColorScale]).toBeDefined();
+            expect(typeof scale[alpha as keyof ChromaticColorScale]).toBe(
+              'string',
+            );
           });
         });
 
@@ -100,7 +94,7 @@ describe('WorkIndiaColors', () => {
             50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000,
           ];
           numericShades.forEach((shade) => {
-            const color = scale[shade as keyof WorkIndiaChromaticColorScale];
+            const color = scale[shade as keyof ChromaticColorScale];
             // Hex color format: #RRGGBB
             expect(color).toMatch(/^#[0-9A-Fa-f]{6}$/);
           });
@@ -109,7 +103,7 @@ describe('WorkIndiaColors', () => {
         it('should have valid rgba format for alpha variants', () => {
           const alphaVariants = ['a50', 'a100', 'a150', 'a200', 'a400'];
           alphaVariants.forEach((alpha) => {
-            const color = scale[alpha as keyof WorkIndiaChromaticColorScale];
+            const color = scale[alpha as keyof ChromaticColorScale];
             // RGBA format: rgba(r, g, b, a)
             expect(color).toMatch(/^rgba\(\d+,\s*\d+,\s*\d+,\s*[\d.]+\)$/);
           });
@@ -125,7 +119,7 @@ describe('WorkIndiaColors', () => {
 
   describe('Neutral color scale validation', () => {
     describe('light scale', () => {
-      const lightScale = WorkIndiaColors.neutral.light;
+      const lightScale = Colors.neutral.light;
 
       it('should have all required numeric shades (0-1300)', () => {
         const requiredShades = [
@@ -133,24 +127,20 @@ describe('WorkIndiaColors', () => {
           1300,
         ];
         requiredShades.forEach((shade) => {
-          expect(
-            lightScale[shade as keyof WorkIndiaNeutralColorScale],
-          ).toBeDefined();
-          expect(
-            typeof lightScale[shade as keyof WorkIndiaNeutralColorScale],
-          ).toBe('string');
+          expect(lightScale[shade as keyof NeutralColorScale]).toBeDefined();
+          expect(typeof lightScale[shade as keyof NeutralColorScale]).toBe(
+            'string',
+          );
         });
       });
 
       it('should have all required alpha variants', () => {
         const alphaVariants = ['a25', 'a50', 'a100', 'a200', 'a400'];
         alphaVariants.forEach((alpha) => {
-          expect(
-            lightScale[alpha as keyof WorkIndiaNeutralColorScale],
-          ).toBeDefined();
-          expect(
-            typeof lightScale[alpha as keyof WorkIndiaNeutralColorScale],
-          ).toBe('string');
+          expect(lightScale[alpha as keyof NeutralColorScale]).toBeDefined();
+          expect(typeof lightScale[alpha as keyof NeutralColorScale]).toBe(
+            'string',
+          );
         });
       });
 
@@ -160,14 +150,14 @@ describe('WorkIndiaColors', () => {
           1300,
         ];
         numericShades.forEach((shade) => {
-          const color = lightScale[shade as keyof WorkIndiaNeutralColorScale];
+          const color = lightScale[shade as keyof NeutralColorScale];
           expect(color).toMatch(/^#[0-9A-Fa-f]{6}$/);
         });
       });
     });
 
     describe('dark scale', () => {
-      const darkScale = WorkIndiaColors.neutral.dark;
+      const darkScale = Colors.neutral.dark;
 
       it('should have all required numeric shades (0-1300)', () => {
         const requiredShades = [
@@ -175,30 +165,26 @@ describe('WorkIndiaColors', () => {
           1300,
         ];
         requiredShades.forEach((shade) => {
-          expect(
-            darkScale[shade as keyof WorkIndiaNeutralColorScale],
-          ).toBeDefined();
-          expect(
-            typeof darkScale[shade as keyof WorkIndiaNeutralColorScale],
-          ).toBe('string');
+          expect(darkScale[shade as keyof NeutralColorScale]).toBeDefined();
+          expect(typeof darkScale[shade as keyof NeutralColorScale]).toBe(
+            'string',
+          );
         });
       });
 
       it('should have all required alpha variants', () => {
         const alphaVariants = ['a25', 'a50', 'a100', 'a200', 'a400'];
         alphaVariants.forEach((alpha) => {
-          expect(
-            darkScale[alpha as keyof WorkIndiaNeutralColorScale],
-          ).toBeDefined();
-          expect(
-            typeof darkScale[alpha as keyof WorkIndiaNeutralColorScale],
-          ).toBe('string');
+          expect(darkScale[alpha as keyof NeutralColorScale]).toBeDefined();
+          expect(typeof darkScale[alpha as keyof NeutralColorScale]).toBe(
+            'string',
+          );
         });
       });
     });
 
     describe('blackNWhite', () => {
-      const blackNWhite = WorkIndiaColors.neutral.blackNWhite;
+      const blackNWhite = Colors.neutral.blackNWhite;
 
       it('should have black and white color objects', () => {
         expect(blackNWhite.black).toBeDefined();
@@ -262,29 +248,25 @@ describe('WorkIndiaColors', () => {
   });
 
   describe('Type safety', () => {
-    it('should match WorkIndiaColorTokens interface', () => {
-      const colors: WorkIndiaColorTokens = WorkIndiaColors;
+    it('should match ColorTokens interface', () => {
+      const colors: ColorTokens = Colors;
       expect(colors).toBeDefined();
     });
 
     it('should have correct chromatic color scale types', () => {
-      const brandScale: WorkIndiaChromaticColorScale =
-        WorkIndiaColors.chromatic.brand;
+      const brandScale: ChromaticColorScale = Colors.chromatic.brand;
       expect(brandScale).toBeDefined();
     });
 
     it('should have correct neutral color scale types', () => {
-      const lightScale: WorkIndiaNeutralColorScale =
-        WorkIndiaColors.neutral.light;
-      const darkScale: WorkIndiaNeutralColorScale =
-        WorkIndiaColors.neutral.dark;
+      const lightScale: NeutralColorScale = Colors.neutral.light;
+      const darkScale: NeutralColorScale = Colors.neutral.dark;
       expect(lightScale).toBeDefined();
       expect(darkScale).toBeDefined();
     });
 
     it('should have correct blackNWhite type', () => {
-      const blackNWhite: WorkIndiaBlackNWhite =
-        WorkIndiaColors.neutral.blackNWhite;
+      const blackNWhite: BlackNWhite = Colors.neutral.blackNWhite;
       expect(blackNWhite).toBeDefined();
     });
   });
@@ -292,7 +274,7 @@ describe('WorkIndiaColors', () => {
   describe('Color consistency', () => {
     it('should have consistent color values across scales', () => {
       // All chromatic scales should have the same structure
-      const scales = Object.values(WorkIndiaColors.chromatic);
+      const scales = Object.values(Colors.chromatic);
       const firstScaleKeys = Object.keys(scales[0]);
 
       scales.forEach((scale) => {
@@ -301,8 +283,8 @@ describe('WorkIndiaColors', () => {
     });
 
     it('should have consistent neutral scale structure', () => {
-      const lightKeys = Object.keys(WorkIndiaColors.neutral.light);
-      const darkKeys = Object.keys(WorkIndiaColors.neutral.dark);
+      const lightKeys = Object.keys(Colors.neutral.light);
+      const darkKeys = Object.keys(Colors.neutral.dark);
 
       expect(lightKeys.sort()).toEqual(darkKeys.sort());
     });

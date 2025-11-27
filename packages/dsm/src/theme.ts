@@ -6,9 +6,9 @@
 import type { ThemeTokens } from '@razorpay/blade/tokens';
 import { bladeTheme } from '@razorpay/blade/tokens';
 import {
-  WorkIndiaColors,
-  type WorkIndiaChromaticColorScale,
-  type WorkIndiaColorTokens,
+  Colors,
+  type ChromaticColorScale,
+  type ColorTokens,
 } from '@workindia/tokens';
 import { deepMerge } from './utils/deep-merge';
 
@@ -23,8 +23,8 @@ const createWorkIndiaTheme = (): ThemeTokens => {
 
   // Extract alpha color values to avoid type inference issues in nested object
   // Accessing through the scale object ensures proper type inference
-  const colors: WorkIndiaColorTokens = WorkIndiaColors;
-  const primaryScale: WorkIndiaChromaticColorScale = colors.chromatic.brand;
+  const colors: ColorTokens = Colors;
+  const primaryScale: ChromaticColorScale = colors.chromatic.brand;
   const primaryFaded = primaryScale.a50;
   const primaryFadedHighlighted = primaryScale.a100;
 

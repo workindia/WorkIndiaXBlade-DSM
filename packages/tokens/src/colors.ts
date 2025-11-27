@@ -11,7 +11,7 @@
  * Chromatic color scale type - defines allowed gradient steps
  * This ensures only approved gradient variations can be used
  */
-export interface WorkIndiaChromaticColorScale {
+export interface ChromaticColorScale {
   /** Lightest shade - for very light backgrounds */
   50: string;
   /** Light shade - for light backgrounds */
@@ -49,7 +49,7 @@ export interface WorkIndiaChromaticColorScale {
 /**
  * Neutral color scale type - defines allowed gradient steps for neutral colors
  */
-export interface WorkIndiaNeutralColorScale {
+export interface NeutralColorScale {
   /** Lightest shade */
   0: string;
   /** Very light shade */
@@ -95,7 +95,7 @@ export interface WorkIndiaNeutralColorScale {
 /**
  * Black and white color tokens with transparency shades
  */
-export interface WorkIndiaBlackNWhite {
+export interface BlackNWhite {
   black: {
     /** Black with 9% opacity */
     10: string;
@@ -138,32 +138,32 @@ export interface WorkIndiaBlackNWhite {
   };
 }
 
-export interface WorkIndiaColorTokens {
+export interface ColorTokens {
   /** Chromatic color palette */
   chromatic: {
     /** Brand color scale */
-    brand: WorkIndiaChromaticColorScale;
+    brand: ChromaticColorScale;
     /** Rose color scale */
-    rose: WorkIndiaChromaticColorScale;
+    rose: ChromaticColorScale;
     /** Cerulean color scale */
-    cerulean: WorkIndiaChromaticColorScale;
+    cerulean: ChromaticColorScale;
     /** Emerald color scale */
-    emerald: WorkIndiaChromaticColorScale;
+    emerald: ChromaticColorScale;
     /** Crimson color scale */
-    crimson: WorkIndiaChromaticColorScale;
+    crimson: ChromaticColorScale;
     /** Amber color scale */
-    amber: WorkIndiaChromaticColorScale;
+    amber: ChromaticColorScale;
     /** Sky color scale */
-    sky: WorkIndiaChromaticColorScale;
+    sky: ChromaticColorScale;
   };
   /** Neutral color palette */
   neutral: {
     /** Light neutral color scale */
-    light: WorkIndiaNeutralColorScale;
+    light: NeutralColorScale;
     /** Dark neutral color scale */
-    dark: WorkIndiaNeutralColorScale;
+    dark: NeutralColorScale;
     /** Black and white colors */
-    blackNWhite: WorkIndiaBlackNWhite;
+    blackNWhite: BlackNWhite;
   };
 }
 
@@ -190,7 +190,7 @@ function hexToRgba(hex: string, opacityPercent: number): string {
  * IMPORTANT: All hex codes must be provided by the design team.
  * Do not auto-generate or modify these values without design approval.
  */
-export const WorkIndiaColors: WorkIndiaColorTokens = {
+export const Colors: ColorTokens = {
   chromatic: {
     brand: {
       50: '#F4F6FF',

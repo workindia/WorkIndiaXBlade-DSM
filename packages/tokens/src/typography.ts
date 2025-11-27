@@ -6,7 +6,7 @@
  * import '@razorpay/blade/fonts.css';
  */
 
-export interface WorkIndiaTypographyTokens {
+export interface TypographyTokens {
   fontFamily: {
     /** Text font family - Inter for body text and UI elements */
     text: string;
@@ -41,7 +41,7 @@ export interface WorkIndiaTypographyTokens {
  * WorkIndia typography token values
  * Uses Inter font family for all text and headings.
  */
-export const WorkIndiaTypography: WorkIndiaTypographyTokens = {
+export const Typography: TypographyTokens = {
   fontFamily: {
     /** Inter font with fallbacks - matches Blade's Inter font setup */
     text: '"Inter", "Inter Fallback Arial", Arial, sans-serif',
