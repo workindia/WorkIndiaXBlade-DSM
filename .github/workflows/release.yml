@@ -41,10 +41,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: |
-            npm run build
-            npm run test
-            npm run release
+          publish: npm run publish:ci
           version: npm run version
           commit: 'chore: version packages'
           title: 'chore: version packages'
