@@ -5,58 +5,43 @@ on:
     branches:
       - main
 
-concurrency: ${{ github.workflow }}-${{ github.ref }}
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
 
-permissions:
-  contents: write
-  pull-requests: write
-  id-token: write # REQUIRED for trusted publishing
-
-env:
-  NPM_CONFIG_PROVENANCE: true # adds provenance to build
+permissions: {}
 
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+      id-token: write # REQUIRED for trusted publishing
+      pull-requests: write
+    env:
+      NPM_CONFIG_PROVENANCE: true # adds provenance to build
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
           registry-url: 'https://registry.npmjs.org'
-          # OIDC authentication - setup-node@v4 will use OIDC when id-token: write is set
-          # and no NODE_AUTH_TOKEN is provided
           cache: 'npm'
-        # Explicitly do NOT set NODE_AUTH_TOKEN to allow OIDC to work
-        # If you have NPM_TOKEN secret, remove it or don't use it here
 
       - name: Install dependencies
         run: npm ci
 
+      - name: Upgrade npm for OIDC support
+        run: npm install -g npm@latest
+
       - name: Build packages and run tests before publishing
         run: npm run prepublish:ci
-
-      - name: Verify npm authentication (debug)
-        run: |
-          echo "=== npm Authentication Debug ==="
-          echo "NODE_AUTH_TOKEN is set: $([ -n "$NODE_AUTH_TOKEN" ] && echo 'YES (this might interfere with OIDC)' || echo 'NO (good for OIDC)')"
-          echo "Registry: $(npm config get registry)"
-          echo ""
-          echo "npm config (auth-related):"
-          npm config list | grep -E "(registry|auth|token|always-auth)" || echo "No auth config found"
-          echo ""
-          echo "Attempting npm whoami (will fail if OIDC not configured, but publish should still work):"
-          npm whoami 2>&1 || echo "⚠️ npm whoami failed - this is expected if using OIDC without explicit token"
-          echo ""
-          echo "=== OIDC Check ==="
-          echo "If OIDC is properly configured, npm publish will work even if npm whoami fails"
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
