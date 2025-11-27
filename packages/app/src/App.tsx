@@ -732,6 +732,7 @@ export const App = () => {
                 flexDirection="row"
                 gap="spacing.3"
                 flexWrap="wrap"
+                alignItems="flex-start"
               >
                 <Button variant="primary" size="medium">
                   Primary

@@ -3,7 +3,7 @@
  * Wraps BladeProvider with WorkIndia restricted theme
  */
 
-import React, { type ReactNode } from 'react';
+import React, { type ReactNode, type ReactElement } from 'react';
 import { BladeProvider } from '@razorpay/blade/components';
 import type { ColorSchemeNamesInput } from '@razorpay/blade/tokens';
 import { workIndiaTheme } from './theme';
@@ -31,10 +31,10 @@ export interface WorkIndiaProviderProps {
 export const WorkIndiaProvider = ({
   children,
   colorScheme = 'light',
-}: WorkIndiaProviderProps) => {
+}: WorkIndiaProviderProps): ReactElement => {
   return (
     <BladeProvider themeTokens={workIndiaTheme} colorScheme={colorScheme}>
       {children}
     </BladeProvider>
-  );
+  ) as ReactElement;
 };
