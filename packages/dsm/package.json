@@ -1,6 +1,6 @@
 {
   "name": "@workindia/dsm",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "WorkIndia Design System wrapper around @razorpay/blade with restricted tokens",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -49,7 +49,7 @@
   "dependencies": {
     "@babel/runtime": "^7.28.3",
     "@razorpay/blade": "12.65.1",
-    "@workindia/tokens": "^0.4.0"
+    "@workindia/tokens": "^0.5.0"
   },
   "peerDependencies": {
     "react": ">=18",
