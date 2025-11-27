@@ -4,13 +4,15 @@
   "description": "Model Context Protocol server for WorkIndia Design System",
   "main": "dist/exports.js",
   "type": "module",
-  "bin": "dist/server.js",
+  "bin": {
+    "dsm-mcp": "dist/server.js"
+  },
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com/workindia/WorkIndiaXBlade-DSM.git"
+    "url": "git+ssh://git@github.com/workindia/WorkIndiaXBlade-DSM.git"
   },
   "files": [
     "dist",
