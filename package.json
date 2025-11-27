@@ -29,7 +29,8 @@
     "changeset": "changeset",
     "version": "changeset version",
     "release": "changeset publish",
-    "publish:all": "npm run release",
+    "prepublish:ci": "npm run build && npm run test",
+    "publish:ci": "npm run prepublish:ci && npm run release",
     "setup:git-template": "./scripts/setup-git-template.sh",
     "lint-staged": "lint-staged",
     "prepare": "husky || npm run setup:git-template || true"
