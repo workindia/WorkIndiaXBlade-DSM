@@ -11,7 +11,7 @@
  * Chromatic color scale type - defines allowed gradient steps
  * This ensures only approved gradient variations can be used
  */
-export interface WorkIndiaChromaticColorScale {
+export interface ChromaticColorScale {
   /** Lightest shade - for very light backgrounds */
   50: string;
   /** Light shade - for light backgrounds */
@@ -49,7 +49,7 @@ export interface WorkIndiaChromaticColorScale {
 /**
  * Neutral color scale type - defines allowed gradient steps for neutral colors
  */
-export interface WorkIndiaNeutralColorScale {
+export interface NeutralColorScale {
   /** Lightest shade */
   0: string;
   /** Very light shade */
@@ -93,41 +93,77 @@ export interface WorkIndiaNeutralColorScale {
 }
 
 /**
- * Black and white color tokens
+ * Black and white color tokens with transparency shades
  */
-export interface WorkIndiaBlackNWhite {
-  /** Pure black */
-  black: string;
-  /** Pure white */
-  white: string;
+export interface BlackNWhite {
+  black: {
+    /** Black with 9% opacity */
+    10: string;
+    /** Black with 12% opacity */
+    25: string;
+    /** Black with 18% opacity */
+    50: string;
+    /** Black with 32% opacity */
+    100: string;
+    /** Black with 56% opacity */
+    200: string;
+    /** Black with 72% opacity */
+    300: string;
+    /** Black with 80% opacity */
+    400: string;
+    /** Black with 88% opacity */
+    450: string;
+    /** Pure black - 100% opacity */
+    500: string;
+  };
+  white: {
+    /** White with 9% opacity */
+    10: string;
+    /** White with 12% opacity */
+    25: string;
+    /** White with 18% opacity */
+    50: string;
+    /** White with 32% opacity */
+    100: string;
+    /** White with 56% opacity */
+    200: string;
+    /** White with 72% opacity */
+    300: string;
+    /** White with 80% opacity */
+    400: string;
+    /** White with 88% opacity */
+    450: string;
+    /** Pure white - 100% opacity */
+    500: string;
+  };
 }
 
-export interface WorkIndiaColorTokens {
+export interface ColorTokens {
   /** Chromatic color palette */
   chromatic: {
     /** Brand color scale */
-    brand: WorkIndiaChromaticColorScale;
+    brand: ChromaticColorScale;
     /** Rose color scale */
-    rose: WorkIndiaChromaticColorScale;
+    rose: ChromaticColorScale;
     /** Cerulean color scale */
-    cerulean: WorkIndiaChromaticColorScale;
+    cerulean: ChromaticColorScale;
     /** Emerald color scale */
-    emerald: WorkIndiaChromaticColorScale;
+    emerald: ChromaticColorScale;
     /** Crimson color scale */
-    crimson: WorkIndiaChromaticColorScale;
+    crimson: ChromaticColorScale;
     /** Amber color scale */
-    amber: WorkIndiaChromaticColorScale;
+    amber: ChromaticColorScale;
     /** Sky color scale */
-    sky: WorkIndiaChromaticColorScale;
+    sky: ChromaticColorScale;
   };
   /** Neutral color palette */
   neutral: {
     /** Light neutral color scale */
-    light: WorkIndiaNeutralColorScale;
+    light: NeutralColorScale;
     /** Dark neutral color scale */
-    dark: WorkIndiaNeutralColorScale;
+    dark: NeutralColorScale;
     /** Black and white colors */
-    blackNWhite: WorkIndiaBlackNWhite;
+    blackNWhite: BlackNWhite;
   };
 }
 
@@ -154,7 +190,7 @@ function hexToRgba(hex: string, opacityPercent: number): string {
  * IMPORTANT: All hex codes must be provided by the design team.
  * Do not auto-generate or modify these values without design approval.
  */
-export const WorkIndiaColors: WorkIndiaColorTokens = {
+export const Colors: ColorTokens = {
   chromatic: {
     brand: {
       50: '#F4F6FF',
@@ -329,8 +365,28 @@ export const WorkIndiaColors: WorkIndiaColorTokens = {
       a400: hexToRgba('#BEC7D0', 64),
     },
     blackNWhite: {
-      black: '#000000',
-      white: '#FFFFFF',
+      black: {
+        10: hexToRgba('#000000', 9),
+        25: hexToRgba('#000000', 12),
+        50: hexToRgba('#000000', 18),
+        100: hexToRgba('#000000', 32),
+        200: hexToRgba('#000000', 56),
+        300: hexToRgba('#000000', 72),
+        400: hexToRgba('#000000', 80),
+        450: hexToRgba('#000000', 88),
+        500: '#000000',
+      },
+      white: {
+        10: hexToRgba('#FFFFFF', 9),
+        25: hexToRgba('#FFFFFF', 12),
+        50: hexToRgba('#FFFFFF', 18),
+        100: hexToRgba('#FFFFFF', 32),
+        200: hexToRgba('#FFFFFF', 56),
+        300: hexToRgba('#FFFFFF', 72),
+        400: hexToRgba('#FFFFFF', 80),
+        450: hexToRgba('#FFFFFF', 88),
+        500: '#FFFFFF',
+      },
     },
   },
 };
