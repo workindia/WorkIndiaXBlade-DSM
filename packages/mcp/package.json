@@ -8,7 +8,9 @@
     "dsm-mcp": "dist/server.js"
   },
   "publishConfig": {
-    "access": "public"
+    "registry": "https://registry.npmjs.org/",
+    "access": "public",
+    "provenance": true
   },
   "repository": {
     "type": "git",

@@ -28,7 +28,7 @@
     "clean": "lerna run clean && rm -rf node_modules",
     "changeset": "changeset",
     "version": "changeset version",
-    "release": "npm run build && npm run test && changeset publish",
+    "release": "changeset publish",
     "publish:all": "npm run release",
     "setup:git-template": "./scripts/setup-git-template.sh",
     "lint-staged": "lint-staged",
@@ -65,6 +65,9 @@
       "prettier --write"
     ],
     "*.{json,md}": [
+      "prettier --write"
+    ],
+    "*.{yml,yaml}": [
       "prettier --write"
     ]
   },
