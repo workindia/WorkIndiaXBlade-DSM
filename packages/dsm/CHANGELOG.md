@@ -1,5 +1,25 @@
 # @workindia/dsm
 
+## 0.4.1
+
+### Patch Changes
+
+- a593325: Lock Blade version and add automated release monitoring
+  - Lock @razorpay/blade version to exact version (12.65.1) in package.json to prevent automatic updates
+  - Add GitHub Actions workflow to monitor and notify about new Blade and Blade MCP releases
+  - Automatically create GitHub issues with changelog when new versions are detected
+  - Add version tracking file to prevent duplicate issue creation
+
+- 37dcf48: Update WorkIndiaColorTokens with design team color updates and fix WorkIndiaProvider type compatibility
+  - Add a400 (64% opacity) alpha variant to all chromatic and neutral color scales
+  - Update neutral light alpha base color from #7B8995 to #838F9A
+  - Update neutral dark alpha base color from #C3CCD4 to #BEC7D0
+  - Fix WorkIndiaProvider return type for React 19 compatibility
+  - Update demo app to display new a400 variants
+
+- Updated dependencies [37dcf48]
+  - @workindia/tokens@0.4.0
+
 ## 0.4.0
 
 ### Minor Changes
