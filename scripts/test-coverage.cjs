@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+/* eslint-env node */
+/* eslint-disable no-undef */
 
 const { execSync } = require('child_process');
 const fs = require('fs');
@@ -13,11 +15,14 @@ if (fs.existsSync(coverageDir)) {
 }
 fs.mkdirSync(coverageDir, { recursive: true });
 
-// Run tests with coverage for all packages using lerna
+// Run tests with coverage for all packages using Nx
 // Each package will generate its own coverage, then we'll aggregate
-console.log('Running tests with coverage for all packages via lerna...');
+console.log('Running tests with coverage for all packages via Nx...');
 try {
-  execSync('lerna run test:coverage', { stdio: 'inherit', cwd: process.cwd() });
+  execSync('nx run-many --target=test:coverage --all', {
+    stdio: 'inherit',
+    cwd: process.cwd(),
+  });
 } catch (error) {
   console.error('Error running tests:', error.message);
   process.exit(1);
@@ -71,10 +76,17 @@ if (htmlReportDir) {
   const sourceHtml = path.join(htmlReportDir, 'lcov-report');
   const destHtml = path.join(coverageDir, 'lcov-report');
   if (fs.existsSync(sourceHtml)) {
-    execSync('cp -r "' + sourceHtml + '" "' + destHtml + '"', { stdio: 'inherit' });
+    execSync('cp -r "' + sourceHtml + '" "' + destHtml + '"', {
+      stdio: 'inherit',
+    });
   }
 }
 
 console.log('\n✓ Coverage report generated successfully at coverage/lcov.info');
-console.log('  Merged ' + lcovFiles.length + ' coverage files from ' + lcovFiles.length + ' packages');
-
+console.log(
+  '  Merged ' +
+    lcovFiles.length +
+    ' coverage files from ' +
+    lcovFiles.length +
+    ' packages',
+);

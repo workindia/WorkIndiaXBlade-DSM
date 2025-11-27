@@ -1,0 +1,43 @@
+{
+  "name": "@workindia/app",
+  "sourceRoot": "packages/app/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run build",
+        "cwd": "packages/app"
+      },
+      "dependsOn": ["^build"]
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run lint",
+        "cwd": "packages/app"
+      }
+    },
+    "lint:fix": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run lint:fix",
+        "cwd": "packages/app"
+      }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run typecheck",
+        "cwd": "packages/app"
+      }
+    },
+    "clean": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npm run clean",
+        "cwd": "packages/app"
+      }
+    }
+  }
+}
