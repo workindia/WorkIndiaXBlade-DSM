@@ -93,13 +93,49 @@ export interface WorkIndiaNeutralColorScale {
 }
 
 /**
- * Black and white color tokens
+ * Black and white color tokens with transparency shades
  */
 export interface WorkIndiaBlackNWhite {
-  /** Pure black */
-  black: string;
-  /** Pure white */
-  white: string;
+  black: {
+    /** Black with 9% opacity */
+    10: string;
+    /** Black with 12% opacity */
+    25: string;
+    /** Black with 18% opacity */
+    50: string;
+    /** Black with 32% opacity */
+    100: string;
+    /** Black with 56% opacity */
+    200: string;
+    /** Black with 72% opacity */
+    300: string;
+    /** Black with 80% opacity */
+    400: string;
+    /** Black with 88% opacity */
+    450: string;
+    /** Pure black - 100% opacity */
+    500: string;
+  };
+  white: {
+    /** White with 9% opacity */
+    10: string;
+    /** White with 12% opacity */
+    25: string;
+    /** White with 18% opacity */
+    50: string;
+    /** White with 32% opacity */
+    100: string;
+    /** White with 56% opacity */
+    200: string;
+    /** White with 72% opacity */
+    300: string;
+    /** White with 80% opacity */
+    400: string;
+    /** White with 88% opacity */
+    450: string;
+    /** Pure white - 100% opacity */
+    500: string;
+  };
 }
 
 export interface WorkIndiaColorTokens {
@@ -329,8 +365,28 @@ export const WorkIndiaColors: WorkIndiaColorTokens = {
       a400: hexToRgba('#BEC7D0', 64),
     },
     blackNWhite: {
-      black: '#000000',
-      white: '#FFFFFF',
+      black: {
+        10: hexToRgba('#000000', 9),
+        25: hexToRgba('#000000', 12),
+        50: hexToRgba('#000000', 18),
+        100: hexToRgba('#000000', 32),
+        200: hexToRgba('#000000', 56),
+        300: hexToRgba('#000000', 72),
+        400: hexToRgba('#000000', 80),
+        450: hexToRgba('#000000', 88),
+        500: '#000000',
+      },
+      white: {
+        10: hexToRgba('#FFFFFF', 9),
+        25: hexToRgba('#FFFFFF', 12),
+        50: hexToRgba('#FFFFFF', 18),
+        100: hexToRgba('#FFFFFF', 32),
+        200: hexToRgba('#FFFFFF', 56),
+        300: hexToRgba('#FFFFFF', 72),
+        400: hexToRgba('#FFFFFF', 80),
+        450: hexToRgba('#FFFFFF', 88),
+        500: '#FFFFFF',
+      },
     },
   },
 };

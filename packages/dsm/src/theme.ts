@@ -54,7 +54,7 @@ const createWorkIndiaTheme = (): ThemeTokens => {
               disabled: baseTheme.colors.onLight.surface.text.gray.disabled,
             },
             staticBlack: {
-              normal: colors.neutral.blackNWhite.black,
+              normal: colors.neutral.blackNWhite.black[500],
               subtle: baseTheme.colors.onLight.surface.text.staticBlack.subtle,
               muted: baseTheme.colors.onLight.surface.text.staticBlack.muted,
               disabled:
@@ -178,7 +178,7 @@ const createWorkIndiaTheme = (): ThemeTokens => {
               disabled: baseTheme.colors.onDark.surface.text.gray.disabled,
             },
             staticBlack: {
-              normal: colors.neutral.blackNWhite.black,
+              normal: colors.neutral.blackNWhite.black[500],
               subtle: baseTheme.colors.onDark.surface.text.staticBlack.subtle,
               muted: baseTheme.colors.onDark.surface.text.staticBlack.muted,
               disabled:

@@ -63,9 +63,9 @@ The neutral palette includes light and dark scales for text and backgrounds:
 
 - `neutral.light` - Light neutral color scale (shades 0-1300 + alpha variants)
 - `neutral.dark` - Dark neutral color scale (shades 0-1300 + alpha variants)
-- `neutral.blackNWhite` - Pure black and white colors
-  - `black` - Pure black (#000000)
-  - `white` - Pure white (#FFFFFF)
+- `neutral.blackNWhite` - Black and white colors with transparency shades
+  - `black` - Black color scale with transparency (10, 25, 50, 100, 200, 300, 400, 450, 500)
+  - `white` - White color scale with transparency (10, 25, 50, 100, 200, 300, 400, 450, 500)
 
 ### Spacing
 

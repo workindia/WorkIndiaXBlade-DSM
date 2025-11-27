@@ -200,19 +200,63 @@ describe('WorkIndiaColors', () => {
     describe('blackNWhite', () => {
       const blackNWhite = WorkIndiaColors.neutral.blackNWhite;
 
-      it('should have black and white colors', () => {
+      it('should have black and white color objects', () => {
         expect(blackNWhite.black).toBeDefined();
         expect(blackNWhite.white).toBeDefined();
+        expect(typeof blackNWhite.black).toBe('object');
+        expect(typeof blackNWhite.white).toBe('object');
       });
 
-      it('should have valid hex format for black and white', () => {
-        expect(blackNWhite.black).toMatch(/^#[0-9A-Fa-f]{6}$/);
-        expect(blackNWhite.white).toMatch(/^#[0-9A-Fa-f]{6}$/);
+      it('should have all required black shades', () => {
+        const requiredShades = [10, 25, 50, 100, 200, 300, 400, 450, 500];
+        requiredShades.forEach((shade) => {
+          expect(
+            blackNWhite.black[shade as keyof typeof blackNWhite.black],
+          ).toBeDefined();
+          expect(
+            typeof blackNWhite.black[shade as keyof typeof blackNWhite.black],
+          ).toBe('string');
+        });
       });
 
-      it('should have correct black and white values', () => {
-        expect(blackNWhite.black).toBe('#000000');
-        expect(blackNWhite.white).toBe('#FFFFFF');
+      it('should have all required white shades', () => {
+        const requiredShades = [10, 25, 50, 100, 200, 300, 400, 450, 500];
+        requiredShades.forEach((shade) => {
+          expect(
+            blackNWhite.white[shade as keyof typeof blackNWhite.white],
+          ).toBeDefined();
+          expect(
+            typeof blackNWhite.white[shade as keyof typeof blackNWhite.white],
+          ).toBe('string');
+        });
+      });
+
+      it('should have valid rgba format for black shades with opacity', () => {
+        const opacityShades = [10, 25, 50, 100, 200, 300, 400, 450];
+        opacityShades.forEach((shade) => {
+          const color =
+            blackNWhite.black[shade as keyof typeof blackNWhite.black];
+          expect(color).toMatch(/^rgba\(\d+,\s*\d+,\s*\d+,\s*[\d.]+\)$/);
+        });
+      });
+
+      it('should have valid rgba format for white shades with opacity', () => {
+        const opacityShades = [10, 25, 50, 100, 200, 300, 400, 450];
+        opacityShades.forEach((shade) => {
+          const color =
+            blackNWhite.white[shade as keyof typeof blackNWhite.white];
+          expect(color).toMatch(/^rgba\(\d+,\s*\d+,\s*\d+,\s*[\d.]+\)$/);
+        });
+      });
+
+      it('should have valid hex format for black and white 500 (full opacity)', () => {
+        expect(blackNWhite.black[500]).toMatch(/^#[0-9A-Fa-f]{6}$/);
+        expect(blackNWhite.white[500]).toMatch(/^#[0-9A-Fa-f]{6}$/);
+      });
+
+      it('should have correct black and white 500 values', () => {
+        expect(blackNWhite.black[500]).toBe('#000000');
+        expect(blackNWhite.white[500]).toBe('#FFFFFF');
       });
     });
   });

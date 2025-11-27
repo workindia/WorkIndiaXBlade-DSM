@@ -68,8 +68,8 @@ const getContrastColor = (backgroundColor: string): string => {
   const luminance = getLuminance(backgroundColor);
   // Use white text for dark backgrounds (luminance < 0.5), black for light
   return luminance < 0.5
-    ? WorkIndiaColors.neutral.blackNWhite.white
-    : WorkIndiaColors.neutral.blackNWhite.black;
+    ? WorkIndiaColors.neutral.blackNWhite.white[500]
+    : WorkIndiaColors.neutral.blackNWhite.black[500];
 };
 
 /**
@@ -535,37 +535,73 @@ export const App = () => {
                   <Text weight="semibold" marginBottom="spacing.2">
                     Black & White
                   </Text>
-                  <Box display="flex" flexDirection="column" gap="spacing.2">
-                    <div
-                      style={{
-                        backgroundColor:
-                          WorkIndiaColors.neutral.blackNWhite.black,
-                        color: WorkIndiaColors.neutral.blackNWhite.white,
-                        padding: '16px',
-                        borderRadius: '4px',
-                        border: '1px solid',
-                        minWidth: '150px',
-                      }}
-                    >
-                      <Text size="small">
-                        black: {WorkIndiaColors.neutral.blackNWhite.black}
-                      </Text>
-                    </div>
-                    <div
-                      style={{
-                        backgroundColor:
-                          WorkIndiaColors.neutral.blackNWhite.white,
-                        color: WorkIndiaColors.neutral.blackNWhite.black,
-                        padding: '16px',
-                        borderRadius: '4px',
-                        border: '1px solid',
-                        minWidth: '150px',
-                      }}
-                    >
-                      <Text size="small">
-                        white: {WorkIndiaColors.neutral.blackNWhite.white}
-                      </Text>
-                    </div>
+                  <Text
+                    marginBottom="spacing.4"
+                    color="surface.text.gray.subtle"
+                  >
+                    Black and white colors with transparency shades (10-500).
+                  </Text>
+                  <Box
+                    display="flex"
+                    flexDirection="column"
+                    gap="spacing.1"
+                    borderRadius="small"
+                    overflow="hidden"
+                    borderWidth="thin"
+                    borderColor="surface.border.gray.subtle"
+                  >
+                    {Object.entries(
+                      WorkIndiaColors.neutral.blackNWhite.black,
+                    ).map(([shade, color]: [string, string]) => {
+                      const textColor = getContrastColor(color);
+                      return (
+                        <div
+                          key={`black-${shade}`}
+                          style={{
+                            backgroundColor: color,
+                            color: textColor,
+                            padding: '8px',
+                            minWidth: '140px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <Text size="small" color="currentColor">
+                            black-{shade}
+                          </Text>
+                          <Text size="small" color="currentColor">
+                            {color}
+                          </Text>
+                        </div>
+                      );
+                    })}
+                    {Object.entries(
+                      WorkIndiaColors.neutral.blackNWhite.white,
+                    ).map(([shade, color]: [string, string]) => {
+                      const textColor = getContrastColor(color);
+                      return (
+                        <div
+                          key={`white-${shade}`}
+                          style={{
+                            backgroundColor: color,
+                            color: textColor,
+                            padding: '8px',
+                            minWidth: '140px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <Text size="small" color="currentColor">
+                            white-{shade}
+                          </Text>
+                          <Text size="small" color="currentColor">
+                            {color}
+                          </Text>
+                        </div>
+                      );
+                    })}
                   </Box>
                 </Box>
               </Box>
