@@ -84,7 +84,7 @@ describe('WorkIndiaColors', () => {
         });
 
         it('should have all required alpha variants', () => {
-          const alphaVariants = ['a50', 'a100', 'a150', 'a200'];
+          const alphaVariants = ['a50', 'a100', 'a150', 'a200', 'a400'];
           alphaVariants.forEach((alpha) => {
             expect(
               scale[alpha as keyof WorkIndiaChromaticColorScale],
@@ -107,7 +107,7 @@ describe('WorkIndiaColors', () => {
         });
 
         it('should have valid rgba format for alpha variants', () => {
-          const alphaVariants = ['a50', 'a100', 'a150', 'a200'];
+          const alphaVariants = ['a50', 'a100', 'a150', 'a200', 'a400'];
           alphaVariants.forEach((alpha) => {
             const color = scale[alpha as keyof WorkIndiaChromaticColorScale];
             // RGBA format: rgba(r, g, b, a)
@@ -143,7 +143,7 @@ describe('WorkIndiaColors', () => {
       });
 
       it('should have all required alpha variants', () => {
-        const alphaVariants = ['a25', 'a50', 'a100', 'a200'];
+        const alphaVariants = ['a25', 'a50', 'a100', 'a200', 'a400'];
         alphaVariants.forEach((alpha) => {
           expect(
             lightScale[alpha as keyof WorkIndiaNeutralColorScale],
@@ -185,7 +185,7 @@ describe('WorkIndiaColors', () => {
       });
 
       it('should have all required alpha variants', () => {
-        const alphaVariants = ['a25', 'a50', 'a100', 'a200'];
+        const alphaVariants = ['a25', 'a50', 'a100', 'a200', 'a400'];
         alphaVariants.forEach((alpha) => {
           expect(
             darkScale[alpha as keyof WorkIndiaNeutralColorScale],

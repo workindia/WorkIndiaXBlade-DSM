@@ -114,7 +114,7 @@ export const App = () => {
               </Heading>
               <Text marginBottom="spacing.4" color="surface.text.gray.subtle">
                 All chromatic colors include shades from 50-1000 and alpha
-                variants (a50, a100, a150, a200).
+                variants (a50, a100, a150, a200, a400).
               </Text>
               <Box
                 display="flex"
@@ -432,7 +432,7 @@ export const App = () => {
               </Heading>
               <Text marginBottom="spacing.4" color="surface.text.gray.subtle">
                 Neutral colors include light and dark scales with shades from
-                0-1300 and alpha variants (a25, a50, a100, a200).
+                0-1300 and alpha variants (a25, a50, a100, a200, a400).
               </Text>
               <Box
                 display="flex"
@@ -732,6 +732,7 @@ export const App = () => {
                 flexDirection="row"
                 gap="spacing.3"
                 flexWrap="wrap"
+                alignItems="flex-start"
               >
                 <Button variant="primary" size="medium">
                   Primary
@@ -810,7 +811,7 @@ export const App = () => {
                   label="Text Input"
                   placeholder="Enter text here"
                   value={textInputValue}
-                  onChange={({ value }) => {
+                  onChange={({ value }: { value?: string }) => {
                     setTextInputValue(value ?? '');
                   }}
                 />
@@ -853,7 +854,7 @@ export const App = () => {
 
                 <Checkbox
                   isChecked={checkboxChecked}
-                  onChange={({ isChecked }) => {
+                  onChange={({ isChecked }: { isChecked: boolean }) => {
                     setCheckboxChecked(isChecked);
                   }}
                 >
@@ -878,7 +879,7 @@ export const App = () => {
                   <Switch
                     accessibilityLabel="Toggle Switch"
                     isChecked={switchChecked}
-                    onChange={({ isChecked }) => {
+                    onChange={({ isChecked }: { isChecked: boolean }) => {
                       setSwitchChecked(isChecked);
                     }}
                   />
