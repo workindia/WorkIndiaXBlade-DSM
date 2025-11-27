@@ -1,5 +1,11 @@
 # @workindia/dsm
 
+## 0.4.0
+
+### Minor Changes
+
+- ae890ce: Expanded exports to include all Blade components and types.
+
 ## 0.3.0
 
 ### Minor Changes

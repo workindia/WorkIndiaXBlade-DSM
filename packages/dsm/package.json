@@ -1,6 +1,6 @@
 {
   "name": "@workindia/dsm",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "WorkIndia Design System wrapper around @razorpay/blade with restricted tokens",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
