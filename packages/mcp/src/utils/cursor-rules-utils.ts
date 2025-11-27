@@ -1,0 +1,64 @@
+import { CURSOR_RULES_VERSION } from './tokens.js';
+
+/**
+ * Checks if cursor rules don't exist (version is '0' and client is 'cursor')
+ * @param cursorRuleVersion - The version of the cursor rules
+ * @param clientName - The name of the client ('claude', 'cursor', or 'unknown')
+ * @returns true if cursor rules don't exist, false otherwise
+ */
+export function isCursorRuleFileMissing(
+  cursorRuleVersion: string,
+  clientName: 'claude' | 'cursor' | 'unknown',
+): boolean {
+  return cursorRuleVersion === '0' && clientName === 'cursor';
+}
+
+/**
+ * Checks if cursor rules are outdated (version doesn't match the latest version and client is 'cursor')
+ * @param cursorRuleVersion - The version of the cursor rules
+ * @param clientName - The name of the client ('claude', 'cursor', or 'unknown')
+ * @returns true if cursor rules are outdated, false otherwise
+ */
+export function areCursorRulesOutdated(
+  cursorRuleVersion: string,
+  clientName: 'claude' | 'cursor' | 'unknown',
+): boolean {
+  return cursorRuleVersion !== CURSOR_RULES_VERSION && clientName === 'cursor';
+}
+
+const bashScriptContent = `
+#!/bin/bash
+# Download frontend-workindia-rules.mdc from GitHub and save to .cursor/rules
+TARGET_DIR=".cursor/rules"
+URL="https://raw.githubusercontent.com/workindia/WorkIndiaXBlade-DSM/master/packages/mcp/cursorRules/frontend-workindia-rules.mdc"
+FILE_PATH="$TARGET_DIR/frontend-workindia-rules.mdc"
+# Create directory if it doesn't exist (works even if it already exists)
+mkdir -p "$TARGET_DIR"
+curl -sSL "$URL" -o "$FILE_PATH"
+`;
+
+/**
+ *
+ * Generates formatted instructions for creating cursor rules files in a project.
+ * @param currentProjectRootDirectory - The working root directory of the consumer's project
+ * @returns The instructions text for creating cursor rules
+ */
+export function cursorRuleCreationInstructions(
+  currentProjectRootDirectory: string,
+): string {
+  return `## 
+**Instructions:**
+1. Change to the working directory: \`cd "${currentProjectRootDirectory}"\`
+2. Run the bash script below (copy and execute the commands from the script)
+3. This will create the cursor rules file at \`.cursor/rules/frontend-workindia-rules.mdc\`
+Run the following bash script to create cursor rules:
+  
+
+**Bash Script:**
+
+\`\`\`bash
+${bashScriptContent}
+\`
+**Working Directory:** \`${currentProjectRootDirectory}\`
+`;
+}

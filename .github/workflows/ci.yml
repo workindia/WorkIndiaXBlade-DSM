@@ -37,6 +37,7 @@ jobs:
         run: |
           test -d packages/tokens/build || exit 1
           test -d packages/dsm/build || exit 1
+          test -d packages/mcp/dist || exit 1
 
       - name: Run linter
         run: npm run lint
@@ -44,8 +45,8 @@ jobs:
       - name: Run type checking
         run: npm run typecheck
 
-      - name: Run tests
-        run: npm test -- --coverage
+      - name: Run tests with coverage
+        run: npm run test:coverage
 
       - name: Upload coverage reports
         uses: codecov/codecov-action@v5

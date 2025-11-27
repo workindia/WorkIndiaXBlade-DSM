@@ -1,0 +1,58 @@
+{
+  "name": "@workindia/dsm-mcp",
+  "version": "0.1.0",
+  "description": "Model Context Protocol server for WorkIndia Design System",
+  "main": "dist/exports.js",
+  "type": "module",
+  "bin": "dist/server.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/workindia/WorkIndiaXBlade-DSM.git"
+  },
+  "files": [
+    "dist",
+    "knowledgebase",
+    "cursorRules"
+  ],
+  "scripts": {
+    "prepare": "",
+    "build": "sh -c \"tsc && chmod +x dist/server.js\"",
+    "dev": "tsx src/server.ts",
+    "inspect": "npx -y @modelcontextprotocol/inspector node dist/server.js",
+    "start": "node dist/server.js",
+    "lint": "eslint --ext .ts src/",
+    "typecheck": "tsc --noEmit",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:watch": "NODE_OPTIONS=--experimental-vm-modules jest --watch",
+    "test:coverage": "NODE_OPTIONS=--experimental-vm-modules jest --coverage",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "workindia",
+    "dsm",
+    "mcp",
+    "design-system",
+    "anthropic"
+  ],
+  "author": "WorkIndia",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.23.0",
+    "zod": "^4.0.0",
+    "dedent": "1.6.0"
+  },
+  "resolutions": {
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.11",
+    "@types/node": "20.12.6",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.1",
+    "tsx": "4.7.1",
+    "typescript": "^5.0.0"
+  }
+}
