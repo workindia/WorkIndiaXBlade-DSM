@@ -281,7 +281,7 @@ describe('get-workindia-dsm-pattern-docs tool', () => {
     // Test with a pattern that doesn't exist to trigger error in getWorkIndiaDocsResponseText
     // First verify a valid pattern works, then test with invalid one
     const invalidPatternName = 'NonExistentPatternForErrorTest12345';
-    
+
     // @ts-expect-error - ToolCallback may expect 2 args when called directly, but works with 1 when registered
     const result = await getWorkIndiaDsmPatternDocsToolCallback({
       patternsList: invalidPatternName,
@@ -294,7 +294,7 @@ describe('get-workindia-dsm-pattern-docs tool', () => {
     expect(result).toBeDefined();
     expect(result.content).toBeDefined();
     expect(result.content.length).toBeGreaterThan(0);
-    
+
     const firstContent = result.content[0];
     expect(firstContent.type).toBe('text');
     if (firstContent.type === 'text') {
@@ -326,11 +326,10 @@ describe('get-workindia-dsm-pattern-docs tool', () => {
     expect(result).toBeDefined();
     expect(result.content).toBeDefined();
     expect(result.content.length).toBeGreaterThan(0);
-    
+
     // If it succeeds, we've covered the try block (lines 99-112)
     // If it fails, we've covered the catch block (lines 113-118)
     const firstContent = result.content[0];
     expect(firstContent.type).toBe('text');
   });
 });
-

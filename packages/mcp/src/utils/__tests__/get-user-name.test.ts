@@ -113,5 +113,3 @@ describe('get-user-name', () => {
     });
   });
 });
-
-

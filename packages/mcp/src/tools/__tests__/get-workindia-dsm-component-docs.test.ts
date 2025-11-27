@@ -130,4 +130,3 @@ describe('get-workindia-dsm-component-docs tool', () => {
     expect(result.content.length).toBeGreaterThan(0);
   });
 });
-

@@ -19,6 +19,7 @@ npm run inspect
 **Note:** The test scripts use `NODE_OPTIONS=--experimental-vm-modules` to enable Jest's ES module support, which is required because the package uses `"type": "module"` in `package.json`.
 
 This will:
+
 - Build the TypeScript code
 - Start the MCP Inspector
 - Open a web UI where you can:
@@ -56,12 +57,14 @@ npm run test:coverage
 **Writing New Tests:**
 
 1. Create a test file next to the file you want to test:
+
    ```
    src/tools/my-tool.ts
    src/tools/__tests__/my-tool.test.ts
    ```
 
 2. Import the functions you want to test:
+
    ```typescript
    import { myToolCallback } from '../my-tool.js';
    ```
@@ -149,4 +152,3 @@ npm run typecheck  # Type checking
 npm test           # Unit tests
 npm run lint        # Linting
 ```
-

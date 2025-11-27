@@ -15,9 +15,9 @@ describe('create-workindia-dsm-cursor-rules tool', () => {
   it('should have a non-empty description', () => {
     expect(createWorkIndiaDsmCursorRulesToolDescription).toBeTruthy();
     expect(typeof createWorkIndiaDsmCursorRulesToolDescription).toBe('string');
-    expect(
-      createWorkIndiaDsmCursorRulesToolDescription.length,
-    ).toBeGreaterThan(0);
+    expect(createWorkIndiaDsmCursorRulesToolDescription.length).toBeGreaterThan(
+      0,
+    );
   });
 
   it('should have correct schema structure', () => {
@@ -56,4 +56,3 @@ describe('create-workindia-dsm-cursor-rules tool', () => {
     expect(result.content).toBeDefined();
   });
 });
-

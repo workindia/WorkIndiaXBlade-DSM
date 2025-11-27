@@ -150,5 +150,3 @@ describe('get-workindia-dsm-general-docs tool', () => {
     expect(result.content.length).toBeGreaterThan(0);
   });
 });
-
-

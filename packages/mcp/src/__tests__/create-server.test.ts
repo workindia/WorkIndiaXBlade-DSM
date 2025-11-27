@@ -20,4 +20,3 @@ describe('createServer', () => {
     expect(server).toBeDefined();
   });
 });
-
