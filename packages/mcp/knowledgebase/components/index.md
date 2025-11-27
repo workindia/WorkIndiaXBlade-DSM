@@ -1,0 +1,88 @@
+# WorkIndia DSM Components
+
+This directory contains documentation for WorkIndia Design System components.
+
+Components are based on Razorpay's Blade Design System but customized for WorkIndia's needs.
+
+## Available Components
+
+- Accordion
+- ActionList
+- Alert
+- Amount
+- AnimateInteractions
+- AreaChart
+- AutoComplete
+- Avatar
+- Badge
+- BarChart
+- BottomNav
+- BottomSheet
+- Box
+- Breadcrumb
+- Button
+- ButtonGroup
+- Card
+- Carousel
+- ChatMessage
+- Checkbox
+- Chip
+- Code
+- Collapsible
+- Counter
+- CounterInput
+- DatePicker
+- Display
+- Divider
+- DonutChart
+- Drawer
+- Dropdown
+- Elevate
+- EmptyState
+- Fade
+- FileUpload
+- Heading
+- IconButton
+- Icons
+- Indicator
+- InfoGroup
+- InputGroup
+- LineChart
+- Link
+- List
+- ListView
+- Menu
+- Modal
+- Morph
+- Move
+- OTPInput
+- PasswordInput
+- PhoneNumberInput
+- Popover
+- Preview
+- ProgressBar
+- QuickFilter
+- Radio
+- Scale
+- SearchInput
+- SelectInput
+- SideNav
+- Skeleton
+- SkipNav
+- Slide
+- Spinner
+- SpotlightPopoverTour
+- Stagger
+- StepGroup
+- Switch
+- Table
+- Tabs
+- Tag
+- Text
+- TextArea
+- TextInput
+- TimePicker
+- Toast
+- Tooltip
+- TopNav
+- VisuallyHidden
