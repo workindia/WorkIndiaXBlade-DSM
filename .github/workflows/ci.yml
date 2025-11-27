@@ -28,9 +28,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Ensure optional dependencies are installed
-        run: npm install --no-save
-
       - name: Build packages in dependency order
         run: npm run build
         # Build tokens first (no dependencies), then dsm (depends on tokens)
