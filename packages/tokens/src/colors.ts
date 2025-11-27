@@ -42,6 +42,8 @@ export interface WorkIndiaChromaticColorScale {
   a150: string;
   /** Alpha variant - 32% opacity for stronger overlays */
   a200: string;
+  /** Alpha variant - 64% opacity for strong overlays */
+  a400: string;
 }
 
 /**
@@ -86,6 +88,8 @@ export interface WorkIndiaNeutralColorScale {
   a100: string;
   /** Alpha variant - 32% opacity for stronger overlays */
   a200: string;
+  /** Alpha variant - 64% opacity for strong overlays */
+  a400: string;
 }
 
 /**
@@ -168,6 +172,7 @@ export const WorkIndiaColors: WorkIndiaColorTokens = {
       a100: hexToRgba('#3C50C8', 18),
       a150: hexToRgba('#3C50C8', 24),
       a200: hexToRgba('#3C50C8', 32),
+      a400: hexToRgba('#3C50C8', 64),
     },
     rose: {
       50: '#FFF5F9',
@@ -185,6 +190,7 @@ export const WorkIndiaColors: WorkIndiaColorTokens = {
       a100: hexToRgba('#C43D63', 18),
       a150: hexToRgba('#C43D63', 24),
       a200: hexToRgba('#C43D63', 32),
+      a400: hexToRgba('#C43D63', 64),
     },
     cerulean: {
       50: '#F2FBFF',
@@ -202,6 +208,7 @@ export const WorkIndiaColors: WorkIndiaColorTokens = {
       a100: hexToRgba('#138DD2', 18),
       a150: hexToRgba('#138DD2', 24),
       a200: hexToRgba('#138DD2', 32),
+      a400: hexToRgba('#138DD2', 64),
     },
     emerald: {
       50: '#F2FBF3',
@@ -219,6 +226,7 @@ export const WorkIndiaColors: WorkIndiaColorTokens = {
       a100: hexToRgba('#1B8724', 18),
       a150: hexToRgba('#1B8724', 24),
       a200: hexToRgba('#1B8724', 32),
+      a400: hexToRgba('#1B8724', 64),
     },
     crimson: {
       50: '#FFF4F3',
@@ -236,6 +244,7 @@ export const WorkIndiaColors: WorkIndiaColorTokens = {
       a100: hexToRgba('#D81C1B', 18),
       a150: hexToRgba('#D81C1B', 24),
       a200: hexToRgba('#D81C1B', 32),
+      a400: hexToRgba('#D81C1B', 64),
     },
     amber: {
       50: '#FFF8EB',
@@ -253,6 +262,7 @@ export const WorkIndiaColors: WorkIndiaColorTokens = {
       a100: hexToRgba('#F7901A', 18),
       a150: hexToRgba('#F7901A', 24),
       a200: hexToRgba('#F7901A', 32),
+      a400: hexToRgba('#F7901A', 64),
     },
     sky: {
       50: '#F3FBFF',
@@ -270,6 +280,7 @@ export const WorkIndiaColors: WorkIndiaColorTokens = {
       a100: hexToRgba('#44BBFD', 18),
       a150: hexToRgba('#44BBFD', 24),
       a200: hexToRgba('#44BBFD', 32),
+      a400: hexToRgba('#44BBFD', 64),
     },
   },
   neutral: {
@@ -289,10 +300,11 @@ export const WorkIndiaColors: WorkIndiaColorTokens = {
       1100: '#313D4A',
       1200: '#26313C',
       1300: '#24282E',
-      a25: hexToRgba('#7B8995', 6),
-      a50: hexToRgba('#7B8995', 9),
-      a100: hexToRgba('#7B8995', 18),
-      a200: hexToRgba('#7B8995', 32),
+      a25: hexToRgba('#838F9A', 6),
+      a50: hexToRgba('#838F9A', 9),
+      a100: hexToRgba('#838F9A', 18),
+      a200: hexToRgba('#838F9A', 32),
+      a400: hexToRgba('#838F9A', 64),
     },
     dark: {
       0: '#FEFFFF',
@@ -310,10 +322,11 @@ export const WorkIndiaColors: WorkIndiaColorTokens = {
       1100: '#303A43',
       1200: '#272F36',
       1300: '#24282E',
-      a25: hexToRgba('#C3CCD4', 6),
-      a50: hexToRgba('#C3CCD4', 9),
-      a100: hexToRgba('#C3CCD4', 18),
-      a200: hexToRgba('#C3CCD4', 32),
+      a25: hexToRgba('#BEC7D0', 6),
+      a50: hexToRgba('#BEC7D0', 9),
+      a100: hexToRgba('#BEC7D0', 18),
+      a200: hexToRgba('#BEC7D0', 32),
+      a400: hexToRgba('#BEC7D0', 64),
     },
     blackNWhite: {
       black: '#000000',
