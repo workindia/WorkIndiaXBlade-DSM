@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.28.3",
-    "@razorpay/blade": "12.65.1",
+    "@razorpay/blade": "12.66.0",
     "@workindia/tokens": "^0.5.0"
   },
   "peerDependencies": {
