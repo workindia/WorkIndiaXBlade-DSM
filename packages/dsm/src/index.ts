@@ -185,6 +185,8 @@ export {
   PreviewFooter,
   // ProgressBar
   ProgressBar,
+  // Pagination
+  Pagination,
   // QuickFilters
   QuickFilter,
   QuickFilterGroup,
@@ -395,6 +397,8 @@ export type {
   // ProgressBar
   ProgressBarProps,
   ProgressBarVariant,
+  // Pagination
+  PaginationProps,
   // QuickFilters - types exported from QuickFilters module
   // Radio
   RadioProps,
