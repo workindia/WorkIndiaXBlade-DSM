@@ -56,6 +56,7 @@ Components are based on Razorpay's Blade Design System but customized for WorkIn
 - Morph
 - Move
 - OTPInput
+- Pagination
 - PasswordInput
 - PhoneNumberInput
 - Popover
