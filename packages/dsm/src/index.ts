@@ -285,6 +285,7 @@ export type {
   BadgeProps,
   // BladeProvider
   BladeProviderProps,
+  Theme,
   // BottomNav
   BottomNavProps,
   BottomNavItemProps,
