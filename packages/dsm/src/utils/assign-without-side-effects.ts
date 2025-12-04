@@ -32,8 +32,10 @@
  * @returns The component with the properties assigned
  */
 // We're matching the types of this with Object.assign types
-// eslint-disable-next-line @typescript-eslint/no-empty-object-type
-const assignWithoutSideEffects = <T extends {}>(
+// Using a more permissive constraint that accepts React components (which are callable) and objects
+const assignWithoutSideEffects = <
+  T extends object | ((...args: unknown[]) => unknown),
+>(
   component: T,
   sourceObj: { displayName?: string; componentId?: string },
 ): T => {
