@@ -31,7 +31,9 @@
  * @param sourceObj.componentId - The component id of the component
  * @returns The component with the properties assigned
  */
-const assignWithoutSideEffects = <T extends Record<string, unknown>>(
+// We're matching the types of this with Object.assign types
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+const assignWithoutSideEffects = <T extends {}>(
   component: T,
   sourceObj: { displayName?: string; componentId?: string },
 ): T => {
