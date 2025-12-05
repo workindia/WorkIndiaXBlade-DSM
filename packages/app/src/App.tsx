@@ -42,6 +42,8 @@ import {
   Elevation,
   type ElevationLevels,
 } from '@workindia/tokens';
+import * as Icons from '@workindia/icons';
+import type { IconComponent } from '@workindia/icons';
 
 /**
  * Calculate the relative luminance of a color
@@ -82,6 +84,41 @@ const getContrastColor = (backgroundColor: string): string => {
 };
 
 /**
+ * Get all icon components from the icons package
+ * Filters out non-icon exports (types, utilities, etc.)
+ * @returns Array of icon entries with name and component
+ */
+const getAllIcons = (): { name: string; Icon: IconComponent }[] => {
+  const iconEntries: { name: string; Icon: IconComponent }[] = [];
+
+  // Filter out non-icon exports
+  const excludedKeys = [
+    'Svg',
+    'Path',
+    'useIconProps',
+    'isIconComponent',
+    // Type exports (they start with uppercase but are types)
+  ];
+
+  Object.entries(Icons).forEach(([name, value]) => {
+    // Check if it's a valid icon component (function/component that's not excluded)
+    if (
+      !excludedKeys.includes(name) &&
+      typeof value === 'function' &&
+      name.endsWith('Icon')
+    ) {
+      iconEntries.push({
+        name,
+        Icon: value as IconComponent,
+      });
+    }
+  });
+
+  // Sort icons alphabetically
+  return iconEntries.sort((a, b) => a.name.localeCompare(b.name));
+};
+
+/**
  * Example App component showcasing locked-down tokens and UI components
  * Note: We only import from @workindia/dsm, never from @razorpay/blade directly
  * @returns The App component
@@ -106,7 +143,7 @@ export const App = () => {
           </Text>
         </Box>
 
-        {/* Tabs for Tokens and Components */}
+        {/* Tabs for Tokens, Components, and Icons */}
         <Tabs
           value={activeTab}
           onChange={(value: string) => {
@@ -117,6 +154,7 @@ export const App = () => {
           <TabList>
             <TabItem value="tokens">Tokens</TabItem>
             <TabItem value="components">Components</TabItem>
+            <TabItem value="icons">Icons</TabItem>
           </TabList>
 
           {/* Tokens Tab Panel */}
@@ -1248,6 +1286,102 @@ export const App = () => {
                     <Text size="small">
                       {`import { WorkIndiaProvider, Button, Heading } from '@workindia/dsm';
 import { Colors } from '@workindia/tokens';`}
+                    </Text>
+                  </Box>
+                </CardBody>
+              </Card>
+            </Box>
+          </TabPanel>
+
+          {/* Icons Tab Panel */}
+          <TabPanel value="icons">
+            <Box paddingTop="spacing.6">
+              <Card>
+                <CardHeader>
+                  <CardHeaderLeading title="Icon Library" />
+                </CardHeader>
+                <CardBody>
+                  <Text marginBottom="spacing.4">
+                    All available icons from @workindia/icons package. Click on
+                    an icon to copy its name.
+                  </Text>
+
+                  {/* Icons Grid */}
+                  <Box
+                    display="grid"
+                    gridTemplateColumns={{
+                      base: 'repeat(2, 1fr)',
+                      s: 'repeat(3, 1fr)',
+                      m: 'repeat(4, 1fr)',
+                      l: 'repeat(5, 1fr)',
+                    }}
+                    gap="spacing.4"
+                  >
+                    {getAllIcons().map(({ name, Icon }) => (
+                      <div
+                        key={name}
+                        onClick={() => {
+                          void navigator.clipboard.writeText(name);
+                        }}
+                        onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            void navigator.clipboard.writeText(name);
+                          }
+                        }}
+                        role="button"
+                        tabIndex={0}
+                        title={`Click to copy: ${name}`}
+                        style={{
+                          cursor: 'pointer',
+                          transition: 'all 0.2s',
+                          color: Colors.neutral.light[900],
+                        }}
+                        onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
+                          e.currentTarget.style.backgroundColor =
+                            Colors.neutral.light[100];
+                          e.currentTarget.style.borderColor =
+                            Colors.neutral.light[400];
+                        }}
+                        onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
+                          e.currentTarget.style.backgroundColor =
+                            Colors.neutral.light[50];
+                          e.currentTarget.style.borderColor =
+                            Colors.neutral.light[300];
+                        }}
+                      >
+                        <Box
+                          padding="spacing.4"
+                          borderRadius="medium"
+                          borderWidth="thin"
+                          borderColor="surface.border.gray.subtle"
+                          backgroundColor="surface.background.gray.subtle"
+                          display="flex"
+                          flexDirection="column"
+                          alignItems="center"
+                          gap="spacing.2"
+                        >
+                          <Icon size="large" color="currentColor" />
+                          <Text
+                            size="small"
+                            color="surface.text.gray.subtle"
+                            textAlign="center"
+                          >
+                            {name.replace('Icon', '')}
+                          </Text>
+                        </Box>
+                      </div>
+                    ))}
+                  </Box>
+
+                  <Box
+                    marginTop="spacing.6"
+                    paddingTop="spacing.4"
+                    borderTopWidth="thin"
+                    borderTopColor="surface.border.gray.subtle"
+                  >
+                    <Text size="small" color="surface.text.gray.muted">
+                      Total icons: {getAllIcons().length}
                     </Text>
                   </Box>
                 </CardBody>

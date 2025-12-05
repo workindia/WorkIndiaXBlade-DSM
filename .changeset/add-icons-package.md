@@ -9,3 +9,4 @@ Add new @workindia/icons package
 - Supports theme-based icon colors using @workindia/dsm Theme type
 - Includes icon size mapping and useIconProps hook
 - Exports IconComponent, IconProps, IconSize, and IconColors types
+- Include System Icons entirely
