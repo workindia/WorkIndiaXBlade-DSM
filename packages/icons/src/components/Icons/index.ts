@@ -160,6 +160,8 @@ export { default as EyeFillIcon } from './EyeFillIcon/eye-fill-icon';
 export { default as EyeIcon } from './EyeIcon/eye-icon';
 export { default as EyesFillIcon } from './EyesFillIcon/eyes-fill-icon';
 export { default as EyesIcon } from './EyesIcon/eyes-icon';
+export { default as EyesSlashFillIcon } from './EyeSlashFillIcon/eye-slash-fill-icon';
+export { default as EyesSlashIcon } from './EyeSlashIcon/eye-slash-icon';
 export { default as FastForwardFillIcon } from './FastForwardFillIcon/fast-forward-fill-icon';
 export { default as FastForwardIcon } from './FastForwardIcon/fast-forward-icon';
 export { default as FileArrowDownFillIcon } from './FileArrowDownFillIcon/file-arrow-down-fill-icon';
