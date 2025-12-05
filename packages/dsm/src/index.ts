@@ -287,6 +287,7 @@ export type {
   BadgeProps,
   // BladeProvider
   BladeProviderProps,
+  Theme,
   // BottomNav
   BottomNavProps,
   BottomNavItemProps,
@@ -470,3 +471,7 @@ export type {
   // Icon types
   IconComponent,
 } from '@razorpay/blade/components';
+
+// Export utilities
+export { assignWithoutSideEffects } from './utils/assign-without-side-effects';
+export type { DotNotationToken } from './utils/dot-notation-token';

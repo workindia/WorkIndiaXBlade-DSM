@@ -1,0 +1,10 @@
+{
+  "extends": "@create-figma-plugin/tsconfig",
+  "compilerOptions": {
+    "outDir": "build",
+    "jsxFragmentFactory": "Fragment",
+    "types": ["@figma/plugin-typings"],
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*"]
+}
