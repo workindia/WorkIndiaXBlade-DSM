@@ -1,7 +1,7 @@
 {
   "name": "@workindia/figma-icon-exporter",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Figma plugin to export icon frames as React icon components",
   "license": "MIT",
   "scripts": {
