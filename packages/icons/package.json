@@ -12,7 +12,8 @@
   },
   "files": [
     "build",
-    "README.md"
+    "README.md",
+    "LICENSE.md"
   ],
   "scripts": {
     "build": "npm run clean && npm run build:types && npm run build:rollup",
