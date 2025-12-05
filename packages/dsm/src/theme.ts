@@ -7,6 +7,7 @@ import type { ThemeTokens } from '@razorpay/blade/tokens';
 import { bladeTheme } from '@razorpay/blade/tokens';
 import {
   Colors,
+  Typography,
   type ChromaticColorScale,
   type ColorTokens,
 } from '@workindia/tokens';
@@ -284,6 +285,31 @@ const createWorkIndiaTheme = (): ThemeTokens => {
       ...baseTheme.spacing,
       // Override specific spacing values if needed
       // For now, we keep Blade defaults but can restrict later
+    },
+    // Map typography tokens - override font families to use Inter for headings
+    typography: {
+      onDesktop: {
+        ...baseTheme.typography.onDesktop,
+        fonts: {
+          ...baseTheme.typography.onDesktop.fonts,
+          family: {
+            text: Typography.fontFamily.text,
+            heading: Typography.fontFamily.heading,
+            code: Typography.fontFamily.code,
+          },
+        },
+      },
+      onMobile: {
+        ...baseTheme.typography.onMobile,
+        fonts: {
+          ...baseTheme.typography.onMobile.fonts,
+          family: {
+            text: Typography.fontFamily.text,
+            heading: Typography.fontFamily.heading,
+            code: Typography.fontFamily.code,
+          },
+        },
+      },
     },
   }) as ThemeTokens;
 

@@ -820,6 +820,107 @@ export const App = () => {
                 </CardBody>
               </Card>
 
+              {/* Heading Font Verification Section */}
+              <Card marginBottom="spacing.6">
+                <CardHeader>
+                  <CardHeaderLeading title="Heading Font Verification" />
+                </CardHeader>
+                <CardBody>
+                  <Text marginBottom="spacing.4">
+                    This section verifies that the Heading component uses Inter
+                    font (not TASA Orbiter). Check the computed font-family in
+                    your browser's developer tools.
+                  </Text>
+
+                  <Box marginBottom="spacing.5">
+                    <Heading size="large" marginBottom="spacing.3">
+                      Heading Component Test
+                    </Heading>
+                    <Text marginBottom="spacing.2">
+                      The heading above should use Inter font family. Inspect
+                      the element to verify:
+                    </Text>
+                    <Box
+                      padding="spacing.3"
+                      backgroundColor="surface.background.gray.subtle"
+                      borderRadius="medium"
+                    >
+                      <Code size="small">
+                        font-family: &quot;Inter&quot;, &quot;Inter Fallback
+                        Arial&quot;, Arial, sans-serif
+                      </Code>
+                    </Box>
+                  </Box>
+
+                  <Box marginBottom="spacing.5">
+                    <Heading size="medium" marginBottom="spacing.3">
+                      All Heading Sizes
+                    </Heading>
+                    <Box display="flex" flexDirection="column" gap="spacing.3">
+                      <Box>
+                        <Heading size="small">Small Heading (Inter)</Heading>
+                        <Text size="small" color="surface.text.gray.subtle">
+                          Size: small
+                        </Text>
+                      </Box>
+                      <Box>
+                        <Heading size="medium">Medium Heading (Inter)</Heading>
+                        <Text size="small" color="surface.text.gray.subtle">
+                          Size: medium
+                        </Text>
+                      </Box>
+                      <Box>
+                        <Heading size="large">Large Heading (Inter)</Heading>
+                        <Text size="small" color="surface.text.gray.subtle">
+                          Size: large
+                        </Text>
+                      </Box>
+                      <Box>
+                        <Heading size="xlarge">
+                          Extra Large Heading (Inter)
+                        </Heading>
+                        <Text size="small" color="surface.text.gray.subtle">
+                          Size: xlarge
+                        </Text>
+                      </Box>
+                      <Box>
+                        <Heading size="2xlarge">
+                          2X Large Heading (Inter)
+                        </Heading>
+                        <Text size="small" color="surface.text.gray.subtle">
+                          Size: 2xlarge
+                        </Text>
+                      </Box>
+                    </Box>
+                  </Box>
+
+                  <Box>
+                    <Heading size="medium" marginBottom="spacing.3">
+                      Comparison: Heading vs Text
+                    </Heading>
+                    <Text marginBottom="spacing.2">
+                      Both should use Inter font (not TASA Orbiter):
+                    </Text>
+                    <Box display="flex" flexDirection="column" gap="spacing.2">
+                      <Box>
+                        <Heading size="medium">This is a Heading</Heading>
+                        <Text size="small" color="surface.text.gray.subtle">
+                          Heading component - should use Inter
+                        </Text>
+                      </Box>
+                      <Box>
+                        <Text size="medium" weight="semibold">
+                          This is Text with semibold weight
+                        </Text>
+                        <Text size="small" color="surface.text.gray.subtle">
+                          Text component - should use Inter
+                        </Text>
+                      </Box>
+                    </Box>
+                  </Box>
+                </CardBody>
+              </Card>
+
               {/* Breakpoints Section */}
               <Card marginBottom="spacing.6">
                 <CardHeader>
