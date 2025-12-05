@@ -25,3 +25,7 @@ Icons are created from Figma frames (24x24) containing vector paths. Each icon f
 ## Development
 
 Icons are exported from Figma using the `@workindia/figma-icon-exporter` plugin. Select icon frames (24x24) and use the plugin to generate icon components.
+
+## Attribution
+
+The icons in this package are based on icons from [Phosphor Icons](https://phosphoricons.com/), which are licensed under the MIT License.
