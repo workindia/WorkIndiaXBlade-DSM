@@ -17,6 +17,7 @@ import type {
   ShowNotification,
   ExportIconsRequest,
   IconData,
+  PathData,
 } from './main';
 
 /**
@@ -99,17 +100,77 @@ function Plugin() {
 
       // Generate file contents and add to ZIP
       icons.forEach((icon: IconData) => {
-        const pathMatch = /d="([^"]+)"/.exec(icon.svgPath);
-        const fillRuleMatch = /fillRule="([^"]+)"/.exec(icon.svgPath);
-        const clipRuleMatch = /clipRule="([^"]+)"/.exec(icon.svgPath);
-
-        const d = pathMatch ? pathMatch[1] : '';
-        const fillRule = fillRuleMatch ? fillRuleMatch[1] : undefined;
-        const clipRule = clipRuleMatch ? clipRuleMatch[1] : undefined;
-
-        const fillRuleProp = fillRule ? `\n        fillRule="${fillRule}"` : '';
-        const clipRuleProp = clipRule ? `\n        clipRule="${clipRule}"` : '';
         const fileName = toKebabCase(icon.componentName);
+
+        // Generate Path elements for all paths
+
+        const pathElements = icon.paths
+          .map((pathData: PathData) => {
+            const props: string[] = [];
+
+            // Add fill-related props
+
+            const fillRule = pathData.fillRule;
+            if (fillRule) {
+              props.push(`fillRule="${fillRule}"`);
+            }
+
+            const clipRule = pathData.clipRule;
+            if (clipRule) {
+              props.push(`clipRule="${clipRule}"`);
+            }
+
+            // Determine if we should use fill or stroke
+
+            const stroke = pathData.stroke;
+            const hasStroke = stroke !== undefined && stroke !== 'none';
+
+            const fill = pathData.fill;
+            const hasFill = fill !== undefined && fill !== 'none';
+
+            if (hasStroke) {
+              // Use stroke with iconColor
+              props.push(`stroke={iconColor}`);
+
+              const strokeWidth = pathData.strokeWidth;
+              if (strokeWidth) {
+                props.push(`strokeWidth="${strokeWidth}"`);
+              }
+
+              const strokeLinecap = pathData.strokeLinecap;
+              if (strokeLinecap) {
+                props.push(`strokeLinecap="${strokeLinecap}"`);
+              }
+
+              const strokeLinejoin = pathData.strokeLinejoin;
+              if (strokeLinejoin) {
+                props.push(`strokeLinejoin="${strokeLinejoin}"`);
+              }
+
+              const strokeDasharray = pathData.strokeDasharray;
+              if (strokeDasharray) {
+                props.push(`strokeDasharray="${strokeDasharray}"`);
+              }
+              // Only add fill if explicitly set and not "none"
+              if (hasFill && fill && fill !== 'none') {
+                props.push(`fill="${fill}"`);
+              } else {
+                props.push('fill="none"');
+              }
+            } else {
+              // Use fill with iconColor (default behavior)
+              props.push(`fill={iconColor}`);
+            }
+
+            const propsString =
+              props.length > 0 ? '\n        ' + props.join('\n        ') : '';
+            const d = pathData.d;
+
+            return `      <Path${propsString}
+        d="${d}"
+      />`;
+          })
+          .join('\n');
 
         const content = `import { Svg, Path } from '../../_Svg';
 import type { IconComponent } from '../types';
@@ -121,10 +182,7 @@ const _${icon.componentName}: IconComponent = ({ size, color, ...styledProps }) 
 
   return (
     <Svg {...styledProps} width={width} height={height} viewBox="${icon.viewBox}" fill="none">
-      <Path${fillRuleProp}${clipRuleProp}
-        d="${d}"
-        fill={iconColor}
-      />
+${pathElements}
     </Svg>
   );
 };

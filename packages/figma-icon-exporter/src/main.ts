@@ -2,10 +2,22 @@
 // Figma plugin types are provided at runtime, so we disable type safety checks for Figma API calls
 import { emit, on, showUI } from '@create-figma-plugin/utilities';
 
+export interface PathData {
+  d: string;
+  fill?: string;
+  fillRule?: string;
+  clipRule?: string;
+  stroke?: string;
+  strokeWidth?: string;
+  strokeLinecap?: string;
+  strokeLinejoin?: string;
+  strokeDasharray?: string;
+}
+
 export interface IconData {
   name: string;
   componentName: string;
-  svgPath: string;
+  paths: PathData[];
   viewBox: string;
 }
 
@@ -87,15 +99,17 @@ function isIconFrame(node: SceneNode): boolean {
 }
 
 /**
- * Extracts the vector path from the node
- * @param node - The node to extract the vector path from
+ * Extracts all vector paths from the node and its children
+ * @param node - The node to extract vector paths from
  * @param depth - The depth of the node in the tree (for logging purposes)
- * @returns The vector path as a string, or null if the node is not a vector
+ * @returns Array of SVG strings, or empty array if no vectors found
  */
-async function extractVectorPath(
+async function extractVectorPaths(
   node: SceneNode,
   depth = 0,
-): Promise<string | null> {
+): Promise<string[]> {
+  const svgStrings: string[] = [];
+
   // Check if this node can be exported as SVG
   const exportableTypes = [
     'VECTOR',
@@ -119,7 +133,7 @@ async function extractVectorPath(
       console.log(
         `Found exportable node "${String(node.name)}" (${String(nodeType)}) at depth ${String(depth)}`,
       );
-      return svgString;
+      svgStrings.push(svgString);
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);
@@ -127,11 +141,10 @@ async function extractVectorPath(
         `Error exporting ${String(nodeType)} "${String(node.name)}":`,
         errorMessage,
       );
-      return null;
     }
   }
 
-  // If not directly exportable, check children
+  // Check children for additional paths
   // Type assertion needed because Figma types are provided at runtime
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const childrenNode = node as any;
@@ -141,18 +154,16 @@ async function extractVectorPath(
       `Node "${String(node.name)}" (${String(nodeType)}) has ${String(children.length)} children, checking...`,
     );
     for (const child of children) {
-      const path = await extractVectorPath(child, depth + 1);
-      if (path) {
-        return path;
-      }
+      const childPaths = await extractVectorPaths(child, depth + 1);
+      svgStrings.push(...childPaths);
     }
-  } else {
+  } else if (svgStrings.length === 0) {
     console.log(
       `Node "${String(node.name)}" (${String(nodeType)}) has no children and is not exportable`,
     );
   }
 
-  return null;
+  return svgStrings;
 }
 
 /**
@@ -192,99 +203,145 @@ function rectToPath(
 }
 
 /**
- * Parses the SVG path from the string
- * @param svgString - The SVG string to parse
- * @returns The parsed SVG path and viewBox, or null if the SVG string is not valid
+ * Parses all SVG paths from the string(s)
+ * @param svgStrings - Array of SVG strings to parse
+ * @returns The parsed paths and viewBox, or null if no valid paths found
  */
-function parseSVGPath(
-  svgString: string,
-): { path: string; viewBox: string } | null {
+function parseSVGPaths(
+  svgStrings: string[],
+): { paths: PathData[]; viewBox: string } | null {
   try {
-    console.log(
-      'Parsing SVG string (first 200 chars):',
-      svgString.substring(0, 200),
-    );
-
-    // Extract viewBox from SVG string
-    const viewBoxMatch = /viewBox=["']([^"']+)["']/.exec(svgString);
-    const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24';
-    console.log('Extracted viewBox:', viewBox);
-
-    // Try to find path elements first
-    let pathMatch = /<path[^>]*d=["']([^"']+)["']/.exec(svgString);
-    let d: string | undefined;
-
-    // If no path found, try to find other shapes
-    if (!pathMatch) {
-      console.log('No <path> element found, checking for other shapes...');
-
-      // Check for rect element
-      const rectMatch = /<rect[^>]*/.exec(svgString);
-      if (rectMatch) {
-        const rectTag = rectMatch[0];
-        const xMatch = /x=["']([^"']+)["']/.exec(rectTag);
-        const yMatch = /y=["']([^"']+)["']/.exec(rectTag);
-        const widthMatch = /width=["']([^"']+)["']/.exec(rectTag);
-        const heightMatch = /height=["']([^"']+)["']/.exec(rectTag);
-        const rxMatch = /rx=["']([^"']+)["']/.exec(rectTag);
-        const ryMatch = /ry=["']([^"']+)["']/.exec(rectTag);
-
-        if (widthMatch && heightMatch) {
-          const x = xMatch ? parseFloat(xMatch[1]) : 0;
-          const y = yMatch ? parseFloat(yMatch[1]) : 0;
-          const width = parseFloat(widthMatch[1]);
-          const height = parseFloat(heightMatch[1]);
-          const rx = rxMatch ? parseFloat(rxMatch[1]) : 0;
-          const ry = ryMatch ? parseFloat(ryMatch[1]) : rx;
-
-          d = rectToPath(x, y, width, height, rx, ry);
-          console.log('Converted rect to path:', d);
-        }
-      }
-
-      // If still no path, try to extract from SVG content
-      if (!d) {
-        const svgContentMatch = /<svg[^>]*>([\s\S]*)<\/svg>/.exec(svgString);
-        if (svgContentMatch) {
-          const content = svgContentMatch[1];
-          pathMatch = /d=["']([^"']+)["']/.exec(content);
-          if (pathMatch) {
-            d = pathMatch[1];
-          }
-        }
-      }
-    } else {
-      d = pathMatch[1];
-    }
-
-    if (!d) {
-      console.error('Could not find or convert path data in SVG');
-      console.log('Full SVG:', svgString);
+    if (svgStrings.length === 0) {
       return null;
     }
 
-    console.log(
-      'Extracted/converted path d attribute (first 100 chars):',
-      d.substring(0, 100),
-    );
+    // Extract viewBox from the first SVG string (they should all have the same viewBox)
+    const viewBoxMatch = /viewBox=["']([^"']+)["']/.exec(svgStrings[0] ?? '');
+    const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24';
+    console.log('Extracted viewBox:', viewBox);
 
-    // Extract fill-rule and clip-rule if present
-    const fillRuleMatch = /fill-rule=["']([^"']+)["']/i.exec(svgString);
-    const clipRuleMatch = /clip-rule=["']([^"']+)["']/i.exec(svgString);
-    const fillRule = fillRuleMatch ? fillRuleMatch[1] : undefined;
-    const clipRule = clipRuleMatch ? clipRuleMatch[1] : undefined;
+    const paths: PathData[] = [];
 
-    // Build path data string with attributes
-    let pathData = `d="${d}"`;
-    if (fillRule) {
-      pathData = `fillRule="${fillRule}" ${pathData}`;
+    // Process each SVG string
+    for (const svgString of svgStrings) {
+      console.log(
+        'Parsing SVG string (first 200 chars):',
+        svgString.substring(0, 200),
+      );
+
+      // Extract all path elements from this SVG string
+      const pathRegex = /<path[^>]*>/gi;
+      let pathMatch;
+      const foundPaths: PathData[] = [];
+
+      // Find all path elements
+      while ((pathMatch = pathRegex.exec(svgString)) !== null) {
+        const pathTag = pathMatch[0];
+
+        // Extract d attribute
+        const dMatch = /d=["']([^"']+)["']/i.exec(pathTag);
+        if (!dMatch) {
+          continue;
+        }
+
+        const d = dMatch[1];
+
+        // Extract fill-related attributes
+        const fillMatch = /fill=["']([^"']+)["']/i.exec(pathTag);
+        const fillRuleMatch = /fill-rule=["']([^"']+)["']/i.exec(pathTag);
+        const clipRuleMatch = /clip-rule=["']([^"']+)["']/i.exec(pathTag);
+
+        // Extract stroke-related attributes
+        const strokeMatch = /stroke=["']([^"']+)["']/i.exec(pathTag);
+        const strokeWidthMatch = /stroke-width=["']([^"']+)["']/i.exec(pathTag);
+        const strokeLinecapMatch = /stroke-linecap=["']([^"']+)["']/i.exec(
+          pathTag,
+        );
+        const strokeLinejoinMatch = /stroke-linejoin=["']([^"']+)["']/i.exec(
+          pathTag,
+        );
+        const strokeDasharrayMatch = /stroke-dasharray=["']([^"']+)["']/i.exec(
+          pathTag,
+        );
+
+        const pathData: PathData = {
+          d,
+        };
+
+        if (fillMatch) {
+          pathData.fill = fillMatch[1];
+        }
+        if (fillRuleMatch) {
+          pathData.fillRule = fillRuleMatch[1];
+        }
+        if (clipRuleMatch) {
+          pathData.clipRule = clipRuleMatch[1];
+        }
+        if (strokeMatch) {
+          pathData.stroke = strokeMatch[1];
+        }
+        if (strokeWidthMatch) {
+          pathData.strokeWidth = strokeWidthMatch[1];
+        }
+        if (strokeLinecapMatch) {
+          pathData.strokeLinecap = strokeLinecapMatch[1];
+        }
+        if (strokeLinejoinMatch) {
+          pathData.strokeLinejoin = strokeLinejoinMatch[1];
+        }
+        if (strokeDasharrayMatch) {
+          pathData.strokeDasharray = strokeDasharrayMatch[1];
+        }
+
+        foundPaths.push(pathData);
+        console.log(
+          `Extracted path d attribute (first 100 chars): ${d.substring(0, 100)}`,
+        );
+      }
+
+      // If no path elements found, try to find other shapes (rect, circle, etc.)
+      if (foundPaths.length === 0) {
+        console.log('No <path> element found, checking for other shapes...');
+
+        // Check for rect element
+        const rectMatch = /<rect[^>]*/.exec(svgString);
+        if (rectMatch) {
+          const rectTag = rectMatch[0];
+          const xMatch = /x=["']([^"']+)["']/.exec(rectTag);
+          const yMatch = /y=["']([^"']+)["']/.exec(rectTag);
+          const widthMatch = /width=["']([^"']+)["']/.exec(rectTag);
+          const heightMatch = /height=["']([^"']+)["']/.exec(rectTag);
+          const rxMatch = /rx=["']([^"']+)["']/.exec(rectTag);
+          const ryMatch = /ry=["']([^"']+)["']/.exec(rectTag);
+
+          if (widthMatch && heightMatch) {
+            const x = xMatch ? parseFloat(xMatch[1]) : 0;
+            const y = yMatch ? parseFloat(yMatch[1]) : 0;
+            const width = parseFloat(widthMatch[1]);
+            const height = parseFloat(heightMatch[1]);
+            const rx = rxMatch ? parseFloat(rxMatch[1]) : 0;
+            const ry = ryMatch ? parseFloat(ryMatch[1]) : rx;
+
+            const d = rectToPath(x, y, width, height, rx, ry);
+            console.log('Converted rect to path:', d);
+            foundPaths.push({ d });
+          }
+        }
+      }
+
+      paths.push(...foundPaths);
     }
-    if (clipRule) {
-      pathData = `clipRule="${clipRule}" ${pathData}`;
+
+    if (paths.length === 0) {
+      console.error('Could not find or convert path data in SVG');
+      console.log('Full SVG strings:', svgStrings);
+      return null;
     }
+
+    console.log(`Extracted ${paths.length.toString()} path(s) total`);
 
     return {
-      path: pathData,
+      paths,
       viewBox,
     };
   } catch (error) {
@@ -350,54 +407,58 @@ async function exportIcons(): Promise<void> {
 
     console.log(`${nodeType} "${nodeName}" passed size check`);
 
-    // Extract SVG path from the frame
-    let svgString: string | null = null;
+    // Extract SVG paths from the frame
+    let svgStrings: string[] = [];
     try {
-      svgString = await extractVectorPath(node);
+      svgStrings = await extractVectorPaths(node);
     } catch (error) {
       const errorMessage =
         error instanceof Error ? error.message : String(error);
-      const errorMsg = `Error extracting vector from "${nodeName}": ${errorMessage}`;
+      const errorMsg = `Error extracting vectors from "${nodeName}": ${errorMessage}`;
       console.error(errorMsg);
       errors.push(errorMsg);
       emit<ShowNotification>('SHOW_NOTIFICATION', {
-        message: `Could not extract vector from "${nodeName}". Skipping...`,
+        message: `Could not extract vectors from "${nodeName}". Skipping...`,
         error: false,
       });
       continue;
     }
 
-    if (!svgString) {
-      const errorMsg = `Could not extract vector from "${nodeName}" - no exportable content found`;
+    if (svgStrings.length === 0) {
+      const errorMsg = `Could not extract vectors from "${nodeName}" - no exportable content found`;
       errors.push(errorMsg);
       emit<ShowNotification>('SHOW_NOTIFICATION', {
-        message: `Could not extract vector from "${nodeName}". Skipping...`,
+        message: `Could not extract vectors from "${nodeName}". Skipping...`,
         error: false,
       });
       continue;
     }
 
-    console.log(`Successfully extracted SVG from "${nodeName}"`);
+    console.log(
+      `Successfully extracted ${svgStrings.length.toString()} SVG(s) from "${nodeName}"`,
+    );
 
-    const parsed = parseSVGPath(svgString);
-    if (!parsed) {
-      const errorMsg = `Could not parse SVG from "${nodeName}"`;
+    const parsed = parseSVGPaths(svgStrings);
+    if (!parsed || parsed.paths.length === 0) {
+      const errorMsg = `Could not parse SVG paths from "${nodeName}"`;
       errors.push(errorMsg);
       emit<ShowNotification>('SHOW_NOTIFICATION', {
-        message: `Could not parse SVG from "${nodeName}". Skipping...`,
+        message: `Could not parse SVG paths from "${nodeName}". Skipping...`,
         error: false,
       });
       continue;
     }
 
-    console.log(`Successfully parsed SVG from "${nodeName}"`);
+    console.log(
+      `Successfully parsed ${parsed.paths.length.toString()} path(s) from "${nodeName}"`,
+    );
 
     const componentName = `${toPascalCase(node.name)}Icon`;
 
     icons.push({
       name: node.name,
       componentName,
-      svgPath: parsed.path,
+      paths: parsed.paths,
       viewBox: parsed.viewBox,
     });
 
