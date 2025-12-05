@@ -1,5 +1,25 @@
 # @workindia/dsm
 
+## 0.6.0
+
+### Minor Changes
+
+- 8e938d1: Add utility functions and types for icon package support
+  - Export `assignWithoutSideEffects` utility function for component metadata assignment
+  - Export `DotNotationToken` type utility for theme token path generation
+  - Export `Theme` type for theme-based type definitions
+
+- 2c5076f: Upgrade @razorpay/blade from 12.65.1 to 12.68.0
+  feat(blade): add data attribute in basefilter chip
+  feat(blade): added openInteraction prop for hover/click trigger on popover component
+
+### Patch Changes
+
+- 6c67303: Fix Heading component to use Inter font instead of TASA Orbiter
+  - Map WorkIndia typography tokens to Blade theme typography configuration
+  - Override font families for both desktop and mobile platforms
+  - Heading component now correctly uses Inter font as defined in @workindia/tokens
+
 ## 0.5.0
 
 ### Minor Changes
