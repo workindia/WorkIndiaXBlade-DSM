@@ -234,8 +234,10 @@ export default ${icon.componentName};`;
       <Text>WorkIndia Icon Exporter</Text>
       <VerticalSpace space="small" />
       <Text>
-        Select icon frames or components in Figma (various sizes supported) and
-        click Export to generate React icon components.
+        Select icon frames, components, or component sets (with variants) in
+        Figma (various sizes supported) and click Export to generate React icon
+        components. Component sets will export each variant as a separate icon
+        component.
       </Text>
       <VerticalSpace space="medium" />
       <Button onClick={handleExport}>Export Icons</Button>
