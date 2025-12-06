@@ -18,17 +18,21 @@ A Figma plugin to export icon frames as React icon components for the `@workindi
 
 ## Usage
 
-1. In your Figma file, select one or more icon frames (must be 24x24 frames containing vector paths)
+1. In your Figma file, select one or more:
+   - Icon frames (must be 16x16 to 48x48 frames containing vector paths)
+   - Components (individual components)
+   - Component sets (with variants - each variant will be exported as a separate icon)
 2. Run the plugin: Plugins → Development → WorkIndia Icon Exporter
 3. Click "Export Icons" in the plugin UI
 4. The plugin will generate React icon component code
-5. Copy the generated code and paste it into your `@workindia/icons` package
+5. Click "Download ZIP File" to download all icons as a ZIP archive
 
-## Icon Frame Requirements
+## Icon Requirements
 
-- Frame must be exactly 24x24 pixels
-- Frame must contain a vector path (VECTOR node) inside
-- Frame name will be used to generate the component name (e.g., "Home" → "HomeIcon")
+- Frame/Component must be between 16x16 and 48x48 pixels
+- Must contain a vector path (VECTOR node) inside
+- Frame/Component name will be used to generate the component name (e.g., "Home" → "HomeIcon")
+- For component sets: Each variant will be exported as a separate icon component
 
 ## Generated Code Structure
 
