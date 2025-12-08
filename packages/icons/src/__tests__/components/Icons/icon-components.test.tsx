@@ -111,7 +111,8 @@ describe('Icon Components', () => {
         color: 'interactive.icon.primary',
       });
       const path = container.querySelector('path');
-      expect(path).toHaveAttribute('fill', 'interactive.icon.primary');
+      // Color token should be resolved to actual theme color value
+      expect(path).toHaveAttribute('fill', '#0066FF');
     });
 
     it('should apply custom color token (stroke icons)', () => {
@@ -119,7 +120,8 @@ describe('Icon Components', () => {
         color: 'interactive.icon.primary',
       });
       const path = container.querySelector('path');
-      expect(path).toHaveAttribute('stroke', 'interactive.icon.primary');
+      // Color token should be resolved to actual theme color value
+      expect(path).toHaveAttribute('stroke', '#0066FF');
     });
   });
 

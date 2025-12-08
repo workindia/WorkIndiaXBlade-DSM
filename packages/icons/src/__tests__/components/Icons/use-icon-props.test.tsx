@@ -87,14 +87,24 @@ describe('useIconProps', () => {
       expect(result.current.iconColor).toBe('currentColor');
     });
 
-    it('should return the color token when color is provided', () => {
+    it('should return the resolved theme color when color token is provided', () => {
       const { result } = renderHook(() =>
         useIconProps({
           color: 'interactive.icon.primary',
         } as unknown as IconProps),
       );
 
-      expect(result.current.iconColor).toBe('interactive.icon.primary');
+      expect(result.current.iconColor).toBe('#0066FF');
+    });
+
+    it('should return the resolved theme color for surface.icon.gray.normal', () => {
+      const { result } = renderHook(() =>
+        useIconProps({
+          color: 'surface.icon.gray.normal',
+        } as unknown as IconProps),
+      );
+
+      expect(result.current.iconColor).toBe('#6B7280');
     });
   });
 
@@ -109,7 +119,7 @@ describe('useIconProps', () => {
 
       expect(result.current.width).toBe('20px');
       expect(result.current.height).toBe('20px');
-      expect(result.current.iconColor).toBe('interactive.icon.primary');
+      expect(result.current.iconColor).toBe('#0066FF');
     });
   });
 });
