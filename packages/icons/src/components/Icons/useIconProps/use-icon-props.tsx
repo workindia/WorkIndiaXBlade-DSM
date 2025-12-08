@@ -15,7 +15,7 @@ function useIconProps({ size = 'medium', color = 'currentColor' }: IconProps): {
   width: `${number}px`;
   iconColor: string;
 } {
-  const { theme, colorScheme } = useTheme();
+  const { theme } = useTheme();
   const height = `${String(iconSizeMap[size])}px` as `${number}px`;
   const width = `${String(iconSizeMap[size])}px` as `${number}px`;
 
@@ -23,20 +23,9 @@ function useIconProps({ size = 'medium', color = 'currentColor' }: IconProps): {
   if (color === 'currentColor') {
     iconColor = 'currentColor';
   } else {
-    // Handle both resolved theme (theme.colors) and ThemeTokens structure (theme.colors.onLight/onDark)
-    // Blade's useBladeProvider resolves colors, but we need to handle both cases for safety
-    let colorsToSearch = theme.colors;
-
-    // Check if colors still has onLight/onDark structure (ThemeTokens format)
-    if ('onLight' in theme.colors || 'onDark' in theme.colors) {
-      // Use the appropriate color scheme branch
-      const colorMode = colorScheme === 'dark' ? 'onDark' : 'onLight';
-      colorsToSearch = (
-        theme.colors as { onLight?: unknown; onDark?: unknown }
-      )[colorMode] as typeof theme.colors;
-    }
-
-    const resolvedColor = getThemeColor(colorsToSearch, color);
+    // theme.colors is already resolved by Blade's useBladeProvider to the appropriate
+    // color scheme (onLight or onDark), so we can use it directly
+    const resolvedColor = getThemeColor(theme.colors, color);
     // Fall back to currentColor if color token couldn't be resolved
     iconColor = resolvedColor || 'currentColor';
   }
