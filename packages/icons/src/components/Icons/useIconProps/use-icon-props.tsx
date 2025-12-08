@@ -1,5 +1,7 @@
 import type { IconProps } from '../types';
 import { iconSizeMap } from './icon-size-map';
+import { useTheme } from '@workindia/dsm';
+import getThemeColor from './get-theme-color';
 
 /**
  * Hook to get the props for the Icon component
@@ -13,9 +15,18 @@ function useIconProps({ size = 'medium', color = 'currentColor' }: IconProps): {
   width: `${number}px`;
   iconColor: string;
 } {
+  const { theme } = useTheme();
   const height = `${String(iconSizeMap[size])}px` as `${number}px`;
   const width = `${String(iconSizeMap[size])}px` as `${number}px`;
-  const iconColor = color === 'currentColor' ? 'currentColor' : color;
+
+  let iconColor: string;
+  if (color === 'currentColor') {
+    iconColor = 'currentColor';
+  } else {
+    const resolvedColor = getThemeColor(theme.colors, color);
+    // Fall back to currentColor if color token couldn't be resolved
+    iconColor = resolvedColor || 'currentColor';
+  }
 
   return { height, width, iconColor };
 }
