@@ -39,4 +39,9 @@ const mockTheme = {
 
 export const useTheme = () => ({
   theme: mockTheme,
+  colorScheme: 'light' as const,
+  setColorScheme: () => {
+    // Mock function - no-op
+  },
+  platform: 'onDesktop' as const,
 });
