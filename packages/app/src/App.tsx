@@ -1487,6 +1487,189 @@ import { Colors } from '@workindia/tokens';`}
                   </Box>
                 </CardBody>
               </Card>
+
+              {/* Logo Section */}
+              <Card marginBottom="spacing.6">
+                <CardHeader>
+                  <CardHeaderLeading title="Logo & Wordmark" />
+                </CardHeader>
+                <CardBody>
+                  <Text marginBottom="spacing.4">
+                    WorkIndia brand logo and wordmark icons. Use the appropriate
+                    variant based on your background color.
+                  </Text>
+
+                  {/* Logo Icons */}
+                  <Box marginBottom="spacing.6">
+                    <Heading size="medium" marginBottom="spacing.4">
+                      Logo (24×24)
+                    </Heading>
+                    <Box
+                      display="grid"
+                      gridTemplateColumns={{
+                        base: 'repeat(1, 1fr)',
+                        s: 'repeat(2, 1fr)',
+                      }}
+                      gap="spacing.4"
+                    >
+                      {/* Logo on Light Background */}
+                      <Box
+                        padding="spacing.6"
+                        borderRadius="medium"
+                        borderWidth="thin"
+                        borderColor="surface.border.gray.subtle"
+                        backgroundColor="surface.background.gray.subtle"
+                        display="flex"
+                        flexDirection="column"
+                        alignItems="center"
+                        gap="spacing.3"
+                      >
+                        <Box
+                          padding="spacing.4"
+                          borderRadius="small"
+                          backgroundColor="surface.background.gray.subtle"
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                        >
+                          <Icons.WorkIndiaLogoOnLightIcon size="2xlarge" />
+                        </Box>
+                        <Text size="small" color="surface.text.gray.subtle">
+                          WorkIndiaLogoOnLightIcon
+                        </Text>
+                        <Text size="xsmall" color="surface.text.gray.muted">
+                          For light backgrounds
+                        </Text>
+                      </Box>
+
+                      {/* Logo on Dark Background */}
+                      <Box
+                        padding="spacing.6"
+                        borderRadius="medium"
+                        borderWidth="thin"
+                        borderColor="surface.border.gray.subtle"
+                        backgroundColor="overlay.background.subtle"
+                        display="flex"
+                        flexDirection="column"
+                        alignItems="center"
+                        gap="spacing.3"
+                      >
+                        <Box
+                          padding="spacing.4"
+                          borderRadius="small"
+                          backgroundColor="transparent"
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                        >
+                          <Icons.WorkIndiaLogoOnDarkIcon size="2xlarge" />
+                        </Box>
+                        <Text
+                          size="small"
+                          color="surface.text.staticWhite.subtle"
+                        >
+                          WorkIndiaLogoOnDarkIcon
+                        </Text>
+                        <Text
+                          size="xsmall"
+                          color="surface.text.staticWhite.muted"
+                        >
+                          For dark backgrounds
+                        </Text>
+                      </Box>
+                    </Box>
+                  </Box>
+
+                  {/* Wordmark Icons */}
+                  <Box>
+                    <Heading size="medium" marginBottom="spacing.4">
+                      Wordmark (172×25)
+                    </Heading>
+                    <Box
+                      display="grid"
+                      gridTemplateColumns={{
+                        base: 'repeat(1, 1fr)',
+                        s: 'repeat(2, 1fr)',
+                      }}
+                      gap="spacing.4"
+                    >
+                      {/* Wordmark on Light Background */}
+                      <Box
+                        padding="spacing.6"
+                        borderRadius="medium"
+                        borderWidth="thin"
+                        borderColor="surface.border.gray.subtle"
+                        backgroundColor="surface.background.gray.subtle"
+                        display="flex"
+                        flexDirection="column"
+                        alignItems="center"
+                        gap="spacing.3"
+                      >
+                        <Box
+                          padding="spacing.4"
+                          borderRadius="small"
+                          backgroundColor="surface.background.gray.subtle"
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                          width="100%"
+                        >
+                          <Icons.WorkIndiaWordmarkOnLightIcon
+                            size="2xlarge"
+                            testID="workindia-wordmark-on-light-icon"
+                          />
+                        </Box>
+                        <Text size="small" color="surface.text.gray.subtle">
+                          WorkIndiaWordmarkOnLightIcon
+                        </Text>
+                        <Text size="xsmall" color="surface.text.gray.muted">
+                          For light backgrounds
+                        </Text>
+                      </Box>
+
+                      {/* Wordmark on Dark Background */}
+                      <Box
+                        padding="spacing.6"
+                        borderRadius="medium"
+                        borderWidth="thin"
+                        borderColor="surface.border.gray.subtle"
+                        backgroundColor="overlay.background.subtle"
+                        display="flex"
+                        flexDirection="column"
+                        alignItems="center"
+                        gap="spacing.3"
+                      >
+                        <Box
+                          padding="spacing.4"
+                          borderRadius="small"
+                          backgroundColor="transparent"
+                          display="flex"
+                          alignItems="center"
+                          justifyContent="center"
+                          width="100%"
+                        >
+                          <Icons.WorkIndiaWordmarkOnDarkIcon
+                            size="2xlarge"
+                            testID="workindia-wordmark-on-dark-icon"
+                          />
+                        </Box>
+                        <Text
+                          size="small"
+                          color="surface.text.staticWhite.subtle"
+                        >
+                          WorkIndiaWordmarkOnDarkIcon
+                        </Text>
+                        <Text
+                          size="xsmall"
+                          color="surface.text.staticWhite.muted"
+                        >
+                          For dark backgrounds
+                        </Text>
+                      </Box>
+                    </Box>
+                  </Box>
+                </CardBody>
+              </Card>
             </Box>
           </TabPanel>
         </Tabs>
