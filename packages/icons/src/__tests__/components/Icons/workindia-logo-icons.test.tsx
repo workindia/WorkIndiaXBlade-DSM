@@ -4,11 +4,12 @@
 
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import WorkIndiaLogoOnLightIcon from '../../../components/Icons/WorkIndiaLogoOnLightIcon/work-india-logo-on-light-icon';
 import WorkIndiaLogoOnDarkIcon from '../../../components/Icons/WorkIndiaLogoOnDarkIcon/work-india-logo-on-dark-icon';
 import WorkIndiaWordmarkOnLightIcon from '../../../components/Icons/WorkIndiaWordmarkOnLightIcon/work-india-wordmark-on-light-icon';
 import WorkIndiaWordmarkOnDarkIcon from '../../../components/Icons/WorkIndiaWordmarkOnDarkIcon/work-india-wordmark-on-dark-icon';
-import type { IconSize } from '../../../components/Icons/types';
+import type { IconSize, IconComponent } from '../../../components/Icons/types';
 
 // Helper to render icons
 const renderIcon = (
@@ -26,7 +27,8 @@ describe('WorkIndia Logo and Wordmark Icons', () => {
     it('should render WorkIndiaLogoOnLightIcon', () => {
       const { container } = renderIcon(WorkIndiaLogoOnLightIcon);
       const svg = container.querySelector('svg');
-      expect(svg).toBeInTheDocument();
+      expect(svg).not.toBeNull();
+      expect(svg).toBeTruthy();
     });
 
     it('should have correct viewBox', () => {
@@ -36,9 +38,10 @@ describe('WorkIndia Logo and Wordmark Icons', () => {
     });
 
     it('should have componentId', () => {
-      expect(WorkIndiaLogoOnLightIcon.componentId).toBe(
-        'WorkIndiaLogoOnLightIcon',
-      );
+      expect(
+        (WorkIndiaLogoOnLightIcon as IconComponent & { componentId: string })
+          .componentId,
+      ).toBe('WorkIndiaLogoOnLightIcon');
     });
 
     it('should apply size prop', () => {
@@ -62,7 +65,8 @@ describe('WorkIndia Logo and Wordmark Icons', () => {
     it('should render WorkIndiaLogoOnDarkIcon', () => {
       const { container } = renderIcon(WorkIndiaLogoOnDarkIcon);
       const svg = container.querySelector('svg');
-      expect(svg).toBeInTheDocument();
+      expect(svg).not.toBeNull();
+      expect(svg).toBeTruthy();
     });
 
     it('should have correct viewBox', () => {
@@ -72,9 +76,10 @@ describe('WorkIndia Logo and Wordmark Icons', () => {
     });
 
     it('should have componentId', () => {
-      expect(WorkIndiaLogoOnDarkIcon.componentId).toBe(
-        'WorkIndiaLogoOnDarkIcon',
-      );
+      expect(
+        (WorkIndiaLogoOnDarkIcon as IconComponent & { componentId: string })
+          .componentId,
+      ).toBe('WorkIndiaLogoOnDarkIcon');
     });
 
     it('should apply size prop', () => {
@@ -91,7 +96,8 @@ describe('WorkIndia Logo and Wordmark Icons', () => {
     it('should render WorkIndiaWordmarkOnLightIcon', () => {
       const { container } = renderIcon(WorkIndiaWordmarkOnLightIcon);
       const svg = container.querySelector('svg');
-      expect(svg).toBeInTheDocument();
+      expect(svg).not.toBeNull();
+      expect(svg).toBeTruthy();
     });
 
     it('should have correct viewBox', () => {
@@ -101,9 +107,13 @@ describe('WorkIndia Logo and Wordmark Icons', () => {
     });
 
     it('should have componentId', () => {
-      expect(WorkIndiaWordmarkOnLightIcon.componentId).toBe(
-        'WorkIndiaWordmarkOnLightIcon',
-      );
+      expect(
+        (
+          WorkIndiaWordmarkOnLightIcon as IconComponent & {
+            componentId: string;
+          }
+        ).componentId,
+      ).toBe('WorkIndiaWordmarkOnLightIcon');
     });
 
     it('should apply size prop', () => {
@@ -111,7 +121,9 @@ describe('WorkIndia Logo and Wordmark Icons', () => {
         size: 'medium',
       });
       const svg = container.querySelector('svg');
-      expect(svg).toHaveAttribute('width', '16px');
+      // Wordmark has viewBox "0 0 172 25" with aspect ratio 172/25 = 6.88
+      // For medium size (16px height), width should be 16 * 6.88 = 110px (rounded)
+      expect(svg).toHaveAttribute('width', '110px');
       expect(svg).toHaveAttribute('height', '16px');
     });
   });
@@ -120,7 +132,8 @@ describe('WorkIndia Logo and Wordmark Icons', () => {
     it('should render WorkIndiaWordmarkOnDarkIcon', () => {
       const { container } = renderIcon(WorkIndiaWordmarkOnDarkIcon);
       const svg = container.querySelector('svg');
-      expect(svg).toBeInTheDocument();
+      expect(svg).not.toBeNull();
+      expect(svg).toBeTruthy();
     });
 
     it('should have correct viewBox', () => {
@@ -130,9 +143,13 @@ describe('WorkIndia Logo and Wordmark Icons', () => {
     });
 
     it('should have componentId', () => {
-      expect(WorkIndiaWordmarkOnDarkIcon.componentId).toBe(
-        'WorkIndiaWordmarkOnDarkIcon',
-      );
+      expect(
+        (
+          WorkIndiaWordmarkOnDarkIcon as IconComponent & {
+            componentId: string;
+          }
+        ).componentId,
+      ).toBe('WorkIndiaWordmarkOnDarkIcon');
     });
 
     it('should apply size prop', () => {
@@ -140,7 +157,9 @@ describe('WorkIndia Logo and Wordmark Icons', () => {
         size: '2xlarge',
       });
       const svg = container.querySelector('svg');
-      expect(svg).toHaveAttribute('width', '32px');
+      // Wordmark has viewBox "0 0 172 25" with aspect ratio 172/25 = 6.88
+      // For 2xlarge size (32px height), width should be 32 * 6.88 = 220px (rounded)
+      expect(svg).toHaveAttribute('width', '220px');
       expect(svg).toHaveAttribute('height', '32px');
     });
   });
@@ -150,36 +169,36 @@ describe('WorkIndia Logo and Wordmark Icons', () => {
       renderIcon(WorkIndiaLogoOnLightIcon, {
         testID: 'work-india-logo-on-light-test',
       });
-      expect(
-        screen.getByTestId('work-india-logo-on-light-test'),
-      ).toBeInTheDocument();
+      const element = screen.getByTestId('work-india-logo-on-light-test');
+      expect(element).not.toBeNull();
+      expect(element).toBeTruthy();
     });
 
     it('should apply testID to WorkIndiaLogoOnDarkIcon', () => {
       renderIcon(WorkIndiaLogoOnDarkIcon, {
         testID: 'work-india-logo-on-dark-test',
       });
-      expect(
-        screen.getByTestId('work-india-logo-on-dark-test'),
-      ).toBeInTheDocument();
+      const element = screen.getByTestId('work-india-logo-on-dark-test');
+      expect(element).not.toBeNull();
+      expect(element).toBeTruthy();
     });
 
     it('should apply testID to WorkIndiaWordmarkOnLightIcon', () => {
       renderIcon(WorkIndiaWordmarkOnLightIcon, {
         testID: 'work-india-wordmark-on-light-test',
       });
-      expect(
-        screen.getByTestId('work-india-wordmark-on-light-test'),
-      ).toBeInTheDocument();
+      const element = screen.getByTestId('work-india-wordmark-on-light-test');
+      expect(element).not.toBeNull();
+      expect(element).toBeTruthy();
     });
 
     it('should apply testID to WorkIndiaWordmarkOnDarkIcon', () => {
       renderIcon(WorkIndiaWordmarkOnDarkIcon, {
         testID: 'work-india-wordmark-on-dark-test',
       });
-      expect(
-        screen.getByTestId('work-india-wordmark-on-dark-test'),
-      ).toBeInTheDocument();
+      const element = screen.getByTestId('work-india-wordmark-on-dark-test');
+      expect(element).not.toBeNull();
+      expect(element).toBeTruthy();
     });
   });
 });
