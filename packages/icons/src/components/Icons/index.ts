@@ -288,6 +288,8 @@ export { default as LightbulbIcon } from './LightbulbIcon/lightbulb-icon';
 export { default as LinkBreakIcon } from './LinkBreakIcon/link-break-icon';
 export { default as LinkIcon } from './LinkIcon/link-icon';
 export { default as ListBulletsIcon } from './ListBulletsIcon/list-bullets-icon';
+export { default as WorkIndiaLogoOnDarkIcon } from './WorkIndiaLogoOnDarkIcon/work-india-logo-on-dark-icon';
+export { default as WorkIndiaLogoOnLightIcon } from './WorkIndiaLogoOnLightIcon/work-india-logo-on-light-icon';
 export { default as ListChecksIcon } from './ListChecksIcon/list-checks-icon';
 export { default as ListIcon } from './ListIcon/list-icon';
 export { default as ListPlusIcon } from './ListPlusIcon/list-plus-icon';
@@ -554,6 +556,8 @@ export { default as WifiHighFillIcon } from './WifiHighFillIcon/wifi-high-fill-i
 export { default as WifiHighIcon } from './WifiHighIcon/wifi-high-icon';
 export { default as WrenchFillIcon } from './WrenchFillIcon/wrench-fill-icon';
 export { default as WrenchIcon } from './WrenchIcon/wrench-icon';
+export { default as WorkIndiaWordmarkOnDarkIcon } from './WorkIndiaWordmarkOnDarkIcon/work-india-wordmark-on-dark-icon';
+export { default as WorkIndiaWordmarkOnLightIcon } from './WorkIndiaWordmarkOnLightIcon/work-india-wordmark-on-light-icon';
 export { default as XCircleFillIcon } from './XCircleFillIcon/xcircle-fill-icon';
 export { default as XFillIcon } from './XFillIcon/xfill-icon';
 export { default as XIcon } from './XIcon/xicon';
