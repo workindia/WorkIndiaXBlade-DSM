@@ -1,20 +1,25 @@
 import { Svg, Path, Rect } from '../../_Svg';
 import type { IconComponent } from '../types';
-import useIconProps from '../useIconProps/use-icon-props';
+import useRectangularIconProps from '../useIconProps/use-rectangular-icon-props';
 import { assignWithoutSideEffects } from '@workindia/dsm';
 
 const _WorkIndiaWordmarkOnDarkIcon: IconComponent = ({
   size,
   ...styledProps
 }) => {
-  const { height, width } = useIconProps({ size });
+  const viewBox = '0 0 172 25';
+
+  const { height, width } = useRectangularIconProps({
+    size,
+    viewBox,
+  });
 
   return (
     <Svg
       {...styledProps}
       width={width}
       height={height}
-      viewBox="0 0 172 25"
+      viewBox={viewBox}
       fill="none"
     >
       <Path

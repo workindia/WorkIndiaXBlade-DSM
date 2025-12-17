@@ -564,3 +564,4 @@ export { default as XIcon } from './XIcon/xicon';
 
 export * from './types';
 export { default as useIconProps } from './useIconProps/use-icon-props';
+export { default as useRectangularIconProps } from './useIconProps/use-rectangular-icon-props';
