@@ -32,6 +32,7 @@ import {
   TabItem,
   TabPanel,
   Code,
+  SearchInputWithAdd,
 } from '@workindia/dsm';
 import {
   Colors,
@@ -130,6 +131,17 @@ export const App = () => {
   const [radioValue, setRadioValue] = useState('option1');
   const [switchChecked, setSwitchChecked] = useState(false);
   const [activeTab, setActiveTab] = useState('tokens');
+
+  // SearchInputWithAdd demo state
+  const [availableTags, setAvailableTags] = useState([
+    { id: '1', title: 'React' },
+    { id: '2', title: 'TypeScript' },
+    { id: '3', title: 'JavaScript' },
+    { id: '4', title: 'Node.js' },
+    { id: '5', title: 'Design System' },
+    { id: '6', title: 'UI/UX' },
+  ]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
   return (
     <WorkIndiaProvider colorScheme="light">
@@ -1334,6 +1346,66 @@ export const App = () => {
                           }}
                         />
                       </Box>
+                    </Box>
+                  </Box>
+
+                  {/* SearchInputWithAdd */}
+                  <Box marginBottom="spacing.5">
+                    <Heading size="medium" marginBottom="spacing.3">
+                      SearchInputWithAdd (Custom Component)
+                    </Heading>
+                    <Text
+                      marginBottom="spacing.3"
+                      color="surface.text.gray.subtle"
+                    >
+                      A custom extension of SearchInput that allows adding new
+                      items when no results are found.
+                    </Text>
+                    <Box display="flex" flexDirection="column" gap="spacing.4">
+                      <SearchInputWithAdd
+                        label="Search or Add Tags"
+                        placeholder="Search for tags..."
+                        items={availableTags}
+                        onItemSelect={(tag) => {
+                          if (!selectedTags.includes(tag.id)) {
+                            setSelectedTags([...selectedTags, tag.id]);
+                          }
+                        }}
+                        onAddNewItem={(tagName) => {
+                          const newTag = {
+                            id: `tag-${String(Date.now())}`,
+                            title: tagName,
+                          };
+                          setAvailableTags([...availableTags, newTag]);
+                          setSelectedTags([...selectedTags, newTag.id]);
+                        }}
+                        addNewItemText='+ Add tag "{searchTerm}"'
+                        name="tagSearch"
+                      />
+
+                      {selectedTags.length > 0 && (
+                        <Box>
+                          <Text
+                            size="small"
+                            weight="semibold"
+                            marginBottom="spacing.2"
+                          >
+                            Selected Tags:
+                          </Text>
+                          <Box display="flex" flexWrap="wrap" gap="spacing.2">
+                            {selectedTags.map((tagId) => {
+                              const tag = availableTags.find(
+                                (t) => t.id === tagId,
+                              );
+                              return tag ? (
+                                <Badge key={tagId} color="neutral">
+                                  {tag.title}
+                                </Badge>
+                              ) : null;
+                            })}
+                          </Box>
+                        </Box>
+                      )}
                     </Box>
                   </Box>
 
