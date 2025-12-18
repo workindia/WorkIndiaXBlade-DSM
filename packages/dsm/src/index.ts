@@ -475,3 +475,7 @@ export type {
 // Export utilities
 export { assignWithoutSideEffects } from './utils/assign-without-side-effects';
 export type { DotNotationToken } from './utils/dot-notation-token';
+
+// Custom WorkIndia components
+export { SearchInputWithAdd } from './components/search-input-with-add';
+export type { SearchInputWithAddProps } from './components/search-input-with-add';
