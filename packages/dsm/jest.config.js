@@ -38,6 +38,7 @@ module.exports = {
     '!src/index.ts',
     '!src/**/index.ts',
     '!src/**/__tests__/**',
+    '!src/utils/dot-notation-token.ts',
   ],
   coverageDirectory: '<rootDir>/coverage',
   coveragePathIgnorePatterns: ['/node_modules/', '/dist/'],
