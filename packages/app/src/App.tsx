@@ -43,6 +43,7 @@ import {
   Elevation,
   type ElevationLevels,
 } from '@workindia/tokens';
+import { workIndiaTheme } from '@workindia/dsm';
 import * as Icons from '@workindia/icons';
 import type { IconComponent } from '@workindia/icons';
 
@@ -179,21 +180,22 @@ export const App = () => {
                 </CardHeader>
                 <CardBody>
                   <Text marginBottom="spacing.4">
-                    All colors are locked down to ensure design consistency.
-                    Each color provides a full gradient scale.
+                    Theme colors are semantic tokens that are used throughout
+                    the design system components. These colors adapt to the
+                    selected color scheme (light/dark mode).
                   </Text>
 
-                  {/* Chromatic Colors */}
+                  {/* Surface Colors */}
                   <Box marginBottom="spacing.5">
                     <Heading size="medium" marginBottom="spacing.3">
-                      Chromatic Colors
+                      Surface Colors
                     </Heading>
                     <Text
                       marginBottom="spacing.4"
                       color="surface.text.gray.subtle"
                     >
-                      All chromatic colors include shades from 50-1000 and alpha
-                      variants (a50, a100, a150, a200, a400).
+                      Surface colors are used for backgrounds, text, and borders
+                      in the main content areas.
                     </Text>
                     <Box
                       display="flex"
@@ -201,10 +203,10 @@ export const App = () => {
                       gap="spacing.4"
                       flexWrap="wrap"
                     >
-                      {/* Brand */}
+                      {/* Surface Background */}
                       <Box>
                         <Text weight="semibold" marginBottom="spacing.2">
-                          Brand
+                          surface.background.primary
                         </Text>
                         <Box
                           display="flex"
@@ -215,39 +217,40 @@ export const App = () => {
                           borderWidth="thin"
                           borderColor="surface.border.gray.subtle"
                         >
-                          {Object.entries(Colors.chromatic.brand).map(
-                            ([shade, color]: [string, string]) => {
-                              const textColor = getContrastColor(color);
-                              return (
-                                <div
-                                  key={shade}
-                                  style={{
-                                    backgroundColor: color,
-                                    color: textColor,
-                                    padding: '8px',
-                                    minWidth: '140px',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <Text size="small" color="currentColor">
-                                    {shade}
-                                  </Text>
-                                  <Text size="small" color="currentColor">
-                                    {color}
-                                  </Text>
-                                </div>
-                              );
-                            },
-                          )}
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.surface.background
+                              .primary,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
                         </Box>
                       </Box>
 
-                      {/* Rose */}
+                      {/* Surface Text Gray */}
                       <Box>
                         <Text weight="semibold" marginBottom="spacing.2">
-                          Rose
+                          surface.text.gray
                         </Text>
                         <Box
                           display="flex"
@@ -258,39 +261,39 @@ export const App = () => {
                           borderWidth="thin"
                           borderColor="surface.border.gray.subtle"
                         >
-                          {Object.entries(Colors.chromatic.rose).map(
-                            ([shade, color]: [string, string]) => {
-                              const textColor = getContrastColor(color);
-                              return (
-                                <div
-                                  key={shade}
-                                  style={{
-                                    backgroundColor: color,
-                                    color: textColor,
-                                    padding: '8px',
-                                    minWidth: '140px',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <Text size="small" color="currentColor">
-                                    {shade}
-                                  </Text>
-                                  <Text size="small" color="currentColor">
-                                    {color}
-                                  </Text>
-                                </div>
-                              );
-                            },
-                          )}
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.surface.text.gray,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
                         </Box>
                       </Box>
 
-                      {/* Cerulean */}
+                      {/* Surface Text StaticBlack */}
                       <Box>
                         <Text weight="semibold" marginBottom="spacing.2">
-                          Cerulean
+                          surface.text.staticBlack
                         </Text>
                         <Box
                           display="flex"
@@ -301,39 +304,40 @@ export const App = () => {
                           borderWidth="thin"
                           borderColor="surface.border.gray.subtle"
                         >
-                          {Object.entries(Colors.chromatic.cerulean).map(
-                            ([shade, color]: [string, string]) => {
-                              const textColor = getContrastColor(color);
-                              return (
-                                <div
-                                  key={shade}
-                                  style={{
-                                    backgroundColor: color,
-                                    color: textColor,
-                                    padding: '8px',
-                                    minWidth: '140px',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <Text size="small" color="currentColor">
-                                    {shade}
-                                  </Text>
-                                  <Text size="small" color="currentColor">
-                                    {color}
-                                  </Text>
-                                </div>
-                              );
-                            },
-                          )}
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.surface.text
+                              .staticBlack,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
                         </Box>
                       </Box>
 
-                      {/* Emerald */}
+                      {/* Surface Text StaticWhite */}
                       <Box>
                         <Text weight="semibold" marginBottom="spacing.2">
-                          Emerald
+                          surface.text.staticWhite
                         </Text>
                         <Box
                           display="flex"
@@ -344,190 +348,60 @@ export const App = () => {
                           borderWidth="thin"
                           borderColor="surface.border.gray.subtle"
                         >
-                          {Object.entries(Colors.chromatic.emerald).map(
-                            ([shade, color]: [string, string]) => {
-                              const textColor = getContrastColor(color);
-                              return (
-                                <div
-                                  key={shade}
-                                  style={{
-                                    backgroundColor: color,
-                                    color: textColor,
-                                    padding: '8px',
-                                    minWidth: '140px',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <Text size="small" color="currentColor">
-                                    {shade}
-                                  </Text>
-                                  <Text size="small" color="currentColor">
-                                    {color}
-                                  </Text>
-                                </div>
-                              );
-                            },
-                          )}
-                        </Box>
-                      </Box>
-
-                      {/* Crimson */}
-                      <Box>
-                        <Text weight="semibold" marginBottom="spacing.2">
-                          Crimson
-                        </Text>
-                        <Box
-                          display="flex"
-                          flexDirection="column"
-                          gap="spacing.1"
-                          borderRadius="small"
-                          overflow="hidden"
-                          borderWidth="thin"
-                          borderColor="surface.border.gray.subtle"
-                        >
-                          {Object.entries(Colors.chromatic.crimson).map(
-                            ([shade, color]: [string, string]) => {
-                              const textColor = getContrastColor(color);
-                              return (
-                                <div
-                                  key={shade}
-                                  style={{
-                                    backgroundColor: color,
-                                    color: textColor,
-                                    padding: '8px',
-                                    minWidth: '140px',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <Text size="small" color="currentColor">
-                                    {shade}
-                                  </Text>
-                                  <Text size="small" color="currentColor">
-                                    {color}
-                                  </Text>
-                                </div>
-                              );
-                            },
-                          )}
-                        </Box>
-                      </Box>
-
-                      {/* Amber */}
-                      <Box>
-                        <Text weight="semibold" marginBottom="spacing.2">
-                          Amber
-                        </Text>
-                        <Box
-                          display="flex"
-                          flexDirection="column"
-                          gap="spacing.1"
-                          borderRadius="small"
-                          overflow="hidden"
-                          borderWidth="thin"
-                          borderColor="surface.border.gray.subtle"
-                        >
-                          {Object.entries(Colors.chromatic.amber).map(
-                            ([shade, color]: [string, string]) => {
-                              const textColor = getContrastColor(color);
-                              return (
-                                <div
-                                  key={shade}
-                                  style={{
-                                    backgroundColor: color,
-                                    color: textColor,
-                                    padding: '8px',
-                                    minWidth: '140px',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <Text size="small" color="currentColor">
-                                    {shade}
-                                  </Text>
-                                  <Text size="small" color="currentColor">
-                                    {color}
-                                  </Text>
-                                </div>
-                              );
-                            },
-                          )}
-                        </Box>
-                      </Box>
-
-                      {/* Sky */}
-                      <Box>
-                        <Text weight="semibold" marginBottom="spacing.2">
-                          Sky
-                        </Text>
-                        <Box
-                          display="flex"
-                          flexDirection="column"
-                          gap="spacing.1"
-                          borderRadius="small"
-                          overflow="hidden"
-                          borderWidth="thin"
-                          borderColor="surface.border.gray.subtle"
-                        >
-                          {Object.entries(Colors.chromatic.sky).map(
-                            ([shade, color]: [string, string]) => {
-                              const textColor = getContrastColor(color);
-                              return (
-                                <div
-                                  key={shade}
-                                  style={{
-                                    backgroundColor: color,
-                                    color: textColor,
-                                    padding: '8px',
-                                    minWidth: '140px',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <Text size="small" color="currentColor">
-                                    {shade}
-                                  </Text>
-                                  <Text size="small" color="currentColor">
-                                    {color}
-                                  </Text>
-                                </div>
-                              );
-                            },
-                          )}
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.surface.text
+                              .staticWhite,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
                         </Box>
                       </Box>
                     </Box>
                   </Box>
 
-                  {/* Neutral Colors */}
-                  <Box>
+                  {/* Interactive Colors */}
+                  <Box marginBottom="spacing.5">
                     <Heading size="medium" marginBottom="spacing.3">
-                      Neutral Colors
+                      Interactive Colors
                     </Heading>
                     <Text
                       marginBottom="spacing.4"
                       color="surface.text.gray.subtle"
                     >
-                      Neutral colors include light and dark scales with shades
-                      from 0-1300 and alpha variants (a25, a50, a100, a200,
-                      a400).
+                      Interactive colors are used for buttons, links, and other
+                      interactive elements.
                     </Text>
                     <Box
                       display="flex"
                       flexDirection="row"
                       gap="spacing.4"
                       flexWrap="wrap"
-                      alignItems="flex-start"
                     >
-                      {/* Neutral Light */}
+                      {/* Interactive Background Primary */}
                       <Box>
                         <Text weight="semibold" marginBottom="spacing.2">
-                          Neutral Light
+                          interactive.background.primary
                         </Text>
                         <Box
                           display="flex"
@@ -537,42 +411,41 @@ export const App = () => {
                           overflow="hidden"
                           borderWidth="thin"
                           borderColor="surface.border.gray.subtle"
-                          minHeight="600px"
-                          overflowY="auto"
                         >
-                          {Object.entries(Colors.neutral.light).map(
-                            ([shade, color]: [string, string]) => {
-                              const textColor = getContrastColor(color);
-                              return (
-                                <div
-                                  key={shade}
-                                  style={{
-                                    backgroundColor: color,
-                                    color: textColor,
-                                    padding: '8px',
-                                    minWidth: '140px',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <Text size="small" color="currentColor">
-                                    {shade}
-                                  </Text>
-                                  <Text size="small" color="currentColor">
-                                    {color}
-                                  </Text>
-                                </div>
-                              );
-                            },
-                          )}
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.interactive.background
+                              .primary,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
                         </Box>
                       </Box>
 
-                      {/* Neutral Dark */}
+                      {/* Interactive Border Primary */}
                       <Box>
                         <Text weight="semibold" marginBottom="spacing.2">
-                          Neutral Dark
+                          interactive.border.primary
                         </Text>
                         <Box
                           display="flex"
@@ -582,49 +455,41 @@ export const App = () => {
                           overflow="hidden"
                           borderWidth="thin"
                           borderColor="surface.border.gray.subtle"
-                          minHeight="600px"
-                          overflowY="auto"
                         >
-                          {Object.entries(Colors.neutral.dark).map(
-                            ([shade, color]: [string, string]) => {
-                              const textColor = getContrastColor(color);
-                              return (
-                                <div
-                                  key={shade}
-                                  style={{
-                                    backgroundColor: color,
-                                    color: textColor,
-                                    padding: '8px',
-                                    minWidth: '140px',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <Text size="small" color="currentColor">
-                                    {shade}
-                                  </Text>
-                                  <Text size="small" color="currentColor">
-                                    {color}
-                                  </Text>
-                                </div>
-                              );
-                            },
-                          )}
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.interactive.border
+                              .primary,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
                         </Box>
                       </Box>
 
-                      {/* Black & White */}
+                      {/* Interactive Text Primary */}
                       <Box>
                         <Text weight="semibold" marginBottom="spacing.2">
-                          Black & White
-                        </Text>
-                        <Text
-                          marginBottom="spacing.4"
-                          color="surface.text.gray.subtle"
-                        >
-                          Black and white colors with transparency shades
-                          (10-500).
+                          interactive.text.primary
                         </Text>
                         <Box
                           display="flex"
@@ -635,58 +500,449 @@ export const App = () => {
                           borderWidth="thin"
                           borderColor="surface.border.gray.subtle"
                         >
-                          {Object.entries(Colors.neutral.blackNWhite.black).map(
-                            ([shade, color]: [string, string]) => {
-                              const textColor = getContrastColor(color);
-                              return (
-                                <div
-                                  key={`black-${shade}`}
-                                  style={{
-                                    backgroundColor: color,
-                                    color: textColor,
-                                    padding: '8px',
-                                    minWidth: '140px',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <Text size="small" color="currentColor">
-                                    black-{shade}
-                                  </Text>
-                                  <Text size="small" color="currentColor">
-                                    {color}
-                                  </Text>
-                                </div>
-                              );
-                            },
-                          )}
-                          {Object.entries(Colors.neutral.blackNWhite.white).map(
-                            ([shade, color]: [string, string]) => {
-                              const textColor = getContrastColor(color);
-                              return (
-                                <div
-                                  key={`white-${shade}`}
-                                  style={{
-                                    backgroundColor: color,
-                                    color: textColor,
-                                    padding: '8px',
-                                    minWidth: '140px',
-                                    display: 'flex',
-                                    justifyContent: 'space-between',
-                                    alignItems: 'center',
-                                  }}
-                                >
-                                  <Text size="small" color="currentColor">
-                                    white-{shade}
-                                  </Text>
-                                  <Text size="small" color="currentColor">
-                                    {color}
-                                  </Text>
-                                </div>
-                              );
-                            },
-                          )}
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.interactive.text
+                              .primary,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
+                        </Box>
+                      </Box>
+
+                      {/* Interactive Icon Primary */}
+                      <Box>
+                        <Text weight="semibold" marginBottom="spacing.2">
+                          interactive.icon.primary
+                        </Text>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          gap="spacing.1"
+                          borderRadius="small"
+                          overflow="hidden"
+                          borderWidth="thin"
+                          borderColor="surface.border.gray.subtle"
+                        >
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.interactive.icon
+                              .primary,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
+
+                  {/* Feedback Colors */}
+                  <Box marginBottom="spacing.5">
+                    <Heading size="medium" marginBottom="spacing.3">
+                      Feedback Colors
+                    </Heading>
+                    <Text
+                      marginBottom="spacing.4"
+                      color="surface.text.gray.subtle"
+                    >
+                      Feedback colors are used for alerts, badges, and status
+                      indicators to convey success, error, or other states.
+                    </Text>
+                    <Box
+                      display="flex"
+                      flexDirection="row"
+                      gap="spacing.4"
+                      flexWrap="wrap"
+                    >
+                      {/* Feedback Background Positive */}
+                      <Box>
+                        <Text weight="semibold" marginBottom="spacing.2">
+                          feedback.background.positive
+                        </Text>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          gap="spacing.1"
+                          borderRadius="small"
+                          overflow="hidden"
+                          borderWidth="thin"
+                          borderColor="surface.border.gray.subtle"
+                        >
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.feedback.background
+                              .positive,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
+                        </Box>
+                      </Box>
+
+                      {/* Feedback Background Negative */}
+                      <Box>
+                        <Text weight="semibold" marginBottom="spacing.2">
+                          feedback.background.negative
+                        </Text>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          gap="spacing.1"
+                          borderRadius="small"
+                          overflow="hidden"
+                          borderWidth="thin"
+                          borderColor="surface.border.gray.subtle"
+                        >
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.feedback.background
+                              .negative,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
+                        </Box>
+                      </Box>
+
+                      {/* Feedback Text Positive */}
+                      <Box>
+                        <Text weight="semibold" marginBottom="spacing.2">
+                          feedback.text.positive
+                        </Text>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          gap="spacing.1"
+                          borderRadius="small"
+                          overflow="hidden"
+                          borderWidth="thin"
+                          borderColor="surface.border.gray.subtle"
+                        >
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.feedback.text
+                              .positive,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
+                        </Box>
+                      </Box>
+
+                      {/* Feedback Text Negative */}
+                      <Box>
+                        <Text weight="semibold" marginBottom="spacing.2">
+                          feedback.text.negative
+                        </Text>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          gap="spacing.1"
+                          borderRadius="small"
+                          overflow="hidden"
+                          borderWidth="thin"
+                          borderColor="surface.border.gray.subtle"
+                        >
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.feedback.text
+                              .negative,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
+                        </Box>
+                      </Box>
+
+                      {/* Feedback Border Positive */}
+                      <Box>
+                        <Text weight="semibold" marginBottom="spacing.2">
+                          feedback.border.positive
+                        </Text>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          gap="spacing.1"
+                          borderRadius="small"
+                          overflow="hidden"
+                          borderWidth="thin"
+                          borderColor="surface.border.gray.subtle"
+                        >
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.feedback.border
+                              .positive,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
+                        </Box>
+                      </Box>
+
+                      {/* Feedback Border Negative */}
+                      <Box>
+                        <Text weight="semibold" marginBottom="spacing.2">
+                          feedback.border.negative
+                        </Text>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          gap="spacing.1"
+                          borderRadius="small"
+                          overflow="hidden"
+                          borderWidth="thin"
+                          borderColor="surface.border.gray.subtle"
+                        >
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.feedback.border
+                              .negative,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
+                        </Box>
+                      </Box>
+
+                      {/* Feedback Icon Positive */}
+                      <Box>
+                        <Text weight="semibold" marginBottom="spacing.2">
+                          feedback.icon.positive
+                        </Text>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          gap="spacing.1"
+                          borderRadius="small"
+                          overflow="hidden"
+                          borderWidth="thin"
+                          borderColor="surface.border.gray.subtle"
+                        >
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.feedback.icon
+                              .positive,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
+                        </Box>
+                      </Box>
+
+                      {/* Feedback Icon Negative */}
+                      <Box>
+                        <Text weight="semibold" marginBottom="spacing.2">
+                          feedback.icon.negative
+                        </Text>
+                        <Box
+                          display="flex"
+                          flexDirection="column"
+                          gap="spacing.1"
+                          borderRadius="small"
+                          overflow="hidden"
+                          borderWidth="thin"
+                          borderColor="surface.border.gray.subtle"
+                        >
+                          {Object.entries(
+                            workIndiaTheme.colors.onLight.feedback.icon
+                              .negative,
+                          ).map(([key, value]: [string, string]) => {
+                            const textColor = getContrastColor(value);
+                            return (
+                              <div
+                                key={key}
+                                style={{
+                                  backgroundColor: value,
+                                  color: textColor,
+                                  padding: '8px',
+                                  minWidth: '200px',
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <Text size="small" color="currentColor">
+                                  {key}
+                                </Text>
+                                <Text size="small" color="currentColor">
+                                  {value}
+                                </Text>
+                              </div>
+                            );
+                          })}
                         </Box>
                       </Box>
                     </Box>
