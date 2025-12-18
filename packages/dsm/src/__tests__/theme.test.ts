@@ -166,4 +166,191 @@ describe('workIndiaTheme', () => {
       expect(typeof workIndiaTheme.spacing).toBe('object');
     });
   });
+
+  describe('Typography tokens', () => {
+    it('should have typography property', () => {
+      expect(workIndiaTheme.typography).toBeDefined();
+      expect(typeof workIndiaTheme.typography).toBe('object');
+    });
+
+    it('should have onDesktop typography', () => {
+      expect(workIndiaTheme.typography.onDesktop).toBeDefined();
+      expect(workIndiaTheme.typography.onDesktop.fonts).toBeDefined();
+    });
+
+    it('should have onMobile typography', () => {
+      expect(workIndiaTheme.typography.onMobile).toBeDefined();
+      expect(workIndiaTheme.typography.onMobile.fonts).toBeDefined();
+    });
+
+    it('should have correct font families', () => {
+      const { onDesktop, onMobile } = workIndiaTheme.typography;
+
+      // Desktop fonts
+      expect(onDesktop.fonts.family).toBeDefined();
+      expect(onDesktop.fonts.family.text).toBeDefined();
+      expect(onDesktop.fonts.family.heading).toBeDefined();
+      expect(onDesktop.fonts.family.code).toBeDefined();
+
+      // Mobile fonts
+      expect(onMobile.fonts.family).toBeDefined();
+      expect(onMobile.fonts.family.text).toBeDefined();
+      expect(onMobile.fonts.family.heading).toBeDefined();
+      expect(onMobile.fonts.family.code).toBeDefined();
+    });
+  });
+
+  describe('Dark mode feedback colors', () => {
+    it('should have correct positive border colors in dark mode', () => {
+      const positiveBorder =
+        workIndiaTheme.colors.onDark.feedback.border.positive;
+
+      expect(positiveBorder.subtle).toBe(Colors.chromatic.emerald[50]);
+      expect(positiveBorder.intense).toBe(Colors.chromatic.emerald[500]);
+    });
+
+    it('should have correct negative border colors in dark mode', () => {
+      const negativeBorder =
+        workIndiaTheme.colors.onDark.feedback.border.negative;
+
+      expect(negativeBorder.subtle).toBe(Colors.chromatic.crimson[50]);
+      expect(negativeBorder.intense).toBe(Colors.chromatic.crimson[500]);
+    });
+
+    it('should have correct positive text colors in dark mode', () => {
+      const positiveText = workIndiaTheme.colors.onDark.feedback.text.positive;
+
+      expect(positiveText.subtle).toBe(Colors.chromatic.emerald[50]);
+      expect(positiveText.intense).toBe(Colors.chromatic.emerald[500]);
+    });
+
+    it('should have correct negative text colors in dark mode', () => {
+      const negativeText = workIndiaTheme.colors.onDark.feedback.text.negative;
+
+      expect(negativeText.subtle).toBe(Colors.chromatic.crimson[50]);
+      expect(negativeText.intense).toBe(Colors.chromatic.crimson[500]);
+    });
+
+    it('should have correct positive icon colors in dark mode', () => {
+      const positiveIcon = workIndiaTheme.colors.onDark.feedback.icon.positive;
+
+      expect(positiveIcon.subtle).toBe(Colors.chromatic.emerald[50]);
+      expect(positiveIcon.intense).toBe(Colors.chromatic.emerald[500]);
+    });
+
+    it('should have correct negative icon colors in dark mode', () => {
+      const negativeIcon = workIndiaTheme.colors.onDark.feedback.icon.negative;
+
+      expect(negativeIcon.subtle).toBe(Colors.chromatic.crimson[50]);
+      expect(negativeIcon.intense).toBe(Colors.chromatic.crimson[500]);
+    });
+
+    it('should have correct dark mode surface background colors', () => {
+      const surfaceBg = workIndiaTheme.colors.onDark.surface.background.primary;
+
+      expect(surfaceBg.subtle).toBe(Colors.chromatic.brand[50]);
+      expect(surfaceBg.intense).toBe(Colors.chromatic.brand[500]);
+    });
+
+    it('should have correct dark mode surface text colors', () => {
+      const grayText = workIndiaTheme.colors.onDark.surface.text.gray;
+
+      expect(grayText.normal).toBe(Colors.neutral.light[900]);
+      expect(grayText.subtle).toBe(Colors.neutral.light[700]);
+    });
+
+    it('should have correct dark mode staticBlack text colors', () => {
+      const staticBlackText =
+        workIndiaTheme.colors.onDark.surface.text.staticBlack;
+
+      expect(staticBlackText.normal).toBe(
+        Colors.neutral.blackNWhite.black[500],
+      );
+    });
+
+    it('should have correct dark mode interactive colors', () => {
+      const primary =
+        workIndiaTheme.colors.onDark.interactive.background.primary;
+
+      expect(primary.default).toBe(Colors.chromatic.brand[500]);
+      expect(primary.highlighted).toBe(Colors.chromatic.brand[700]);
+    });
+
+    it('should have correct dark mode interactive border colors', () => {
+      const primaryBorder =
+        workIndiaTheme.colors.onDark.interactive.border.primary;
+
+      expect(primaryBorder.default).toBe(Colors.chromatic.brand[500]);
+      expect(primaryBorder.highlighted).toBe(Colors.chromatic.brand[700]);
+    });
+
+    it('should have correct dark mode interactive text colors', () => {
+      const primaryText = workIndiaTheme.colors.onDark.interactive.text.primary;
+
+      expect(primaryText.normal).toBe(Colors.chromatic.brand[500]);
+      expect(primaryText.subtle).toBe(Colors.chromatic.brand[700]);
+    });
+
+    it('should have correct dark mode interactive icon colors', () => {
+      const primaryIcon = workIndiaTheme.colors.onDark.interactive.icon.primary;
+
+      expect(primaryIcon.normal).toBe(Colors.chromatic.brand[500]);
+      expect(primaryIcon.subtle).toBe(Colors.chromatic.brand[700]);
+    });
+  });
+
+  describe('Light mode feedback colors - extended', () => {
+    it('should have correct positive border colors in light mode', () => {
+      const positiveBorder =
+        workIndiaTheme.colors.onLight.feedback.border.positive;
+
+      expect(positiveBorder.subtle).toBe(Colors.chromatic.emerald[200]);
+      expect(positiveBorder.intense).toBe(Colors.chromatic.emerald[500]);
+    });
+
+    it('should have correct negative border colors in light mode', () => {
+      const negativeBorder =
+        workIndiaTheme.colors.onLight.feedback.border.negative;
+
+      expect(negativeBorder.subtle).toBe(Colors.chromatic.crimson[200]);
+      expect(negativeBorder.intense).toBe(Colors.chromatic.crimson[500]);
+    });
+
+    it('should have correct positive text colors in light mode', () => {
+      const positiveText = workIndiaTheme.colors.onLight.feedback.text.positive;
+
+      expect(positiveText.subtle).toBe(Colors.chromatic.emerald[700]);
+      expect(positiveText.intense).toBe(Colors.chromatic.emerald[900]);
+    });
+
+    it('should have correct negative text colors in light mode', () => {
+      const negativeText = workIndiaTheme.colors.onLight.feedback.text.negative;
+
+      expect(negativeText.subtle).toBe(Colors.chromatic.crimson[700]);
+      expect(negativeText.intense).toBe(Colors.chromatic.crimson[900]);
+    });
+
+    it('should have correct positive icon colors in light mode', () => {
+      const positiveIcon = workIndiaTheme.colors.onLight.feedback.icon.positive;
+
+      expect(positiveIcon.subtle).toBe(Colors.chromatic.emerald[500]);
+      expect(positiveIcon.intense).toBe(Colors.chromatic.emerald[700]);
+    });
+
+    it('should have correct negative icon colors in light mode', () => {
+      const negativeIcon = workIndiaTheme.colors.onLight.feedback.icon.negative;
+
+      expect(negativeIcon.subtle).toBe(Colors.chromatic.crimson[500]);
+      expect(negativeIcon.intense).toBe(Colors.chromatic.crimson[700]);
+    });
+
+    it('should have correct staticBlack text colors in light mode', () => {
+      const staticBlackText =
+        workIndiaTheme.colors.onLight.surface.text.staticBlack;
+
+      expect(staticBlackText.normal).toBe(
+        Colors.neutral.blackNWhite.black[500],
+      );
+    });
+  });
 });
