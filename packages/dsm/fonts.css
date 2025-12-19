@@ -3,3 +3,9 @@
  */
 @import '@razorpay/blade/fonts.css';
 
+/* Global CSS Reset for proper box model calculations */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

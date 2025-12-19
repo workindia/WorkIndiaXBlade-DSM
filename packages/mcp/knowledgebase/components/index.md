@@ -66,6 +66,7 @@ Components are based on Razorpay's Blade Design System but customized for WorkIn
 - Radio
 - Scale
 - SearchInput
+- SearchInputWithAdd
 - SelectInput
 - SideNav
 - Skeleton
