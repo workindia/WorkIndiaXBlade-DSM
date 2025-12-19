@@ -14,6 +14,7 @@ import {
   CardBody,
   CardHeader,
   CardHeaderLeading,
+  Divider,
   TextInput,
   SelectInput,
   Checkbox,
@@ -1622,12 +1623,12 @@ export const App = () => {
                         label="Search or Add Tags"
                         placeholder="Search for tags..."
                         items={availableTags}
-                        onItemSelect={(tag) => {
+                        onItemSelect={(tag: { id: string }) => {
                           if (!selectedTags.includes(tag.id)) {
                             setSelectedTags([...selectedTags, tag.id]);
                           }
                         }}
-                        onAddNewItem={(tagName) => {
+                        onAddNewItem={(tagName: string) => {
                           const newTag = {
                             id: `tag-${String(Date.now())}`,
                             title: tagName,
@@ -1662,6 +1663,50 @@ export const App = () => {
                           </Box>
                         </Box>
                       )}
+                    </Box>
+
+                    {/* Second example with addOptionBehavior="always" */}
+                    <Box marginTop="spacing.5">
+                      <Divider />
+                      <Text
+                        marginTop="spacing.4"
+                        marginBottom="spacing.3"
+                        size="medium"
+                        weight="semibold"
+                      >
+                        With "Always Show Add" Option
+                      </Text>
+                      <Text
+                        marginBottom="spacing.3"
+                        color="surface.text.gray.subtle"
+                        size="small"
+                      >
+                        Using{' '}
+                        <Code size="small">addOptionBehavior="always"</Code> to
+                        show the add option even when there are matching
+                        results. Useful for adding variations of existing items.
+                      </Text>
+                      <SearchInputWithAdd
+                        label="Skills (Always Show Add)"
+                        placeholder="Search or add skills..."
+                        items={availableTags}
+                        onItemSelect={(tag: { id: string }) => {
+                          if (!selectedTags.includes(tag.id)) {
+                            setSelectedTags([...selectedTags, tag.id]);
+                          }
+                        }}
+                        onAddNewItem={(tagName: string) => {
+                          const newTag = {
+                            id: `tag-${String(Date.now())}`,
+                            title: tagName,
+                          };
+                          setAvailableTags([...availableTags, newTag]);
+                          setSelectedTags([...selectedTags, newTag.id]);
+                        }}
+                        addOptionBehavior="always"
+                        addNewItemText='+ Add "{searchTerm}"'
+                        name="skillsSearch"
+                      />
                     </Box>
                   </Box>
 

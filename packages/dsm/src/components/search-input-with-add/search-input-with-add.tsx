@@ -54,10 +54,24 @@ interface SearchInputWithAddBaseProps {
   addNewItemText?: string;
 
   /**
-   * Whether to show the "Add New" option when no results are found
-   * @default true
+   * Controls when the "Add New" option should be displayed
+   * - 'never': Don't show the add option at all
+   * - 'no-results-only': Show only when no matching results are found (default)
+   * - 'always': Always show the add option when there's a search term, regardless of results
+   * @default 'no-results-only'
+   * @example
+   * ```tsx
+   * // Never show add option (standard search only)
+   * addOptionBehavior="never"
+   *
+   * // Show add option only when no results (default)
+   * addOptionBehavior="no-results-only"
+   *
+   * // Always show add option when searching
+   * addOptionBehavior="always"
+   * ```
    */
-  showAddNewOption?: boolean;
+  addOptionBehavior?: 'never' | 'no-results-only' | 'always';
 
   /**
    * Custom filter function to filter items based on search term
@@ -85,7 +99,7 @@ interface SearchInputWithAddBaseProps {
   isDropdownLoading?: boolean;
 
   /**
-   * Custom message to show when no results are found and showAddNewOption is false
+   * Custom message to show when no results are found and addOptionBehavior is 'never'
    * @default "No results found for \"{searchTerm}\""
    */
   noResultsText?: string;
@@ -127,7 +141,7 @@ const _SearchInputWithAdd: React.ForwardRefRenderFunction<
     onItemSelect,
     onAddNewItem,
     addNewItemText = '+ Add "{searchTerm}"',
-    showAddNewOption = true,
+    addOptionBehavior = 'no-results-only',
     filterFn,
     renderItem,
     isDropdownLoading = false,
@@ -163,7 +177,9 @@ const _SearchInputWithAdd: React.ForwardRefRenderFunction<
 
   const hasResults = filteredItems.length > 0;
   const shouldShowAddOption =
-    !hasResults && currentSearchTerm.trim() !== '' && showAddNewOption;
+    addOptionBehavior !== 'never' &&
+    currentSearchTerm.trim() !== '' &&
+    (addOptionBehavior === 'always' || !hasResults);
 
   // Format the add new item text by replacing {searchTerm} placeholder
   const formattedAddText = addNewItemText.replace(
@@ -255,7 +271,7 @@ const _SearchInputWithAdd: React.ForwardRefRenderFunction<
             <Box padding="spacing.5" display="flex" justifyContent="center">
               <Text>Loading...</Text>
             </Box>
-          ) : hasResults ? (
+          ) : hasResults || shouldShowAddOption ? (
             <ActionList>
               {filteredItems.map((item) => {
                 const renderedTitle = renderItem
@@ -277,17 +293,14 @@ const _SearchInputWithAdd: React.ForwardRefRenderFunction<
                   />
                 );
               })}
-            </ActionList>
-          ) : shouldShowAddOption ? (
-            <ActionList>
-              {[
+              {shouldShowAddOption && (
                 <ActionListItem
                   key="add-new-item"
                   title={formattedAddText}
                   value="add-new-item"
                   onClick={handleAddNewItem}
-                />,
-              ]}
+                />
+              )}
             </ActionList>
           ) : (
             <Box padding="spacing.5">

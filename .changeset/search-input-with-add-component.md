@@ -8,12 +8,7 @@ Add SearchInputWithAdd component with custom "Add New" functionality
 **@workindia/dsm:**
 
 - Added `SearchInputWithAdd` component that extends Blade's `SearchInput` with the ability to add new items
-- When search results are empty, displays an option to add the missing search term as "+ Add 'searchTerm'" (customizable via `addNewItemText` prop)
-- Supports controlled and uncontrolled modes for search term management
-- Includes `onAddNewItem` callback prop that triggers when a new, non-existent search term is added
-- Supports custom filtering via `filterFn` prop
-- Supports custom item rendering via `renderItem` prop
-- Includes `testID` and `selectionType` props for testing and multi-select scenarios
+- Displays an option to add the missing search term as "+ Add 'searchTerm'"
 
 **@workindia/dsm-mcp:**
 

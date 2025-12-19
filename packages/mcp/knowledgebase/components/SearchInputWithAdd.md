@@ -51,11 +51,26 @@ type SearchInputWithAddProps = Omit<SearchInputProps, 'trailing'> & {
   addNewItemText?: string;
 
   /**
-   * Whether to show the "Add New" option when no results are found
+   * Controls when the "Add New" option should be displayed
+   * - 'never': Don't show the add option at all
+   * - 'no-results-only': Show only when no matching results are found (default)
+   * - 'always': Always show the add option when there's a search term, regardless of results
    *
-   * @default true
+   * @default 'no-results-only'
+   *
+   * @example
+   * ```tsx
+   * // Never show add option (standard search only)
+   * addOptionBehavior="never"
+   *
+   * // Show add option only when no results (default)
+   * addOptionBehavior="no-results-only"
+   *
+   * // Always show add option when searching
+   * addOptionBehavior="always"
+   * ```
    */
-  showAddNewOption?: boolean;
+  addOptionBehavior?: 'never' | 'no-results-only' | 'always';
 
   /**
    * Custom filter function to filter items based on search term
@@ -84,7 +99,7 @@ type SearchInputWithAddProps = Omit<SearchInputProps, 'trailing'> & {
   isDropdownLoading?: boolean;
 
   /**
-   * Custom message to show when no results are found and showAddNewOption is false
+   * Custom message to show when no results are found and addOptionBehavior is 'never'
    *
    * @default "No results found for \"{searchTerm}\""
    */
@@ -442,7 +457,7 @@ function CountrySelector() {
         placeholder="Search countries..."
         items={countries}
         onItemSelect={handleCountrySelect}
-        showAddNewOption={false}
+        addOptionBehavior="never"
         noResultsText='No countries found matching "{searchTerm}"'
         name="countrySearch"
       />
@@ -457,10 +472,77 @@ function CountrySelector() {
 }
 ```
 
+### Always Show Add Option
+
+This example demonstrates the `addOptionBehavior` prop set to `'always'`, which shows the add option even when there are matching results. This is useful when you want to allow users to add variations of existing items.
+
+```tsx
+import { useState } from 'react';
+import { SearchInputWithAdd, Box, Badge, Text } from '@workindia/dsm';
+
+function SkillsInput() {
+  const [skills, setSkills] = useState([
+    { id: '1', title: 'JavaScript' },
+    { id: '2', title: 'TypeScript' },
+    { id: '3', title: 'Python' },
+    { id: '4', title: 'Java' },
+  ]);
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+
+  const handleSkillSelect = (skill: { id: string; title: string }) => {
+    if (!selectedSkills.includes(skill.title)) {
+      setSelectedSkills([...selectedSkills, skill.title]);
+    }
+  };
+
+  const handleAddSkill = (skillName: string) => {
+    // Add the new skill to available skills
+    const newSkill = {
+      id: `skill-${Date.now()}`,
+      title: skillName,
+    };
+    setSkills([...skills, newSkill]);
+
+    // Also add to selected skills
+    setSelectedSkills([...selectedSkills, skillName]);
+  };
+
+  return (
+    <Box>
+      <SearchInputWithAdd
+        label="Add Skills"
+        placeholder="Search or add skills..."
+        items={skills}
+        onItemSelect={handleSkillSelect}
+        onAddNewItem={handleAddSkill}
+        addOptionBehavior="always"
+        addNewItemText='+ Add skill "{searchTerm}"'
+        name="skillsSearch"
+      />
+
+      {selectedSkills.length > 0 && (
+        <Box
+          marginTop="spacing.4"
+          display="flex"
+          gap="spacing.2"
+          flexWrap="wrap"
+        >
+          {selectedSkills.map((skill) => (
+            <Badge key={skill} color="primary">
+              {skill}
+            </Badge>
+          ))}
+        </Box>
+      )}
+    </Box>
+  );
+}
+```
+
 ## Key Features
 
 1. **Automatic Filtering**: Built-in filtering with customizable filter function
-2. **Add New Items**: Shows "+ Add [searchTerm]" option when no results are found
+2. **Flexible Add Behavior**: Control when the add option appears with `addOptionBehavior` ('never', 'no-results-only', or 'always')
 3. **Customizable Text**: Customize the "Add" button text with the `addNewItemText` prop
 4. **Custom Rendering**: Use `renderItem` prop to customize how items are displayed
 5. **Controlled/Uncontrolled**: Supports both controlled and uncontrolled modes

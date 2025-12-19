@@ -231,14 +231,14 @@ describe('SearchInputWithAdd', () => {
       });
     });
 
-    it('should not show add option when showAddNewOption is false', async () => {
+    it('should not show add option when addOptionBehavior is "never"', async () => {
       const user = userEvent.setup();
 
       renderWithProvider(
         <SearchInputWithAdd
           label="Search Tags"
           items={mockItems}
-          showAddNewOption={false}
+          addOptionBehavior="never"
         />,
       );
 
@@ -250,14 +250,14 @@ describe('SearchInputWithAdd', () => {
       });
     });
 
-    it('should show custom no results text when showAddNewOption is false', async () => {
+    it('should show custom no results text when addOptionBehavior is "never"', async () => {
       const user = userEvent.setup();
 
       renderWithProvider(
         <SearchInputWithAdd
           label="Search Tags"
           items={mockItems}
-          showAddNewOption={false}
+          addOptionBehavior="never"
           noResultsText='No tags found matching "{searchTerm}"'
         />,
       );
@@ -941,7 +941,7 @@ describe('SearchInputWithAdd', () => {
         <SearchInputWithAdd
           label="Search Tags"
           items={[]}
-          showAddNewOption={false}
+          addOptionBehavior="never"
           noResultsText="Sorry, no matches for {searchTerm}"
         />,
       );
@@ -953,6 +953,178 @@ describe('SearchInputWithAdd', () => {
         expect(
           screen.getByText('Sorry, no matches for Python'),
         ).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('addOptionBehavior prop', () => {
+    it('should show add option only when no results with "no-results-only" (default)', async () => {
+      const user = userEvent.setup();
+      const onAddNewItem = jest.fn();
+
+      renderWithProvider(
+        <SearchInputWithAdd
+          label="Search"
+          placeholder="Search..."
+          items={mockItems}
+          onAddNewItem={onAddNewItem}
+          addOptionBehavior="no-results-only"
+        />,
+      );
+
+      const input = screen.getByPlaceholderText('Search...');
+
+      // Search for existing item - should NOT show add option
+      await user.type(input, 'React');
+
+      await waitFor(() => {
+        expect(screen.getByText('React')).toBeInTheDocument();
+        expect(screen.queryByText('+ Add "React"')).not.toBeInTheDocument();
+      });
+
+      // Clear and search for non-existing item - should show add option
+      await user.clear(input);
+      await user.type(input, 'Vue');
+
+      await waitFor(() => {
+        expect(screen.getByText('+ Add "Vue"')).toBeInTheDocument();
+      });
+    });
+
+    it('should always show add option with "always" behavior when there are results', async () => {
+      const user = userEvent.setup();
+      const onAddNewItem = jest.fn();
+      const onItemSelect = jest.fn();
+
+      renderWithProvider(
+        <SearchInputWithAdd
+          label="Search"
+          placeholder="Search..."
+          items={mockItems}
+          onItemSelect={onItemSelect}
+          onAddNewItem={onAddNewItem}
+          addOptionBehavior="always"
+        />,
+      );
+
+      const input = screen.getByPlaceholderText('Search...');
+
+      // Search for existing item - should show both the item AND add option
+      await user.type(input, 'React');
+
+      await waitFor(() => {
+        expect(screen.getByText('React')).toBeInTheDocument();
+        expect(screen.getByText('+ Add "React"')).toBeInTheDocument();
+      });
+    });
+
+    it('should always show add option with "always" behavior when there are no results', async () => {
+      const user = userEvent.setup();
+      const onAddNewItem = jest.fn();
+
+      renderWithProvider(
+        <SearchInputWithAdd
+          label="Search"
+          placeholder="Search..."
+          items={mockItems}
+          onAddNewItem={onAddNewItem}
+          addOptionBehavior="always"
+        />,
+      );
+
+      const input = screen.getByPlaceholderText('Search...');
+
+      // Search for non-existing item - should show add option
+      await user.type(input, 'Vue');
+
+      await waitFor(() => {
+        expect(screen.getByText('+ Add "Vue"')).toBeInTheDocument();
+      });
+    });
+
+    it('should allow selecting both existing item and add option with "always" behavior', async () => {
+      const user = userEvent.setup();
+      const onAddNewItem = jest.fn();
+      const onItemSelect = jest.fn();
+
+      renderWithProvider(
+        <SearchInputWithAdd
+          label="Search"
+          placeholder="Search..."
+          items={mockItems}
+          onItemSelect={onItemSelect}
+          onAddNewItem={onAddNewItem}
+          addOptionBehavior="always"
+        />,
+      );
+
+      const input = screen.getByPlaceholderText('Search...');
+      await user.type(input, 'React');
+
+      await waitFor(() => {
+        expect(screen.getByText('React')).toBeInTheDocument();
+        expect(screen.getByText('+ Add "React"')).toBeInTheDocument();
+      });
+
+      // Click on existing item
+      await user.click(screen.getByText('React'));
+
+      expect(onItemSelect).toHaveBeenCalledWith({
+        id: '1',
+        title: 'React',
+      });
+
+      // Clear input and type again to test add option
+      await user.clear(input);
+      await user.type(input, 'React');
+
+      await waitFor(() => {
+        expect(screen.getByText('+ Add "React"')).toBeInTheDocument();
+      });
+
+      await user.click(screen.getByText('+ Add "React"'));
+
+      expect(onAddNewItem).toHaveBeenCalledWith('React');
+    });
+
+    it('should not show add option with "always" behavior when search term is empty', async () => {
+      renderWithProvider(
+        <SearchInputWithAdd
+          label="Search"
+          placeholder="Search..."
+          items={mockItems}
+          addOptionBehavior="always"
+        />,
+      );
+
+      const input = screen.getByPlaceholderText('Search...');
+      input.focus();
+
+      await waitFor(() => {
+        // Should show all items but no add option
+        expect(screen.getByText('React')).toBeInTheDocument();
+        expect(screen.queryByText(/\+ Add ""/)).not.toBeInTheDocument();
+      });
+    });
+
+    it('should never show add option with "never" behavior', async () => {
+      const user = userEvent.setup();
+
+      renderWithProvider(
+        <SearchInputWithAdd
+          label="Search"
+          placeholder="Search..."
+          items={mockItems}
+          addOptionBehavior="never"
+        />,
+      );
+
+      const input = screen.getByPlaceholderText('Search...');
+      await user.type(input, 'React');
+
+      await waitFor(() => {
+        expect(screen.getByText('React')).toBeInTheDocument();
+        expect(screen.queryByText('+ Add "React"')).not.toBeInTheDocument();
       });
     });
   });
