@@ -86,6 +86,67 @@ const getContrastColor = (backgroundColor: string): string => {
 };
 
 /**
+ * Recursively extract all color paths from a color object
+ * @param obj - The color object to traverse
+ * @param prefix - The current path prefix
+ * @returns Array of color paths with their values
+ */
+const extractColorPaths = (
+  obj: unknown,
+  prefix = '',
+): { path: string; value: string }[] => {
+  const paths: { path: string; value: string }[] = [];
+
+  if (typeof obj === 'string') {
+    if (
+      obj.startsWith('#') ||
+      obj.startsWith('rgba') ||
+      obj.startsWith('hsla')
+    ) {
+      // It's a color string
+      paths.push({ path: prefix, value: obj });
+    }
+  } else if (typeof obj === 'object' && obj !== null) {
+    // Recursively traverse the object
+    Object.keys(obj).forEach((key) => {
+      const newPrefix = prefix ? `${prefix}.${key}` : key;
+      const value = (obj as Record<string, unknown>)[key];
+      paths.push(...extractColorPaths(value, newPrefix));
+    });
+  }
+
+  return paths;
+};
+
+/**
+ * Group color paths by their common prefix segments
+ * @param paths - Array of color paths
+ * @returns Grouped object with nested structure
+ */
+const groupColorPaths = (
+  paths: { path: string; value: string }[],
+): Record<string, { path: string; value: string }[]> => {
+  const groups: Record<string, { path: string; value: string }[]> = {};
+
+  paths.forEach(({ path, value }) => {
+    // Extract the base path (everything before the last segment)
+    const segments = path.split('.');
+    if (segments.length > 1) {
+      // Group by all segments except the last one
+      const groupKey = segments.slice(0, -1).join('.');
+      groups[groupKey] = groups[groupKey] ?? [];
+      groups[groupKey].push({ path, value });
+    } else {
+      // Top-level colors
+      groups[''] = groups[''] ?? [];
+      groups[''].push({ path, value });
+    }
+  });
+
+  return groups;
+};
+
+/**
  * Get all icon components from the icons package
  * Filters out non-icon exports (types, utilities, etc.)
  * @returns Array of icon entries with name and component
@@ -193,16 +254,290 @@ const AppContent = () => {
         {/* Tokens Tab Panel */}
         <TabPanel value="tokens">
           <Box paddingTop="spacing.6">
-            {/* Color Tokens Section */}
+            {/* Comprehensive Color Tokens Section */}
             <Card marginBottom="spacing.6">
               <CardHeader>
-                <CardHeaderLeading title="Color Tokens" />
+                <CardHeaderLeading title="All Color Tokens (Comprehensive)" />
               </CardHeader>
               <CardBody>
                 <Text marginBottom="spacing.4">
-                  Theme colors are semantic tokens that are used throughout the
-                  design system components. These colors adapt to the selected
-                  color scheme (light/dark mode).
+                  Complete showcase of all color paths available in both
+                  workIndiaTheme and bladeTheme. Colors are organized by
+                  category and mode (onLight/onDark).
+                </Text>
+
+                {/* WorkIndia Theme Colors - Comprehensive Showcase */}
+                <Box marginBottom="spacing.8">
+                  <Heading size="large" marginBottom="spacing.4">
+                    All WorkIndia Theme Colors
+                  </Heading>
+                  <Text
+                    marginBottom="spacing.4"
+                    color="surface.text.gray.subtle"
+                  >
+                    WorkIndia theme includes all colors from Blade theme (as
+                    base) with WorkIndia-specific overrides. This shows all
+                    available color paths.
+                  </Text>
+
+                  {/* OnLight Colors */}
+                  <Box marginBottom="spacing.6">
+                    <Heading size="medium" marginBottom="spacing.3">
+                      On Light Mode
+                    </Heading>
+                    {Object.keys(workIndiaTheme.colors.onLight).map(
+                      (category) => {
+                        const categoryColors =
+                          workIndiaTheme.colors.onLight[
+                            category as keyof typeof workIndiaTheme.colors.onLight
+                          ];
+                        const colorPaths = extractColorPaths(
+                          categoryColors,
+                          `onLight.${category}`,
+                        );
+
+                        if (colorPaths.length === 0) return null;
+
+                        // Group colors by their path structure
+                        const groupedPaths = groupColorPaths(colorPaths);
+                        const sortedGroups = Object.keys(groupedPaths).sort();
+
+                        return (
+                          <Box key={category} marginBottom="spacing.6">
+                            <Heading size="small" marginBottom="spacing.4">
+                              {category}
+                            </Heading>
+                            {sortedGroups.map((groupKey) => {
+                              const groupColors = groupedPaths[groupKey];
+                              const fullPath = groupKey
+                                ? `onLight.${category}.${groupKey}`
+                                : `onLight.${category}`;
+
+                              return (
+                                <Box
+                                  key={groupKey}
+                                  marginBottom="spacing.5"
+                                  paddingLeft="spacing.4"
+                                  borderLeftWidth="thick"
+                                  borderLeftColor="surface.border.gray.subtle"
+                                >
+                                  <Text
+                                    weight="semibold"
+                                    size="small"
+                                    marginBottom="spacing.3"
+                                    color="surface.text.gray.normal"
+                                  >
+                                    {fullPath}
+                                  </Text>
+                                  <Box
+                                    display="grid"
+                                    gridTemplateColumns={{
+                                      base: 'repeat(1, 1fr)',
+                                      s: 'repeat(2, 1fr)',
+                                      m: 'repeat(3, 1fr)',
+                                      l: 'repeat(4, 1fr)',
+                                    }}
+                                    gap="spacing.3"
+                                  >
+                                    {groupColors.map(({ path, value }) => {
+                                      const textColor = getContrastColor(value);
+                                      // Extract just the last segment for display
+                                      const pathSegments = path.split('.');
+                                      const displayPath =
+                                        pathSegments[pathSegments.length - 1] ??
+                                        path;
+
+                                      return (
+                                        <Box
+                                          key={path}
+                                          borderRadius="small"
+                                          overflow="hidden"
+                                          borderWidth="thin"
+                                          borderColor="surface.border.gray.subtle"
+                                        >
+                                          <div
+                                            style={{
+                                              backgroundColor: value,
+                                              color: textColor,
+                                              padding: '12px',
+                                              minHeight: '80px',
+                                              display: 'flex',
+                                              flexDirection: 'column',
+                                              justifyContent: 'space-between',
+                                            }}
+                                            title={path}
+                                          >
+                                            <Text
+                                              size="xsmall"
+                                              weight="semibold"
+                                              color="currentColor"
+                                            >
+                                              {displayPath}
+                                            </Text>
+                                            <Text
+                                              size="xsmall"
+                                              color="currentColor"
+                                            >
+                                              {value}
+                                            </Text>
+                                            <span
+                                              style={{
+                                                fontSize: '10px',
+                                                opacity: 0.8,
+                                                color: textColor,
+                                              }}
+                                            >
+                                              {path}
+                                            </span>
+                                          </div>
+                                        </Box>
+                                      );
+                                    })}
+                                  </Box>
+                                </Box>
+                              );
+                            })}
+                          </Box>
+                        );
+                      },
+                    )}
+                  </Box>
+
+                  {/* OnDark Colors */}
+                  <Box marginBottom="spacing.6">
+                    <Heading size="medium" marginBottom="spacing.3">
+                      On Dark Mode
+                    </Heading>
+                    {Object.keys(workIndiaTheme.colors.onDark).map(
+                      (category) => {
+                        const categoryColors =
+                          workIndiaTheme.colors.onDark[
+                            category as keyof typeof workIndiaTheme.colors.onDark
+                          ];
+                        const colorPaths = extractColorPaths(
+                          categoryColors,
+                          `onDark.${category}`,
+                        );
+
+                        if (colorPaths.length === 0) return null;
+
+                        // Group colors by their path structure
+                        const groupedPaths = groupColorPaths(colorPaths);
+                        const sortedGroups = Object.keys(groupedPaths).sort();
+
+                        return (
+                          <Box key={category} marginBottom="spacing.6">
+                            <Heading size="small" marginBottom="spacing.4">
+                              {category}
+                            </Heading>
+                            {sortedGroups.map((groupKey) => {
+                              const groupColors = groupedPaths[groupKey];
+                              const fullPath = groupKey
+                                ? `onDark.${category}.${groupKey}`
+                                : `onDark.${category}`;
+
+                              return (
+                                <Box
+                                  key={groupKey}
+                                  marginBottom="spacing.5"
+                                  paddingLeft="spacing.4"
+                                  borderLeftWidth="thick"
+                                  borderLeftColor="surface.border.gray.subtle"
+                                >
+                                  <Text
+                                    weight="semibold"
+                                    size="small"
+                                    marginBottom="spacing.3"
+                                    color="surface.text.gray.normal"
+                                  >
+                                    {fullPath}
+                                  </Text>
+                                  <Box
+                                    display="grid"
+                                    gridTemplateColumns={{
+                                      base: 'repeat(1, 1fr)',
+                                      s: 'repeat(2, 1fr)',
+                                      m: 'repeat(3, 1fr)',
+                                      l: 'repeat(4, 1fr)',
+                                    }}
+                                    gap="spacing.3"
+                                  >
+                                    {groupColors.map(({ path, value }) => {
+                                      const textColor = getContrastColor(value);
+                                      // Extract just the last segment for display
+                                      const pathSegments = path.split('.');
+                                      const displayPath =
+                                        pathSegments[pathSegments.length - 1] ??
+                                        path;
+
+                                      return (
+                                        <Box
+                                          key={path}
+                                          borderRadius="small"
+                                          overflow="hidden"
+                                          borderWidth="thin"
+                                          borderColor="surface.border.gray.subtle"
+                                        >
+                                          <div
+                                            style={{
+                                              backgroundColor: value,
+                                              color: textColor,
+                                              padding: '12px',
+                                              minHeight: '80px',
+                                              display: 'flex',
+                                              flexDirection: 'column',
+                                              justifyContent: 'space-between',
+                                            }}
+                                            title={path}
+                                          >
+                                            <Text
+                                              size="xsmall"
+                                              weight="semibold"
+                                              color="currentColor"
+                                            >
+                                              {displayPath}
+                                            </Text>
+                                            <Text
+                                              size="xsmall"
+                                              color="currentColor"
+                                            >
+                                              {value}
+                                            </Text>
+                                            <span
+                                              style={{
+                                                fontSize: '10px',
+                                                opacity: 0.8,
+                                                color: textColor,
+                                              }}
+                                            >
+                                              {path}
+                                            </span>
+                                          </div>
+                                        </Box>
+                                      );
+                                    })}
+                                  </Box>
+                                </Box>
+                              );
+                            })}
+                          </Box>
+                        );
+                      },
+                    )}
+                  </Box>
+                </Box>
+              </CardBody>
+            </Card>
+
+            {/* Original Color Tokens Section (keeping for backward compatibility) */}
+            <Card marginBottom="spacing.6">
+              <CardHeader>
+                <CardHeaderLeading title="Color Tokens (Selected Examples)" />
+              </CardHeader>
+              <CardBody>
+                <Text marginBottom="spacing.4">
+                  Selected examples of theme colors. See "All Color Tokens
+                  (Comprehensive)" above for the complete list.
                 </Text>
 
                 {/* Surface Colors */}
