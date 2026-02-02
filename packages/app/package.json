@@ -15,8 +15,8 @@
   "dependencies": {
     "@razorpay/i18nify-js": "^1.12.3",
     "@razorpay/i18nify-react": "^4.0.12",
-    "@workindia/dsm": "^0.6.0",
-    "@workindia/icons": "^1.2.0",
+    "@workindia/dsm": "^0.7.0",
+    "@workindia/icons": "^2.0.0",
     "@workindia/tokens": "^0.5.0",
     "framer-motion": "^11.0.0",
     "react": "^19.0.0",

@@ -1,5 +1,11 @@
 # @workindia/dsm
 
+## 0.7.0
+
+### Minor Changes
+
+- 61ee18a: Color tokens are now aligned to WorkIndia tokens in the DSM theme
+
 ## 0.6.0
 
 ### Minor Changes
