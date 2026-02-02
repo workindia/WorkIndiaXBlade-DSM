@@ -1,6 +1,6 @@
 # @workindia/icons
 
-## 2.0.0
+## 1.3.0
 
 ### Patch Changes
 
