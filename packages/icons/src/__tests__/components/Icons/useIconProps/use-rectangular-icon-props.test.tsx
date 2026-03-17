@@ -3,7 +3,9 @@
  */
 
 import { renderHook } from '@testing-library/react';
-import useRectangularIconProps from '../../../../components/Icons/useIconProps/use-rectangular-icon-props';
+import useRectangularIconProps, {
+  parseViewBox,
+} from '../../../../components/Icons/useIconProps/use-rectangular-icon-props';
 import type { IconProps } from '../../../../components/Icons/types';
 
 describe('useRectangularIconProps', () => {
@@ -158,25 +160,13 @@ describe('useRectangularIconProps', () => {
     });
 
     it('should throw error for invalid viewBox format', () => {
-      expect(() => {
-        renderHook(() =>
-          useRectangularIconProps({
-            size: 'medium',
-            viewBox: 'invalid',
-          } as IconProps & { viewBox: string }),
-        );
-      }).toThrow('Invalid viewBox format');
+      expect(() => parseViewBox('invalid')).toThrow('Invalid viewBox format');
     });
 
     it('should throw error for viewBox with wrong number of parts', () => {
-      expect(() => {
-        renderHook(() =>
-          useRectangularIconProps({
-            size: 'medium',
-            viewBox: '0 0 100',
-          } as IconProps & { viewBox: string }),
-        );
-      }).toThrow('Invalid viewBox format');
+      expect(() => parseViewBox('0 0 100')).toThrow(
+        'Invalid viewBox format: 0 0 100. Expected format: "0 0 width height"',
+      );
     });
   });
 
