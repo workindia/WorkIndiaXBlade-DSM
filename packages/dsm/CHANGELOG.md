@@ -1,5 +1,11 @@
 # @workindia/dsm
 
+## 0.8.0
+
+### Minor Changes
+
+- Updated Base Packages
+
 ## 0.7.0
 
 ### Minor Changes

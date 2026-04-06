@@ -1,5 +1,12 @@
 # @workindia/icons
 
+## 2.0.0
+
+### Patch Changes
+
+- Updated dependencies
+  - @workindia/dsm@0.8.0
+
 ## 1.3.0
 
 ### Patch Changes
