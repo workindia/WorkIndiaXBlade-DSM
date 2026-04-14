@@ -1,11 +1,11 @@
 # @workindia/icons
 
-## 2.0.0
+## 1.4.0
 
-### Patch Changes
+### Minor Changes
 
-- Updated dependencies
-  - @workindia/dsm@0.8.0
+- Export `parseViewBox` from `use-rectangular-icon-props` for direct use and tests.
+- Peer dependency: require `@workindia/dsm` **>=0.8.0** (aligned with DSM’s Blade upgrade and theme token updates).
 
 ## 1.3.0
 
