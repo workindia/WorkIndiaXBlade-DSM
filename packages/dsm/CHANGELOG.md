@@ -1,5 +1,15 @@
 # @workindia/dsm
 
+## 0.8.0
+
+### Minor Changes
+
+- **@razorpay/blade:** upgrade **12.68.0 → 12.98.1**.
+- **Theme (`theme.ts`):** extend `interactive.background` on light and dark with **`ghost`** for `gray`, `staticBlack`, and `staticWhite`.
+- **Theme:** extend `interactive.border` on light and dark with **`fadedHighlighted`** for `staticBlack` and `staticWhite`.
+- **Theme:** extend **`popup`** on light and dark—spread base Blade `popup` tokens and add semantic **`background`** and **`border`** maps for `information`, `negative`, `neutral`, `notice`, and `positive`, plus **`gray`** (`subtle` / `moderate` / `intense`), while keeping existing `subtle` / `intense` popup keys.
+- **Jest:** map `@razorpay/blade/components` to `src/__mocks__/blade-components.tsx` so tests do not load Blade’s ESM graph (e.g. Recharts).
+
 ## 0.7.0
 
 ### Minor Changes
