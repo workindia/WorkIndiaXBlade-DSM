@@ -40,6 +40,12 @@ jobs:
       - name: Build packages and run tests before publishing
         run: npm run prepublish:ci
 
+      # Clear the auto-generated npm token placeholder to force npm to use
+      # GitHub's OIDC id-token for Trusted Publishing instead of an API secret.
+      - name: Fix npmrc for OIDC trusted publishing
+        run: |
+          sed -i '/_authToken/d' "${NPM_CONFIG_USERCONFIG:-$HOME/.npmrc}" || true
+
       - name: Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
