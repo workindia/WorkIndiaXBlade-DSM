@@ -1,11 +1,5 @@
 # @workindia/dsm-mcp
 
-## 0.3.0
-
-### Minor Changes
-
-- Updated Base Packages
-
 ## 0.2.2
 
 ### Patch Changes
