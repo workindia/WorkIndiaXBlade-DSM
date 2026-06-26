@@ -37,9 +37,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Upgrade npm for OIDC support
-        run: npm install -g npm@latest
-
       - name: Build packages and run tests before publishing
         run: npm run prepublish:ci
 
