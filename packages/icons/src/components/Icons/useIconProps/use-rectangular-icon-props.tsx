@@ -8,7 +8,9 @@ import getThemeColor from './get-theme-color';
  * @param viewBox - ViewBox string in format "0 0 width height"
  * @returns Object with width and height
  */
-const parseViewBox = (viewBox: string): { width: number; height: number } => {
+export const parseViewBox = (
+  viewBox: string,
+): { width: number; height: number } => {
   const parts = viewBox.split(' ');
   if (parts.length !== 4) {
     throw new Error(

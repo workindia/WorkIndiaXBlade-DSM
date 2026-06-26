@@ -30,6 +30,9 @@ module.exports = {
   ],
   moduleNameMapper: {
     '^@workindia/tokens$': '<rootDir>/../tokens/src',
+    // Mock Blade components to avoid loading ESM deps (recharts) in Jest; tokens stay real for theme
+    '^@razorpay/blade/components$':
+      '<rootDir>/src/__mocks__/blade-components.tsx',
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   collectCoverageFrom: [

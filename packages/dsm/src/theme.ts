@@ -123,6 +123,7 @@ const createWorkIndiaTheme = (): ThemeTokens => {
               disabled: colors.neutral.light.a100,
               faded: colors.neutral.light.a25,
               fadedHighlighted: colors.neutral.light.a50,
+              ghost: colors.neutral.light.a25,
             },
             primary: {
               default: colors.chromatic.brand[500],
@@ -137,6 +138,7 @@ const createWorkIndiaTheme = (): ThemeTokens => {
               disabled: colors.neutral.blackNWhite.black[200],
               faded: colors.neutral.blackNWhite.black[50],
               fadedHighlighted: colors.neutral.blackNWhite.black[100],
+              ghost: colors.neutral.blackNWhite.black[50],
             },
             staticWhite: {
               default: colors.neutral.blackNWhite.white[500],
@@ -144,6 +146,7 @@ const createWorkIndiaTheme = (): ThemeTokens => {
               disabled: colors.neutral.blackNWhite.white[50],
               faded: colors.neutral.blackNWhite.white[50],
               fadedHighlighted: colors.neutral.blackNWhite.white[100],
+              ghost: colors.neutral.blackNWhite.white[50],
             },
           },
           border: {
@@ -195,12 +198,14 @@ const createWorkIndiaTheme = (): ThemeTokens => {
               highlighted: colors.neutral.blackNWhite.black[500],
               disabled: colors.neutral.blackNWhite.black[100],
               faded: colors.neutral.blackNWhite.black[100],
+              fadedHighlighted: colors.neutral.blackNWhite.black[100],
             },
             staticWhite: {
               default: colors.neutral.blackNWhite.white[500],
               highlighted: colors.neutral.blackNWhite.white[400],
               disabled: colors.neutral.blackNWhite.white[100],
               faded: colors.neutral.blackNWhite.white[50],
+              fadedHighlighted: colors.neutral.blackNWhite.white[100],
             },
           },
           text: {
@@ -434,10 +439,32 @@ const createWorkIndiaTheme = (): ThemeTokens => {
         popup: {
           ...baseTheme.colors.onLight.popup,
           background: {
+            ...baseTheme.colors.onLight.popup.background,
+            information: { moderate: colors.chromatic.sky[600] },
+            negative: { moderate: colors.chromatic.crimson[600] },
+            neutral: { moderate: colors.neutral.light[1000] },
+            notice: { moderate: colors.chromatic.amber[600] },
+            positive: { moderate: colors.chromatic.emerald[600] },
+            gray: {
+              subtle: colors.neutral.light[0],
+              moderate: colors.neutral.light[400],
+              intense: colors.neutral.light[1000],
+            },
             subtle: colors.neutral.light[0],
             intense: colors.neutral.light[1000],
           },
           border: {
+            ...baseTheme.colors.onLight.popup.border,
+            information: { moderate: colors.chromatic.sky[600] },
+            negative: { moderate: colors.chromatic.crimson[600] },
+            neutral: { moderate: colors.neutral.light[700] },
+            notice: { moderate: colors.chromatic.amber[600] },
+            positive: { moderate: colors.chromatic.emerald[600] },
+            gray: {
+              subtle: colors.neutral.light.a100,
+              moderate: colors.neutral.light[400],
+              intense: colors.neutral.light[900],
+            },
             subtle: colors.neutral.light.a100,
             intense: colors.neutral.light[900],
           },
@@ -574,6 +601,7 @@ const createWorkIndiaTheme = (): ThemeTokens => {
               disabled: colors.neutral.dark.a100,
               faded: colors.neutral.dark.a25,
               fadedHighlighted: colors.neutral.dark.a50,
+              ghost: colors.neutral.dark.a25,
             },
             primary: {
               default: colors.chromatic.brand[400],
@@ -588,6 +616,7 @@ const createWorkIndiaTheme = (): ThemeTokens => {
               disabled: colors.neutral.blackNWhite.black[200],
               faded: colors.neutral.blackNWhite.black[50],
               fadedHighlighted: colors.neutral.blackNWhite.black[100],
+              ghost: colors.neutral.blackNWhite.black[50],
             },
             staticWhite: {
               default: colors.neutral.blackNWhite.white[500],
@@ -595,6 +624,7 @@ const createWorkIndiaTheme = (): ThemeTokens => {
               disabled: colors.neutral.blackNWhite.white[50],
               faded: colors.neutral.blackNWhite.white[50],
               fadedHighlighted: colors.neutral.blackNWhite.white[100],
+              ghost: colors.neutral.blackNWhite.white[50],
             },
           },
           border: {
@@ -646,12 +676,14 @@ const createWorkIndiaTheme = (): ThemeTokens => {
               highlighted: colors.neutral.blackNWhite.black[500],
               disabled: colors.neutral.blackNWhite.black[100],
               faded: colors.neutral.blackNWhite.black[100],
+              fadedHighlighted: colors.neutral.blackNWhite.black[100],
             },
             staticWhite: {
               default: colors.neutral.blackNWhite.white[500],
               highlighted: colors.neutral.blackNWhite.white[400],
               disabled: colors.neutral.blackNWhite.white[100],
               faded: colors.neutral.blackNWhite.white[50],
+              fadedHighlighted: colors.neutral.blackNWhite.white[100],
             },
           },
           text: {
@@ -885,10 +917,32 @@ const createWorkIndiaTheme = (): ThemeTokens => {
         popup: {
           ...baseTheme.colors.onDark.popup,
           background: {
+            ...baseTheme.colors.onDark.popup.background,
+            information: { moderate: colors.chromatic.sky[500] },
+            negative: { moderate: colors.chromatic.crimson[500] },
+            neutral: { moderate: colors.neutral.dark[200] },
+            notice: { moderate: colors.chromatic.amber[500] },
+            positive: { moderate: colors.chromatic.emerald[500] },
+            gray: {
+              subtle: colors.neutral.dark[1000],
+              moderate: colors.neutral.dark[800],
+              intense: colors.neutral.dark[700],
+            },
             subtle: colors.neutral.dark[1000],
             intense: colors.neutral.dark[700],
           },
           border: {
+            ...baseTheme.colors.onDark.popup.border,
+            information: { moderate: colors.chromatic.sky[500] },
+            negative: { moderate: colors.chromatic.crimson[500] },
+            neutral: { moderate: colors.neutral.dark[200] },
+            notice: { moderate: colors.chromatic.amber[500] },
+            positive: { moderate: colors.chromatic.emerald[500] },
+            gray: {
+              subtle: colors.neutral.dark.a100,
+              moderate: colors.neutral.dark[800],
+              intense: colors.neutral.dark.a100,
+            },
             subtle: colors.neutral.dark.a100,
             intense: colors.neutral.dark.a100,
           },
