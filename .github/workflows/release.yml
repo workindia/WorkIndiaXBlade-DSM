@@ -17,10 +17,10 @@ jobs:
     timeout-minutes: 30
     permissions:
       contents: write
-      id-token: write # REQUIRED for trusted publishing
+      id-token: write # REQUIRED: Grants GitHub permission to request the OIDC token
       pull-requests: write
     env:
-      NPM_CONFIG_PROVENANCE: true # adds provenance to build
+      NPM_CONFIG_PROVENANCE: true # Cryptographically links the npm package to this exact GitHub run
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -31,20 +31,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22.x
-          registry-url: 'https://registry.npmjs.org'
-          cache: 'npm'
+          cache: 'npm' # Note: registry-url is omitted to prevent .npmrc credential conflicts with OIDC
 
       - name: Install dependencies
         run: npm ci
 
       - name: Build packages and run tests before publishing
         run: npm run prepublish:ci
-
-      # Clear the auto-generated npm token placeholder to force npm to use
-      # GitHub's OIDC id-token for Trusted Publishing instead of an API secret.
-      - name: Fix npmrc for OIDC trusted publishing
-        run: |
-          sed -i '/_authToken/d' "${NPM_CONFIG_USERCONFIG:-$HOME/.npmrc}" || true
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
