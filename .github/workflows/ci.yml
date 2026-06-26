@@ -68,6 +68,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          fetch-depth: 0
 
       - name: Generate changesets status
         id: changesets-status
