@@ -32,7 +32,7 @@ jobs:
         run: npm run build
         # Build tokens first (no dependencies), then dsm (depends on tokens)
         # This ensures type definitions are available for ESLint type checking
-      
+
       - name: Check build artifacts
         run: |
           test -d packages/tokens/build || exit 1
@@ -57,3 +57,26 @@ jobs:
           name: codecov-umbrella
           fail_ci_if_error: false
           token: ${{ secrets.CODECOV_TOKEN }}
+
+  changesets:
+    name: Changesets
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-slim
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          fetch-depth: 0
+
+      - name: Generate changesets status
+        id: changesets-status
+        uses: changesets/action/pr-status@v1.9.0
+
+      - name: Comment on PR
+        uses: changesets/action/pr-comment@v1.9.0
+        with:
+          body: ${{ steps.changesets-status.outputs.comment-body }}
