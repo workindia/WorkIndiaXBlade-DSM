@@ -18,7 +18,7 @@ const getPackageJSONVersion = (): string => {
   return packageJson.version;
 };
 
-type DocumentationType = 'components' | 'patterns' | 'general';
+type DocumentationType = 'components' | 'patterns' | 'general' | 'icons';
 
 /**
  * Reads the given documentation type directory and returns a list of available WorkIndia DSM docs

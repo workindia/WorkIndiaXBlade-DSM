@@ -3,9 +3,11 @@ import type { ToolCallback } from '@modelcontextprotocol/sdk/server/mcp.js';
 import {
   CURSOR_RULES_VERSION,
   CHECK_CURSOR_RULES_DESCRIPTION,
+  ICONS_KNOWLEDGEBASE_DIRECTORY,
 } from '../utils/tokens.js';
 import { getWorkIndiaDocsList } from '../utils/general-utils.js';
 import { handleError } from '../utils/error-utils.js';
+import { readdirSync } from 'fs';
 
 import { getWorkIndiaDocsResponseText } from '../utils/get-workindia-docs-response-text.js';
 import {
@@ -15,10 +17,31 @@ import {
 } from '../utils/cursor-rules-utils.js';
 
 const workIndiaComponentsList = getWorkIndiaDocsList('components');
-const workIndiaComponentsListString = workIndiaComponentsList.join(', ');
+
+const getWorkIndiaIconsList = (): string[] => {
+  const iconsList: string[] = [];
+  try {
+    const files = readdirSync(ICONS_KNOWLEDGEBASE_DIRECTORY);
+    for (const file of files) {
+      if (file.endsWith('.md') && !file.includes('index.md')) {
+        iconsList.push(file.replace('.md', '').trim());
+      }
+    }
+  } catch {
+    return [];
+  }
+  return iconsList;
+};
+
+const workIndiaIconsList = getWorkIndiaIconsList();
+const workIndiaAllDocsList = [
+  ...workIndiaComponentsList,
+  ...workIndiaIconsList,
+];
+const workIndiaComponentsListString = workIndiaAllDocsList.join(', ');
 const getWorkIndiaDsmComponentDocsToolName = 'get_workindia_dsm_component_docs';
 
-const getWorkIndiaDsmComponentDocsToolDescription = `Fetch the WorkIndia Design System docs for the given list of components. Use this to get information about the components and their props while adding or changing a component.`;
+const getWorkIndiaDsmComponentDocsToolDescription = `Fetch the WorkIndia Design System docs for the given list of components or icons. Use this to get information about the components and their props while adding or changing a component, or to get documentation about icons (when to use, how to use, when not to use).`;
 
 const getWorkIndiaDsmComponentDocsToolSchema = {
   componentsList: z
@@ -50,13 +73,13 @@ const getWorkIndiaDsmComponentDocsToolCallback: ToolCallback<
 }) => {
   const components = componentsList.split(',').map((s) => s.trim());
   const invalidComponents = components.filter(
-    (comp) => !workIndiaComponentsList.includes(comp),
+    (comp) => !workIndiaAllDocsList.includes(comp),
   );
   const invalidComponentsString = invalidComponents.join(', ');
   if (invalidComponents.length > 0) {
     return handleError({
       toolName: getWorkIndiaDsmComponentDocsToolName,
-      mcpErrorMessage: `Invalid argument componentsList. Invalid values: ${invalidComponentsString}. Valid component docs values: ${workIndiaComponentsListString}. Make sure to call the parent component name (e.g. instead of calling ListViewFilters, call ListView)`,
+      mcpErrorMessage: `Invalid argument componentsList. Invalid values: ${invalidComponentsString}. Valid component and icon docs values: ${workIndiaComponentsListString}. Make sure to call the parent component name (e.g. instead of calling ListViewFilters, call ListView)`,
     });
   }
 
@@ -84,10 +107,26 @@ const getWorkIndiaDsmComponentDocsToolCallback: ToolCallback<
   }
 
   try {
-    const responseText = getWorkIndiaDocsResponseText({
-      docsList: componentsList,
-      documentationType: 'components',
-    });
+    let responseText = '';
+
+    const componentDocs = components.filter((c) =>
+      workIndiaComponentsList.includes(c),
+    );
+    const iconDocs = components.filter((c) => workIndiaIconsList.includes(c));
+
+    if (componentDocs.length > 0) {
+      responseText += getWorkIndiaDocsResponseText({
+        docsList: componentDocs.join(', '),
+        documentationType: 'components',
+      });
+    }
+
+    if (iconDocs.length > 0) {
+      responseText += getWorkIndiaDocsResponseText({
+        docsList: iconDocs.join(', '),
+        documentationType: 'icons',
+      });
+    }
 
     return {
       content: [
