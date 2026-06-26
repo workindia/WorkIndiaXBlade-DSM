@@ -17,12 +17,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: '22.x'
 
@@ -55,10 +55,10 @@ jobs:
         run: |
           BLADE_VERSION=$(npm view @razorpay/blade version)
           BLADE_MCP_VERSION=$(npm view @razorpay/blade-mcp version 2>/dev/null || echo "0.0.0")
-          
+
           echo "blade-version=$BLADE_VERSION" >> $GITHUB_OUTPUT
           echo "blade-mcp-version=$BLADE_MCP_VERSION" >> $GITHUB_OUTPUT
-          
+
           echo "Latest @razorpay/blade version: $BLADE_VERSION"
           echo "Latest @razorpay/blade-mcp version: $BLADE_MCP_VERSION"
 
@@ -72,10 +72,10 @@ jobs:
             CURRENT_BLADE="0.0.0"
             CURRENT_MCP="0.0.0"
           fi
-          
+
           echo "current-blade=$CURRENT_BLADE" >> $GITHUB_OUTPUT
           echo "current-mcp=$CURRENT_MCP" >> $GITHUB_OUTPUT
-          
+
           echo "Current tracked @razorpay/blade version: $CURRENT_BLADE"
           echo "Current tracked @razorpay/blade-mcp version: $CURRENT_MCP"
 
@@ -84,7 +84,7 @@ jobs:
         run: |
           CURRENT="${{ steps.read-versions.outputs.current-blade }}"
           LATEST="${{ steps.npm-versions.outputs.blade-version }}"
-          
+
           if [ "$CURRENT" != "$LATEST" ]; then
             echo "new-version=true" >> $GITHUB_OUTPUT
             echo "version=$LATEST" >> $GITHUB_OUTPUT
@@ -100,7 +100,7 @@ jobs:
         run: |
           CURRENT="${{ steps.read-versions.outputs.current-mcp }}"
           LATEST="${{ steps.npm-versions.outputs.blade-mcp-version }}"
-          
+
           if [ "$CURRENT" != "$LATEST" ] && [ "$LATEST" != "0.0.0" ]; then
             echo "new-version=true" >> $GITHUB_OUTPUT
             echo "version=$LATEST" >> $GITHUB_OUTPUT
@@ -117,7 +117,7 @@ jobs:
         run: |
           VERSION="${{ steps.check-blade.outputs.version }}"
           FOUND=false
-          
+
           # Try multiple tag formats
           for TAG_FORMAT in "v${VERSION}" "@razorpay/blade@${VERSION}" "${VERSION}"; do
             RELEASE_INFO=$(curl -s -H "Accept: application/vnd.github.v3+json" \
@@ -138,7 +138,7 @@ jobs:
               break
             fi
           done
-          
+
           # Fallback: try to get from releases list
           if [ "$FOUND" != "true" ]; then
             RELEASE_LIST=$(curl -s -H "Accept: application/vnd.github.v3+json" \
@@ -168,7 +168,7 @@ jobs:
         run: |
           VERSION="${{ steps.check-blade-mcp.outputs.version }}"
           FOUND=false
-          
+
           # Try multiple tag formats for blade-mcp
           for TAG_FORMAT in "@razorpay/blade-mcp@${VERSION}" "v${VERSION}" "${VERSION}"; do
             RELEASE_INFO=$(curl -s -H "Accept: application/vnd.github.v3+json" \
@@ -189,7 +189,7 @@ jobs:
               break
             fi
           done
-          
+
           # Fallback: try to get from releases list
           if [ "$FOUND" != "true" ]; then
             RELEASE_LIST=$(curl -s -H "Accept: application/vnd.github.v3+json" \
@@ -225,37 +225,37 @@ jobs:
             const previousVersion = '${{ steps.check-blade.outputs.previous-version }}';
             const releaseUrl = '${{ steps.blade-changelog.outputs.url }}';
             const found = '${{ steps.blade-changelog.outputs.found }}' === 'true';
-            
+
             let changelog = '';
             if (found && process.env.CHANGELOG_FILE && fs.existsSync(process.env.CHANGELOG_FILE)) {
               changelog = fs.readFileSync(process.env.CHANGELOG_FILE, 'utf8');
             }
-            
+
             const title = `🚀 New @razorpay/blade version released: ${version}`;
-            
+
             let body = `## New @razorpay/blade Version Detected\n\n`;
             body += `**Version:** \`${previousVersion}\` → \`${version}\`\n\n`;
             body += `**Release URL:** ${releaseUrl}\n\n`;
-            
+
             if (found && changelog) {
               body += `## Changelog from razorpay/blade\n\n`;
               body += `${changelog}\n\n`;
             } else {
               body += `> Note: Changelog could not be automatically retrieved. Please check the [release page](${releaseUrl}) for details.\n\n`;
             }
-            
+
             body += `---\n\n`;
             body += `**Action Required:**\n`;
             body += `- Review the changelog above\n`;
             body += `- Test the new version in your development environment\n`;
             body += `- Update \`packages/dsm/package.json\` if you decide to upgrade\n`;
             body += `- Consider updating the locked version in this repository\n\n`;
-            
+
             // Get current version from package.json
             const packageJson = require('./packages/dsm/package.json');
             const currentLockedVersion = packageJson.dependencies['@razorpay/blade'] || 'not found';
             body += `**Current locked version in package.json:** \`${currentLockedVersion}\`\n`;
-            
+
             // Check if an issue with this version already exists (open or closed)
             // Check open issues first
             let { data: openIssues } = await github.rest.issues.listForRepo({
@@ -265,11 +265,11 @@ jobs:
               labels: 'blade-release',
               per_page: 100
             });
-            
+
             let existingIssue = openIssues.find(issue => 
               issue.title.includes(`@razorpay/blade version released: ${version}`)
             );
-            
+
             // If not found in open issues, check closed issues
             if (!existingIssue) {
               const { data: closedIssues } = await github.rest.issues.listForRepo({
@@ -284,12 +284,12 @@ jobs:
                 issue.title.includes(`@razorpay/blade version released: ${version}`)
               );
             }
-            
+
             if (existingIssue) {
               console.log(`Issue already exists: #${existingIssue.number} (${existingIssue.state})`);
               return;
             }
-            
+
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -310,31 +310,31 @@ jobs:
             const previousVersion = '${{ steps.check-blade-mcp.outputs.previous-version }}';
             const releaseUrl = '${{ steps.blade-mcp-changelog.outputs.url }}';
             const found = '${{ steps.blade-mcp-changelog.outputs.found }}' === 'true';
-            
+
             let changelog = '';
             if (found && process.env.CHANGELOG_FILE && fs.existsSync(process.env.CHANGELOG_FILE)) {
               changelog = fs.readFileSync(process.env.CHANGELOG_FILE, 'utf8');
             }
-            
+
             const title = `🚀 New @razorpay/blade-mcp version released: ${version}`;
-            
+
             let body = `## New @razorpay/blade-mcp Version Detected\n\n`;
             body += `**Version:** \`${previousVersion}\` → \`${version}\`\n\n`;
             body += `**Release URL:** ${releaseUrl}\n\n`;
-            
+
             if (found && changelog) {
               body += `## Changelog from razorpay/blade-mcp\n\n`;
               body += `${changelog}\n\n`;
             } else {
               body += `> Note: Changelog could not be automatically retrieved. Please check the [release page](${releaseUrl}) for details.\n\n`;
             }
-            
+
             body += `---\n\n`;
             body += `**Action Required:**\n`;
             body += `- Review the changelog above\n`;
             body += `- Test the new version if you use blade-mcp features\n`;
             body += `- Consider updating if there are relevant improvements\n\n`;
-            
+
             // Check if an issue with this version already exists (open or closed)
             // Check open issues first
             let { data: openIssues } = await github.rest.issues.listForRepo({
@@ -344,11 +344,11 @@ jobs:
               labels: 'blade-release',
               per_page: 100
             });
-            
+
             let existingIssue = openIssues.find(issue => 
               issue.title.includes(`@razorpay/blade-mcp version released: ${version}`)
             );
-            
+
             // If not found in open issues, check closed issues
             if (!existingIssue) {
               const { data: closedIssues } = await github.rest.issues.listForRepo({
@@ -363,12 +363,12 @@ jobs:
                 issue.title.includes(`@razorpay/blade-mcp version released: ${version}`)
               );
             }
-            
+
             if (existingIssue) {
               console.log(`Issue already exists: #${existingIssue.number} (${existingIssue.state})`);
               return;
             }
-            
+
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -384,13 +384,13 @@ jobs:
         run: |
           BLADE_VERSION="${{ steps.npm-versions.outputs.blade-version }}"
           MCP_VERSION="${{ steps.npm-versions.outputs.blade-mcp-version }}"
-          
+
           # Update the versions file
           jq --arg blade "$BLADE_VERSION" --arg mcp "$MCP_VERSION" \
             '.blade = $blade | .["blade-mcp"] = $mcp' \
             .github/blade-versions.json > .github/blade-versions.json.tmp
           mv .github/blade-versions.json.tmp .github/blade-versions.json
-          
+
           echo "Updated tracked versions:"
           cat .github/blade-versions.json
 
@@ -401,21 +401,20 @@ jobs:
         uses: peter-evans/create-pull-request@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore: update tracked blade versions"
+          commit-message: 'chore: update tracked blade versions'
           branch: automated/update-blade-versions
           base: main
-          title: "chore: update tracked blade versions"
+          title: 'chore: update tracked blade versions'
           body: |
             This PR was automatically generated by the **Check Blade Releases** workflow.
-            
+
             It updates the tracked versions in `.github/blade-versions.json` after detecting new releases:
             - @razorpay/blade: ${{ steps.npm-versions.outputs.blade-version }}
             - @razorpay/blade-mcp: ${{ steps.npm-versions.outputs.blade-mcp-version }}
-            
+
             **Note:** This PR will be automatically updated if new versions are detected before it's merged.
-            
+
             This PR can be auto-merged or manually reviewed.
           delete-branch: false
           labels: automated
           draft: false
-

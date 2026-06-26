@@ -13,14 +13,16 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [22.x, 24.x]
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
@@ -32,7 +34,7 @@ jobs:
         run: npm run build
         # Build tokens first (no dependencies), then dsm (depends on tokens)
         # This ensures type definitions are available for ESLint type checking
-      
+
       - name: Check build artifacts
         run: |
           test -d packages/tokens/build || exit 1
