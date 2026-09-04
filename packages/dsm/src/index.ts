@@ -32,6 +32,12 @@ export {
   Amount,
   // AnimateInteractions
   AnimateInteractions,
+  // AnnouncementBanner
+  AnnouncementBanner,
+  // AppBar
+  AppBar,
+  AppBarActions,
+  AppBarLeading,
   // Avatar
   Avatar,
   // Badge
@@ -70,6 +76,9 @@ export {
   // Charts - exported via Charts module
   // Note: Individual chart components (AreaChart, BarChart, DonutChart, LineChart)
   // are available but need to be imported directly from Charts if needed
+  ChartReferenceBand,
+  ChartSankey,
+  ChartSankeyWrapper,
   // ChatMessage
   ChatMessage,
   // Checkbox
@@ -82,6 +91,9 @@ export {
   Collapsible,
   CollapsibleBody,
   CollapsibleLink,
+  CollapsibleText,
+  // ColorInput
+  ColorInput,
   // Counter
   Counter,
   // CounterInput
@@ -115,6 +127,8 @@ export {
   Fade,
   // FileUpload
   FileUpload,
+  // FloatingActionButton
+  FloatingActionButton,
   // Icons - re-export all icons
   // Note: All icons are exported from Icons, commonly used ones listed below
   HomeIcon,
@@ -132,6 +146,10 @@ export {
   InfoItem,
   InfoItemKey,
   InfoItemValue,
+  // InfoCard
+  InfoCard,
+  InfoCardBody,
+  InfoCardFooter,
   // Indicator
   Indicator,
   // Input components
@@ -195,6 +213,9 @@ export {
   RadioGroup,
   // Scale
   Scale,
+  // SegmentedControl
+  SegmentedControl,
+  SegmentedControlItem,
   // SideNav
   SideNav,
   SideNavLink,
@@ -243,8 +264,18 @@ export {
   TabItem,
   TabList,
   TabPanel,
+  // TreeView
+  TreeView,
+  TreeViewItem,
+  TreeViewLoadMore,
+  // TrustBadge
+  TrustBadge,
   // Tag
   Tag,
+  // TicketCard
+  TicketCard,
+  TicketCardBody,
+  TicketCardFooter,
   // TimePicker
   TimePicker,
   // Toast
@@ -263,6 +294,7 @@ export {
   ListView,
   ListViewFilters,
   // Hooks
+  useAppBarContext,
   useTheme,
 } from '@razorpay/blade/components';
 
@@ -277,10 +309,18 @@ export type {
   ActionListItemAssetProps,
   // Alert
   AlertProps,
+  AlertColors,
   // Amount
   AmountProps,
   // AnimateInteractions
   AnimateInteractionsProps,
+  // AnnouncementBanner
+  AnnouncementBannerProps,
+  // AppBar
+  AppBarProps,
+  AppBarActionsProps,
+  AppBarContextProps,
+  AppBarLeadingProps,
   // Avatar
   AvatarProps,
   // Badge
@@ -305,13 +345,18 @@ export type {
   // Button
   ButtonProps,
   IconButtonProps,
+  IconButtonEmphasis,
   // ButtonGroup
   ButtonGroupProps,
   // Card
   CardProps,
+  CardVariant,
   // Carousel
   CarouselProps,
   // Charts - types exported via Charts module
+  ChartReferenceBandProps,
+  ChartSankeyProps,
+  ChartSankeyWrapperProps,
   // ChatMessage
   ChatMessageProps,
   // Checkbox
@@ -322,6 +367,12 @@ export type {
   ChipGroupProps,
   // Collapsible
   CollapsibleProps,
+  CollapsibleTextProps,
+  // ColorInput
+  ColorInputProps,
+  ColorInputOnChange,
+  ColorInputOnFocusBlur,
+  ColorInputValue,
   // Counter
   CounterProps,
   // CounterInput - CounterInputProps exported from CounterInput component
@@ -344,9 +395,14 @@ export type {
   FadeProps,
   // FileUpload
   FileUploadProps,
+  // FloatingActionButton
+  FloatingActionButtonProps,
+  FloatingActionButtonPlacement,
   // InfoGroup
   InfoGroupProps,
   InfoItemProps,
+  // InfoCard
+  InfoCardProps,
   // Indicator
   IndicatorProps,
   // Input components
@@ -405,6 +461,9 @@ export type {
   RadioGroupProps,
   // Scale
   ScaleProps,
+  // SegmentedControl
+  SegmentedControlProps,
+  SegmentedControlItemProps,
   // SideNav
   SideNavProps,
   SideNavLinkProps,
@@ -451,8 +510,16 @@ export type {
   TabsProps,
   TabItemProps,
   TabPanelProps,
+  // TreeView
+  TreeViewProps,
+  TreeViewItemProps,
+  TreeViewLoadMoreProps,
+  // TrustBadge
+  TrustBadgeProps,
   // Tag
   TagProps,
+  // TicketCard
+  TicketCardProps,
   // TimePicker - types exported from TimePicker module
   // Toast
   ToastProps,

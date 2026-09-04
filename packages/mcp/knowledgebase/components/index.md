@@ -11,6 +11,8 @@ Components are based on Razorpay's Blade Design System but customized for WorkIn
 - Alert
 - Amount
 - AnimateInteractions
+- AnnouncementBanner
+- AppBar
 - AreaChart
 - AutoComplete
 - Avatar
@@ -24,11 +26,15 @@ Components are based on Razorpay's Blade Design System but customized for WorkIn
 - ButtonGroup
 - Card
 - Carousel
+- ChartReferenceBand
+- ChartSankey
 - ChatMessage
 - Checkbox
 - Chip
 - Code
 - Collapsible
+- CollapsibleText
+- ColorInput
 - Counter
 - CounterInput
 - DatePicker
@@ -41,10 +47,12 @@ Components are based on Razorpay's Blade Design System but customized for WorkIn
 - EmptyState
 - Fade
 - FileUpload
+- FloatingActionButton
 - Heading
 - IconButton
 - Icons
 - Indicator
+- InfoCard
 - InfoGroup
 - InputGroup
 - LineChart
@@ -67,6 +75,7 @@ Components are based on Razorpay's Blade Design System but customized for WorkIn
 - Scale
 - SearchInput
 - SelectInput
+- SegmentedControl
 - SideNav
 - Skeleton
 - SkipNav
@@ -82,8 +91,11 @@ Components are based on Razorpay's Blade Design System but customized for WorkIn
 - Text
 - TextArea
 - TextInput
+- TicketCard
 - TimePicker
 - Toast
 - Tooltip
 - TopNav
+- TreeView
+- TrustBadge
 - VisuallyHidden

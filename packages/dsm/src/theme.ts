@@ -36,8 +36,11 @@ const createWorkIndiaTheme = (): ThemeTokens => {
               intense: colors.neutral.light[0],
             },
             primary: {
+              faint: colors.chromatic.brand.a50,
               subtle: colors.chromatic.brand.a50,
+              moderate: colors.chromatic.brand.a100,
               intense: colors.chromatic.brand[500],
+              strong: colors.chromatic.brand[600],
             },
           },
           border: {
@@ -515,8 +518,11 @@ const createWorkIndiaTheme = (): ThemeTokens => {
               intense: colors.neutral.dark[1000],
             },
             primary: {
+              faint: colors.chromatic.brand.a200,
               subtle: colors.chromatic.brand.a200,
+              moderate: colors.chromatic.brand.a100,
               intense: colors.chromatic.brand[500],
+              strong: colors.chromatic.brand[400],
             },
           },
           border: {
